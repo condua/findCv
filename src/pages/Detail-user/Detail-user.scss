@@ -4,7 +4,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .Detail-user-container {
-    min-height: 100vh;
+    // min-height: 100vh;
     background-color: #E9ECEF;
     padding: 10px;
     background-size: cover;
@@ -152,7 +152,17 @@
                 border: none;
                 box-sizing: border-box;
             }
-            input[type="text"]{
+            textarea{
+                width: 80%;
+                margin-top: 20px;
+                height: 100%;
+                border-radius: 6px;
+                background-color: #F5F8FA;
+                border: none;
+                box-sizing: border-box;
+                padding: 10px;
+            }
+            input, textarea[type="text"]{
                 padding-left: 10px;
             }
             

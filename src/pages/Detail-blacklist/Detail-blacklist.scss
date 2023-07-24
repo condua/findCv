@@ -4,7 +4,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .DetailBlacklist-container {
-    min-height: 100vh;
+    // min-height: 100vh;
     background-color: #E9ECEF;
     padding: 10px;
     background-size: cover;
@@ -196,7 +196,7 @@
     flex-direction: column;
     margin-bottom: 20px;
 }
-.DetailBlacklist-name-admin-title, .DetailBlacklist-email-title, .DetailBlacklist-reson-title{
+.DetailBlacklist-name-admin-title, .DetailBlacklist-email-title, .DetailBlacklist-reason-title{
     margin-bottom: 5px;
     font-weight: bold;
 }

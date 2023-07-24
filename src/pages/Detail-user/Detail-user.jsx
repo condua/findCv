@@ -99,14 +99,6 @@ function DetailUser() {
 
     return (
         <div className="Detail-user-container" >
-            <div className="Detail-user-tab-name">
-                <div className="Detail-user-content-tab-name">
-                    Quản lý tài khoản
-                </div>
-                <div className="Detail-user-button-tab-name">
-                    <button className="Detail-user-button-back">Back</button>
-                </div>
-            </div>
             <div className="Detail-user-content">
                 <div className="Detail-user-infor">
                     <div className="Detail-user-user">
@@ -142,16 +134,21 @@ function DetailUser() {
                                 </div>
                                 <div className='Detail-user-info-item'>
                                     <p>Địa chỉ</p>
-                                    <input type='text' value={name} />
+                                    <textarea type='text' value={name} />
                                 </div>
 
                                 <div className="Detail-user-button">
-                                    <button className='Detail-user-button-close'>
-                                        <Link to="/manage-user" className="Detail-user-link">Hủy</Link>
-                                    </button>
-                                    <button className='Detail-user-button-save'>
-                                        <Link to="/manage-user" className="Detail-user-link">Lưu thay đổi</Link>
-                                    </button>
+                                    <Link to="/manage-user" className="Detail-user-link">
+                                        <button className='Detail-user-button-close'>
+                                            Hủy
+                                        </button>
+                                    </Link>
+                                    <Link to="/manage-user" className="Detail-user-link">
+                                        <button className='Detail-user-button-save'>
+                                            Lưu thay đổi
+                                        </button>
+                                    </Link>
+
                                 </div>
                             </form>
 

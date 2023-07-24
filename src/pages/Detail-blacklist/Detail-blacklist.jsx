@@ -20,14 +20,6 @@ function DetailBlacklist() {
 
     return (
         <div className="DetailBlacklist-container" >
-            <div className="DetailBlacklist-tab-name">
-                <div className="DetailBlacklist-content-tab-name">
-                    Thêm vào Blacklist
-                </div>
-                <div className="DetailBlacklist-button-tab-name">
-                    <button className="button-back">Back</button>
-                </div>
-            </div>
             <div className="DetailBlacklist-content">
                 <div className="DetailBlacklist-candidate-info">
                     <div className="DetailBlacklist-common-info">
@@ -105,9 +97,12 @@ function DetailBlacklist() {
                         <textarea type='text' className="DetailBlacklist-form-reason" />
                     </div>
                     <div className="DetailBlacklist-button">
-                        <button className="DetailBlacklist-cancel">
-                            <Link to="/blacklist" className="DetailBlacklist-link">Trở về</Link>
-                        </button>
+                        <Link to="/blacklist" className="DetailBlacklist-link">
+                            <button className="DetailBlacklist-cancel">
+                                Trở về
+                            </button>
+                        </Link>
+
                     </div>
 
                 </div>

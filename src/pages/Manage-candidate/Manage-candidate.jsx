@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import './Manage-candidate.scss';
-import background from '../../assets/background.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import user from '../user'
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import {
+    StopOutlined,
+} from "@ant-design/icons"
+
+
 
 
 function ManageCandidate() {
+    const { id } = useParams();
 
     const ROWS_PER_PAGE = 11;
     const [initialSearchValue, setInitialSearchValue] = useState('');
     const [currentPageCandidate, setCurrentPageCandidate] = useState(1);
-    const candidateUsers = user.filter(item => item.permission === "Candidate");
+    const candidateUsers = user.filter(item => item.permission === "Candidate" && item.status !== "Blacklist" && item.position === id);
 
     //Candidate
     const handlePageChangeCandidate = (pageNumber) => {
@@ -47,15 +54,6 @@ function ManageCandidate() {
     };
     return (
         <div className="Manage-candidate-container" >
-            <div className="Manage-candidate-tab-name">
-                <div className="Manage-candidate-content-tab-name">
-                    Quản lý ứng viên
-                </div>
-                <div className="button-tab-name">
-                    <button className="Manage-candidate-button-back">Back</button>
-                </div>
-            </div>
-
             <div className="Manage-candidate-search-container">
                 <form className="Manage-candidate-form" onSubmit={handleSubmit}>
                     <input
@@ -70,6 +68,11 @@ function ManageCandidate() {
             </div>
 
             <div className="Manage-candidate-candidate-list">
+                <div className="Manage-candidate-header-position">
+                    Language: {id}
+                </div>
+
+
                 <div className="Manage-candidate-pagination">
                     <button
                         className="Manage-candidate-button-prev"
@@ -90,13 +93,15 @@ function ManageCandidate() {
                     </button>
                 </div>
 
+
+
                 <div className="Manage-candidate-title">
                     <div className="Manage-candidate-name-candidate">Họ và tên/Email</div>
                     <div className="Manage-candidate-score-candidate">Điểm số</div>
-                    <div className="Manage-candidate-date-register-candidate">Ngày đăng ký tài khoản</div>
-                    <div className="Manage-candidate-position">Vị trí ứng tuyển</div>
+                    <div className="Manage-candidate-date-register-candidate">Ngày phỏng vấn</div>
                     <div className="Manage-candidate-status">Trạng thái ứng tuyển</div>
-                    <div className="Manage-candidate-details-candidate">Chi tiết</div>
+                    <div className="Manage-candidate-position">Duyệt</div>
+                    <div className="Manage-candidate-details-candidate">Blacklist</div>
                 </div>
 
                 {currentRowsCandidate.filter((item) => {
@@ -123,21 +128,23 @@ function ManageCandidate() {
                                     </div>
                                     <div className="Manage-candidate-score-content-candidate">{item.score}</div>
                                     <div className="Manage-candidate-date-register-content-candidate">{item.date}</div>
-                                    <div className="Manage-candidate-position-content">{item.position}</div>
                                     <div className="Manage-candidate-status-content">
-                                        <div className={`frame-status ${item.status === "Accept" ? "Manage-candidate-accept" : ""} 
+                                        <div className={`Manage-candidate-frame-status ${item.status === "Accept" ? "Manage-candidate-accept" : ""} 
                                 ${item.status === "In process" ? "Manage-candidate-process" : ""} 
-                                ${item.status === "Blacklist" ? "Manage-candidate-blacklist" : ""} 
                                 `}>{item.status}</div>
                                     </div>
-                                    <div className="Manage-candidate-details-content-candidate" >
-                                        <button className={`Manage-candidate-button-edit-candidate ${item.status === "Blacklist" ? "disable-blacklist" : ""}`}>
-                                            <Link className={`Manage-candidate-color-button-add ${item.status === "Blacklist" ? "disable-link" : ""}`}
-                                                to={item.status !== "Blacklist" ? `/reason-blacklist/${item.id}` : "#"}>
-                                                Add blacklist
-                                            </Link>
+                                    <div className={`Manage-candidate-position-content`}>
+                                        <button className={`Manage-candidate-button-accept ${item.status === "Accept" ? "disable-accept" : ""}`}>
+                                            <FontAwesomeIcon icon={faCheck} />
                                         </button>
-
+                                    </div>
+                                    <div className="Manage-candidate-details-content-candidate" >
+                                        <Link className={`Manage-candidate-color-button-add`}
+                                            to={`/reason-blacklist/${item.id}`}>
+                                            <button className={`Manage-candidate-button-edit-candidate`}>
+                                                <StopOutlined />
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             )}

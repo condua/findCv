@@ -60,15 +60,6 @@ function BlackList() {
 
     return (
         <div className="Blacklist-container" >
-            <div className="Blacklist-tab-name">
-                <div className="Blacklist-content-tab-name">
-                    Blacklist
-                </div>
-                <div className="Blacklist-button-tab-name">
-                    <button className="Blacklist-button-back">Back</button>
-                </div>
-            </div>
-
             <div className="Blacklist-search-container-blacklist">
                 <form className="Blacklist-form-blacklist" onSubmit={handleSubmit}>
                     <input
@@ -121,7 +112,7 @@ function BlackList() {
                 <div className="Blacklist-title">
                     <div className="Blacklist-name-candidate">Họ và tên/Email</div>
                     <div className="Blacklist-permission-candidate">Quyền hạn tài khoản</div>
-                    <div className="Blacklist-date-register-candidate">Ngày đăng ký tài khoản</div>
+                    <div className="Blacklist-date-register-candidate">Ngày thêm vào Blacklist</div>
                     <div className="Blacklist-position">Vị trí ứng tuyển</div>
                     <div className="Blacklist-status">Trạng thái ứng tuyển</div>
                     <div className="Blacklist-details-candidate">Chi tiết</div>
@@ -159,9 +150,11 @@ function BlackList() {
                                 `}>{item.status}</div>
                                     </div>
                                     <div className="Blacklist-details-content-candidate" >
-                                        <button className="Blacklist-button-view">
-                                            <Link to={`/detail-blacklist/${item.id}`}>View</Link>
-                                        </button>
+                                        <Link to={`/detail-blacklist/${item.id}`}>
+                                            <button className="Blacklist-button-view">
+                                                View
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             )}

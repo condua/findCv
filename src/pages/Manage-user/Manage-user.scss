@@ -4,10 +4,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .Manage-user-container {
-    min-height: 100vh;
+    // min-height: 100vh;
     background-color: #E9ECEF;
     padding: 10px;
-    background-size: cover;
 }
 .Manage-user-tab-name{
     background-color: white;
@@ -226,10 +225,6 @@
     color: #A1A5B7;
     padding: 7px;
     cursor: pointer;
-}
-.Manage-user-color-button-edit{
-    color: #A1A5B7;
-    text-decoration: none;
 }
 .Manage-user-pagination{
     font-size: 24px;

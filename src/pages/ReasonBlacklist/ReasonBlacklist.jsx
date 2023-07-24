@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './ReasonBlacklist.scss';
 import users from '../user'
-import background from '../../assets/background.webp';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function InterviewMeeting() {
     const { id } = useParams();
-    console.log({ id });
 
     const user = users.find((item) => item.id === id);
     const [avt, setAvt] = useState(user.avt);
@@ -20,14 +18,6 @@ function InterviewMeeting() {
 
     return (
         <div className="ReasonBlacklist-container" >
-            <div className="ReasonBlacklist-tab-name">
-                <div className="ReasonBlacklist-content-tab-name">
-                    Thêm vào Blacklist
-                </div>
-                <div className="ReasonBlacklist-button-tab-name">
-                    <button className="button-back">Back</button>
-                </div>
-            </div>
             <div className="ReasonBlacklist-content">
                 <div className="ReasonBlacklist-candidate-info">
                     <div className="ReasonBlacklist-common-info">
@@ -105,12 +95,16 @@ function InterviewMeeting() {
                         <textarea type='text' className="ReasonBlacklist-form-reason" />
                     </div>
                     <div className="ReasonBlacklist-button">
-                        <button className="ReasonBlacklist-cancel">
-                            <Link to="/manage-candidate" className="ReasonBlacklist-link">Hủy</Link>
-                        </button>
-                        <button className="ReasonBlacklist-add">
-                            <Link to="/manage-candidate" className="ReasonBlacklist-link">Thêm vào danh sách đen</Link>
-                        </button>
+                        <Link to={`/manage-candidate/${position}`} className="ReasonBlacklist-link">
+                            <button className="ReasonBlacklist-cancel">
+                                Hủy
+                            </button></Link>
+                        <Link to={`/manage-candidate/${position}`} className="ReasonBlacklist-link">
+                            <button className="ReasonBlacklist-add">
+                                Thêm vào danh sách đen
+                            </button>
+                        </Link>
+
                     </div>
 
                 </div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Manage-user.scss';
-import background from '../../assets/background.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import user from '../user'
 import { Switch, Space } from 'antd';
+
 
 
 const ManageUser = () => {
@@ -121,15 +121,6 @@ const ManageUser = () => {
 
     return (
         <div className="Manage-user-container" >
-            <div className="Manage-user-tab-name">
-                <div className="Manage-user-content-tab-name">
-                    Quản lý tài khoản
-                </div>
-                <div className="button-tab-name">
-                    <button className="Manage-user-button-back">Back</button>
-                </div>
-            </div>
-
             <div className="Manage-user-search-container">
                 <form className="Manage-user-form" onSubmit={handleSubmit}>
                     <input
@@ -203,7 +194,7 @@ const ManageUser = () => {
                                     <div className="Manage-user-date-register-content-user">{item.date}</div>
                                     <div className="Manage-user-enable-user-content">
                                         <Space direction="vertical">
-                                            <Switch checkedChildren="Enable" unCheckedChildren="Disable" defaultChecked className="custom-switch" />
+                                            <Switch checkedChildren="Enable" unCheckedChildren="Disable" defaultChecked />
                                         </Space>
                                     </div>
                                     <div className="Manage-user-details-content-user">
@@ -352,9 +343,12 @@ const ManageUser = () => {
                                         </Space>
                                     </div>
                                     <div className="Manage-user-details-content-candidate">
-                                        <button className="Manage-user-button-edit">
-                                            <Link className="Manage-user-color-button-edit" to={`/detail-user/${item.id}`}>Edit</Link>
-                                        </button>
+                                        <Link  to={`/detail-user/${item.id}`}>
+                                            <button className="Manage-user-button-edit">
+                                                Edit
+                                            </button>
+                                        </Link>
+
                                     </div>
                                 </div>
                             )}
