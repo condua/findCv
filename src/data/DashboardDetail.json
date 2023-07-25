@@ -1,14 +1,14 @@
 {
-    "dashboarddetailID": 1,
-    "title": "Mivy App",
-    "description": "Description Job",
-    "startDate": "Sep 6, 2023",
+    "roomID": 1,
+    "roomName": "Mivy App",
+    "roomDescription": "Description Job",
+    "startDate": "01-08-2021",
     "numberParticipant": 9,
     "status": "In Process",
-    "listAvatar": [
+    "listParticipant": [
         {
             "email": "user1@gmail.com",
-            "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
+            "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/20.jpg"
         },
         {
             "email": "user2@gmail.com",

@@ -1,67 +1,76 @@
+.TableInterviewer-home {
 
-.wrapper ,h1{
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  display: grid;
-  gap: 30px;
-  grid-template-columns: auto auto auto;
-  background-color: #e9ecef;
-  padding: 10px;
- 
-}
-.block{
-width: 100%;
-height: 400px;
-margin: 2px;
-background-color: #ffffff;
-border: none;
-padding: 20px;
-font-size: 30px;
-text-align: center;
-border-radius: 10px;
-}
-.image{
-width: 100px;
-height: 100px;
-border-radius: 50px;
-}
-#button{
-background-color:#f5f8fa;
-color: #a1a5b7;
-border-radius: 10px;
-border:none;
-padding:12px;
-font-size: 20px;
-margin-top: 20px;
-}
-.Room{
-width: 100%;
-display: flex;
-justify-content: center;
+  .wrapper,
+  h1 {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: auto auto auto;
+    background-color: #e9ecef;
+    padding: 10px;
+
+  }
+
+  .block {
+    width: 100%;
+    height: 400px;
+    margin: 2px;
+    background-color: #ffffff;
+    border: none;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+  }
+
+  #button {
+    background-color: #f5f8fa;
+    color: #a1a5b7;
+    border-radius: 10px;
+    border: none;
+    padding: 12px;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .Room {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
 
-}
-.subRoom{
-width: 40%;
-border-style: dashed;
-margin:10px;
-font-size: 18px;
-padding-top: 8px;
+  }
 
-}
-.miniSide{
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  
-  width: 70%;
-  height: 500px;
-  top: 150px;
-  left: 230px;
-  background-color: pink;
-  border-radius: 20px;
-  .close-button{
+  .subRoom {
+    width: 40%;
+    border-style: dashed;
+    margin: 10px;
+    font-size: 18px;
+    padding-top: 8px;
+
+  }
+
+  .miniSide {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+    height: 500px;
+    top: 150px;
+    left: 230px;
+    background-color: pink;
+    border-radius: 20px;
+
+    .close-button {
       width: 100%;
       height: 50px;
       background-color: pink;
@@ -69,23 +78,27 @@ padding-top: 8px;
       justify-content: right;
       border-radius: 20px;
 
-      .cancel-button{
-          width: 50px;
-          height: 50px;
-          border-radius: 25px;
-          cursor: pointer;
-          margin-top: 1%;
-          margin-right: 1%;
+      .cancel-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 1%;
+        margin-right: 1%;
       }
-      
-  }
-  .ava{
+
+    }
+
+    .ava {
       margin: 50px;
       width: 80px;
       height: 80px;
       border-radius: 40px;
-  }
-  h3, p{
+    }
+
+    h3,
+    p {
       margin-left: 30px;
+    }
   }
 }

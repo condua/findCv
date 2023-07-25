@@ -21,19 +21,22 @@ const token = localStorage.getItem("token")
 
 
 const items = [
-    { key: "/", icon: <HomeOutlined />, label: "Home" },
+    { key: "/home", icon: <HomeOutlined />, label: "Home" },
     { type: "divider" },
     { key: "/event", icon: <FireOutlined />, label: "Event" },
-    { key: "/interview", icon: <VideoCameraOutlined />, label: "Interview" },
+    { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
     { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
     // { key: "/login", icon: <FileSearchOutlined />, label: "Login" },
     // { key: "/register", icon: <FileSearchOutlined />, label: "Register" },
     // { key: "/resetpassword", icon: <FileSearchOutlined />, label: "Reset Password" },
-    // { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
+    { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
     // { key: "/addmorequestions", icon: <FileSearchOutlined />, label: "Add More Questions" },
+    { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
     { key: "/manage-user", icon: <FileSearchOutlined />, label: "Manage User" },
-    { key: "/manage-candidate", icon: <FileSearchOutlined />, label: "Manage Candidate" },
     { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },
+    { key: "/result", icon: <FileSearchOutlined />, label: "Result" },
+    { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },
+    // { key: "/manage-candidate", icon: <FileSearchOutlined />, label: "Manage Candidate" },
 ]
 const IRALayout = ({ collapsed, SetCollapsed, children }) => {
     const {
@@ -45,38 +48,27 @@ const IRALayout = ({ collapsed, SetCollapsed, children }) => {
     let href = window.location.href.substring(window.location.origin.length + 1)
 
     return (
-
-        <div>
-            {token == "true"
-                ?
-                <Layout className="bg-[#E9ECEF]">
-                    <IRASidebar
-                        collapsed={collapsed}
-                        SetCollapsed={SetCollapsed}
-                        items={items}
-                        href={href}
-                        navigate={navigate}
-                    />
-                    <Layout
-                        className={
-                            "bg-[#E9ECEF] transition-all " +
-                            (collapsed ? " ml-24" : "ml-[250px]")
-                        }
-                    >
-                        <IRAHeader colorBgContainer={colorBgContainer} />
-                        <IRAHero />
-                        <IRAContent>{children}</IRAContent>
-
-                    </Layout>
-                </Layout>
-
-                :
-                <div></div>
-            }
-        </div>
-
-
+        <Layout className="bg-[#E9ECEF]">
+            <IRASidebar
+                collapsed={collapsed}
+                SetCollapsed={SetCollapsed}
+                items={items}
+                href={href}
+                navigate={navigate}
+            />
+            <Layout
+                className={
+                    "bg-[#E9ECEF] transition-all " +
+                    (collapsed ? " ml-24" : "ml-[250px]")
+                }
+            >
+                <IRAHeader colorBgContainer={colorBgContainer} />
+                <IRAHero />
+                <IRAContent>{children}</IRAContent>
+            </Layout>
+        </Layout>
     )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IRALayout)
+

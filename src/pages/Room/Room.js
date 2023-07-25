@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import "./room.scss"
 import data from "./data.json"
 import { Link, useParams } from 'react-router-dom';
+import { EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 
 
@@ -17,17 +19,17 @@ const Room = () => {
     return (
         <div className='Room-home'>
             <h4>Các cuộc phỏng vấn gần đây</h4>
-            <Link to={`/room/create`}>
-                <button id='addRoom' >Thêm phòng họp</button>
-            </Link>
             <div className='container-company'>
+                <Link to={`/room/create`}>
+                    <button id='addRoom' >Thêm phòng họp</button>
+                </Link>
                 {tableData.map((item) => (
 
                     <div className='company-item' key={item.id}>
                         <div className='company-item-top'>
                             <img className='logo' src='https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png' />
                             <h3>{item.RoomName}</h3>
-                            <p>{item.RoomType}</p>
+                            <p>{item.RoomSkill}</p>
                             <button className='status'>{item.Status}</button>
                         </div>
                         <div className='company-item-mid'>
@@ -35,18 +37,21 @@ const Room = () => {
                         </div>
                         <div className='company-item-bot'>
                             <button className='date'>
-                                <h4>Feb 6, 2021</h4>
-                                <p>Due date</p>
+                                <h4>{item.StartDate}</h4>
+                                <p>Ngày bắt đầu</p>
                             </button>
                             <button className='salary'>
-                                <h4>$284,900.00</h4>
-                                <p>Budget</p>
+                                <h4>{item.EndDate}</h4>
+                                <p>Ngày kết thúc</p>
                             </button>
-                            <div className='adjustButton'>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginLeft: '50vh' }} className='adjustButton'>
 
-                                <button className='DetailButton'><Link to={`/room/${item.RoomId}`}> Detail     </Link></button>
+                                <Link to={`/room/${item.RoomId}/detail`} ><Button shape="circle" className='DetailButton' icon={<EyeOutlined />}>
+                                </Button></Link>
 
-                                <button className='EditButton'  ><Link to={`/room/${item.RoomId}`}> Edit </Link></button>
+                                <Link to={`/room/${item.RoomId}/edit`}>  <Button style={{ marginLeft: '20px' }} shape="circle" className='EditButton' icon={<EditOutlined />}>
+                                </Button></Link>
+
 
                             </div>
                         </div>

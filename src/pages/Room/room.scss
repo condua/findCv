@@ -16,6 +16,8 @@
     border: none;
     border-radius: 10px;
     padding: 20px;
+    width: 25%;
+    font-size: larger;
     margin-right: 870px;
   }
 
@@ -140,30 +142,30 @@
         display: flex;
         flex-direction: row;
 
-        .adjustButton {
-          margin-left: 100px;
-          padding: 0px;
-          background-color: #00A3FF;
+        // .adjustButton {
+        //   margin-left: 100px;
+        //   padding: 0px;
+        //   background-color: #00A3FF;
 
-          .DetailButton {
-            position: absolute;
-            right: 200px;
-            margin-right: 20px;
-            padding: 10px 15px;
-            border-radius: 10px;
-          }
+        //   .DetailButton {
+        //     position: absolute;
+        //     right: 200px;
+        //     margin-right: 20px;
+        //     padding: 10px 15px;
+        //     border-radius: 10px;
+        //   }
 
-          .EditButton {
-            position: absolute;
-            right: 300px;
-            padding: 10px 15px;
-            border-radius: 10px;
+        //   .EditButton {
+        //     position: absolute;
+        //     right: 300px;
+        //     padding: 10px 15px;
+        //     border-radius: 10px;
 
-          }
-        }
+        //   }
+        // }
 
         .date {
-          width: 15%;
+          width: 20%;
           height: 100%;
           border: 1px dashed #E4E6EF;
           border-radius: 6px;
@@ -182,7 +184,7 @@
         }
 
         .salary {
-          width: 15%;
+          width: 20%;
           height: 100%;
           border: 1px dashed #E4E6EF;
           border-radius: 6px;

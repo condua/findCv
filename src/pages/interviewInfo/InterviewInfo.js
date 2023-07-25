@@ -12,7 +12,7 @@ const InterviewInfo = () => {
   ))
   
   return (
-    <div className='edit-container'>
+    <div className='InterviewInfo-edit-container'>
       <div className='top-main'>  
           <h1>Hello Devs !</h1>
       </div>

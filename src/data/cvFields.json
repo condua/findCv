@@ -1,0 +1,58 @@
+{
+    "header": {
+      "col0": [
+        { "label": "Full Name", "value": "Nguyen Van A" },
+        { "label": "Position", "value": "Full Stack Developer" }
+      ],
+      "col1": [
+        { "label": "Name", "value": "Nguyen Van A" },
+        { "label": "Phone", "value": "0123456789" },
+        { "label": "Address", "value": "Ho Chi Minh City, Vietnam" }
+      ],
+      "col2": [
+        { "label": "Birth", "value": "01/01/1990" },
+        { "label": "Email", "value": "example@gmail.com" }
+      ],
+      "col3": [
+        { "label": "Avatar", "value": "https://vn-live-02.slatic.net/p/c6789a18dd8aa26f2c861edc057040a0.jpg" }
+      ]
+    },
+    "overview": [
+        "- Over 2 years of experience in programming with good communication and quick learning skills",
+        "- Strengths: Front-end technology and Back-end web application development",
+        "- Proficiency in HTML, CSS, JavaScript",
+        "- Strong proficiency in JavaScript, including DOM manipulation and the JavaScript object model",
+        "- Thorough understanding of React.js and its core principles",
+        "- Experience with popular React.js workflows (such as Flux or Redux)",
+        "- Familiarity with newer specifications of EcmaScript",
+        "- Experience with data structure libraries",
+        "- Familiarity with RESTful APIs",
+        "- Strong experience in: PHP, JavaScript (ReactJS, React-native), MySQL, NoSQL, GraphQL, Redis, JSON, API, Docker, Kubernetes, Rancher, AWS services",
+        "- Proficient use of source code management tools: SVN, GIT",
+        "- Proficiency in operating systems: Linux (Ubuntu, OSX), Windows",
+        "- Ability to learn and apply new technology quickly",
+        "- Current working location: Ha Noi, Viet Nam"
+      ],
+      "workExperience": [
+        {
+          "time": "2018",
+          "detail": "F8 TECHNOLOGY EDUCATION.,JSC"
+        },
+        {
+          "time": "2019",
+          "detail": "Example Company"
+        }
+      ],
+      "awards": [
+        {
+            "time": "2018",
+            "award": "Poly Creative Competition 2016"
+        },
+        {
+            "time": "2019",
+            "award": "AI&T JSC Employee Award"
+        }
+      ]
+      
+  }
+  

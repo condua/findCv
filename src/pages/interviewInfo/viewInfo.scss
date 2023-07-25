@@ -1,4 +1,4 @@
-.edit-container{
+.InterviewInfo-edit-container {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -6,7 +6,8 @@
     align-items: center;
     background-color: #E9ECEF;
     overflow-y: scroll;
-    .top-main{
+
+    .top-main {
         width: 100%;
         height: 20%;
         background: radial-gradient(36.28% 150.93% at 50% 50%, #3B8AFF 0%, #0048B3 100%);
@@ -14,7 +15,8 @@
         display: flex;
         flex-direction: column;
         justify-content: left;
-        h1{
+
+        h1 {
             font-size: 25px;
             color: white;
             background: none;
@@ -23,10 +25,12 @@
             padding-left: 28px;
             position: absolute;
         }
-        p{
+
+        p {
             font-size: 10px;
         }
     }
+
     .avatar-container {
         width: 100%;
         height: 40%;
@@ -36,12 +40,14 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 20px;
-        .Room{
+
+        .Room {
             width: 100%;
             height: 100%;
             justify-content: center;
             flex-direction: row;
             position: relative;
+
             .subRoom {
                 position: absolute;
                 left: 50px;
@@ -49,16 +55,17 @@
                 width: 40%;
                 height: 70px;
                 border-style: dashed;
-                margin:10px;
+                margin: 10px;
                 font-size: 18px;
                 padding-top: 8px;
                 flex-direction: row;
                 text-align: center;
-                margin-top:50px;
+                margin-top: 50px;
             }
-            .hasInterview{
+
+            .hasInterview {
                 position: absolute;
-                margin-top:50px;
+                margin-top: 50px;
                 left: 900px;
                 width: 40%;
                 height: 70px;
@@ -69,13 +76,15 @@
                 text-align: center;
             }
         }
-        .Column{
+
+        .Column {
             width: 100%;
             height: 100px;
             background-color: white;
             display: flex;
             flex-direction: row;
-            .avatar-edit{
+
+            .avatar-edit {
                 width: 90px;
                 height: 90px;
                 margin-left: 2%;
@@ -84,33 +93,38 @@
                 background-color: pink;
                 margin-right: 5%;
             }
-            h2{
+
+            h2 {
                 margin-top: 40px;
-                
+
             }
-            p{
+
+            p {
                 font-size: 20px;
                 color: #8A92A6;
                 margin-left: 5px;
                 margin-top: 44px;
             }
         }
-        
-            
+
+
     }
-    .info-container{
+
+    .info-container {
         width: 95%;
         height: 60%;
         border-radius: 10px;
         background-color: #FFFFFF;
         padding-bottom: 40px;
-        h2{
+
+        h2 {
             height: 8%;
             margin-top: 10px;
             margin-left: 20px;
             text-align: left;
         }
-        .form-edit{
+
+        .form-edit {
             width: 100%;
             height: 84%;
             background-color: #FFFFFF;
@@ -118,17 +132,20 @@
             flex-direction: column;
             align-items: center;
             border-top: 1px solid #cbcfd3;
-            .info-item{
+
+            .info-item {
                 width: 95%;
                 display: flex;
                 flex-direction: row;
                 background-color: #FFFFFF;
                 height: 15%;
-                p{
+
+                p {
                     margin-right: 100px;
                     width: 10%;
                 }
-                .info{
+
+                .info {
                     width: 80%;
                     margin-top: 20px;
                     height: 60%;
@@ -136,15 +153,16 @@
                     background-color: #F5F8FA;
                     border: none;
                     box-sizing: border-box;
-                    padding:  10px;
-                    
+                    padding: 10px;
+
                 }
-                
+
             }
         }
     }
-    button{
-        margin-top:0px;
+
+    button {
+        margin-top: 0px;
         background-color: #00a3ff;
         border-radius: 10px;
         border: none;
@@ -154,4 +172,3 @@
         font-size: x-large;
     }
 }
-

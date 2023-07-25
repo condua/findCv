@@ -1,13 +1,14 @@
 [
     {
-        "interviewID": 1,
-        "titleJob": "Mivy App",
-        "descriptionJob": "Description Job",
+        "roomID": 1,
+        "roomName": "Mivy App",
+        "roomDescription": "Description Job",
         "status": "In Process",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 9,
-        "listAvatar": [
-            {
+        "listInterviewer": ["Interview1"],
+        "listParticipant": [
+            { 
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
             },
@@ -46,13 +47,14 @@
         ]
     },
     {
-        "interviewID": 2,
-        "titleJob": "Job Title 2",
-        "descriptionJob": "Description Job 2",
+        "roomID": 2,
+        "roomName": "Room 2",
+        "roomDescription": "Description Job 2",
         "status": "Completed",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 5,
-        "listAvatar": [
+        "listInterviewer": ["Interview2"],
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -76,13 +78,13 @@
         ]
     },
     {
-        "interviewID": 3,
-        "titleJob": "Job Title 3",
-        "descriptionJob": "Description Job 3",
+        "roomID": 3,
+        "roomName": "Room 3",
+        "roomDescription": "Description Job 3",
         "status": "Yet to start",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 7,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -102,13 +104,13 @@
         ]
     },
     {
-        "interviewID": 4,
-        "titleJob": "Job Title 4",
-        "descriptionJob": "Description Job 4",
+        "roomID": 4,
+        "roomName": "Room 4",
+        "roomDescription": "Description Job 4",
         "status": "In Process",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 3,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -120,13 +122,13 @@
         ]
     },
     {
-        "interviewID": 5,
-        "titleJob": "Job Title 5",
-        "descriptionJob": "Description Job 5",
+        "roomID": 5,
+        "roomName": "Room 5",
+        "roomDescription": "Description Job 5",
         "status": "Yet to start",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 2,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -134,13 +136,13 @@
         ]
     },
     {
-        "interviewID": 6,
-        "titleJob": "Job Title 6",
-        "descriptionJob": "Description Job 6",
+        "roomID": 6,
+        "roomName": "Room 6",
+        "roomDescription": "Description Job 6",
         "status": "In Process",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 8,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -164,13 +166,13 @@
         ]
     },
     {
-        "interviewID": 7,
-        "titleJob": "Job Title 7",
-        "descriptionJob": "Description Job 7",
+        "roomID": 7,
+        "roomName": "Room 7",
+        "roomDescription": "Description Job 7",
         "status": "Completed",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 6,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -190,13 +192,13 @@
         ]
     },
     {
-        "interviewID": 8,
-        "titleJob": "Job Title 8",
-        "descriptionJob": "Description Job 8",
+        "roomID": 8,
+        "roomName": "Room 8",
+        "roomDescription": "Description Job 8",
         "status": "Completed",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 4,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -224,13 +226,13 @@
         ]
     },
     {
-        "interviewID": 9,
-        "titleJob": "Job Title 9",
-        "descriptionJob": "Description Job 9",
+        "roomID": 9,
+        "roomName": "Room 9",
+        "roomDescription": "Description Job 9",
         "status": "Yet to start",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 1,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/female/0.jpg"
@@ -254,13 +256,13 @@
         ]
     },
     {
-        "interviewID": 10,
-        "titleJob": "Job Title 10",
-        "descriptionJob": "Description Job 11",
+        "roomID": 10,
+        "roomName": "Room 10",
+        "roomDescription": "Description Job 11",
         "status": "Completed",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 6,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -280,13 +282,13 @@
         ]
     },
     {
-        "interviewID": 11,
-        "titleJob": "Job Title 11",
-        "descriptionJob": "Description Job 11",
+        "roomID": 11,
+        "roomName": "Room 11",
+        "roomDescription": "Description Job 11",
         "status": "In Process",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 6,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -306,13 +308,13 @@
         ]
     },
     {
-        "interviewID": 12,
-        "titleJob": "Job Title 12",
-        "descriptionJob": "Description Job 12",
+        "roomID": 12,
+        "roomName": "Room 12",
+        "roomDescription": "Description Job 12",
         "status": "Completed",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 6,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"
@@ -332,13 +334,13 @@
         ]
     },
     {
-        "interviewID": 13,
-        "titleJob": "Job Title 13",
-        "descriptionJob": "Description Job 13",
+        "roomID": 13,
+        "roomName": "Room 13",
+        "roomDescription": "Description Job 13",
         "status": "Yet to start",
-        "startDate": "Feb 6, 2021",
+        "startDate": "01-08-2021",
         "numberParticipant": 6,
-        "listAvatar": [
+        "listParticipant": [
             {
                 "email": "user1@gmail.com",
                 "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/0.jpg"

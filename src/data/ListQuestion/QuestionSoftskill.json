@@ -1,0 +1,44 @@
+[
+    {
+        "key": "S1",
+        "position": "Intern",
+        "skill": "React, JavaScript",
+        "questionContent": "Có kinh nghiệm làm việc nhóm không?",
+        "answerContent": "Đã từng, chưa từng"
+    },
+    {
+        "key": "S2",
+        "position": "Junior Developer",
+        "skill": "Java, Spring Boot",
+        "questionContent": "Bạn có khả năng làm việc độc lập và tự quản lý công việc không?",
+        "answerContent": "Có, Tự quản lý tốt, Cần hỗ trợ để tự quản lý"
+    },
+    {
+        "key": "S3",
+        "position": "Software Engineer",
+        "skill": "Python, Django",
+        "questionContent": "Bạn có khả năng làm việc dưới áp lực và trong các dự án có thời hạn gấp?",
+        "answerContent": "Có, Thích thú với áp lực, Cần hỗ trợ trong dự án có thời hạn gấp"
+    },
+    {
+        "key": "S4",
+        "position": "Frontend Developer",
+        "skill": "HTML, CSS, JavaScript",
+        "questionContent": "Bạn có kỹ năng tổ chức và quản lý thời gian tốt không?",
+        "answerContent": "Có, Quản lý thời gian tốt, Cần cải thiện kỹ năng quản lý thời gian"
+    },
+    {
+        "key": "S5",
+        "position": "Backend Developer",
+        "skill": "Node.js, Express",
+        "questionContent": "Bạn có khả năng giải quyết vấn đề một cách sáng tạo và linh hoạt không?",
+        "answerContent": "Có, Giải quyết vấn đề sáng tạo, Cần hỗ trợ trong việc giải quyết vấn đề"
+    },
+    {
+        "key": "S6",
+        "position": "Full Stack Developer",
+        "skill": "React, Node.js, MongoDB",
+        "questionContent": "Bạn có khả năng thích nghi và học hỏi nhanh chóng không?",
+        "answerContent": "Có, Thích nghi nhanh, Cần thời gian để thích nghi"
+    }
+]

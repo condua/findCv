@@ -2,27 +2,27 @@
   width: 100%;
   height: 100vh;
   background-color: #e9ecef;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  // align-items: center;
-
+  align-items: center;
 
   .info-container {
     width: 100%;
-    flex-direction: column;
-    display: flex;
     align-items: center;
     justify-content: center;
-    height: 60%;
+    height: 70%;
     border-radius: 10px;
     background-color: #FFFFFF;
 
     .BackButton {
+      position: absolute;
       background-color: #f1fafe;
       border-radius: 10px;
       color: #00a3ff;
       border: none;
       padding: 10px;
-      margin-top: 30px;
+      left: 780px;
     }
 
     h2 {
@@ -34,7 +34,7 @@
 
     .form-edit {
       width: 100%;
-      height: 60%;
+      height: 84%;
       background-color: #FFFFFF;
       display: flex;
       flex-direction: column;
@@ -42,14 +42,12 @@
       border-top: 1px solid #cbcfd3;
 
 
-
       .info-item {
         width: 95%;
         display: flex;
-
         flex-direction: row;
         background-color: #FFFFFF;
-        height: 45%;
+        height: 30%;
 
         p {
           margin-right: 100px;
@@ -206,7 +204,6 @@
     margin-left: 30px;
     align-items: center;
     border-radius: 10px;
-    overflow-y: scroll;
 
     .company-item {
       width: 100%;
@@ -274,7 +271,7 @@
 
         .AddButton {
           background-color: #f1fafe;
-          margin: 10px 0px 10px 800px;
+          margin: 10px 0px 10px 630px;
           border-radius: 10px;
           border: none;
         }
@@ -296,18 +293,12 @@
       }
 
       .company-item-bot {
-        width: 100%;
+        width: 96%;
         height: 25%;
         background-color: white;
         margin: 10px 0px 10px 20px;
         display: flex;
         flex-direction: row;
-
-        .adjustButton {
-          margin-left: 550px;
-          gap: 50px;
-          background-color: red;
-        }
 
         .date {
           width: 15%;

@@ -1,12 +1,12 @@
 [
   {
-    "id": 2,
+    "id": 1,
     "name": "John Doe",
     "email": "johndoe@example.com",
     "image": "images/1.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 2,
@@ -14,8 +14,8 @@
     "email": "janesmith@example.com",
     "image": "images/2.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 3,
@@ -23,8 +23,8 @@
     "email": "phanhoangphuc0509@gmail.com",
     "image": "images/3.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 4,
@@ -32,28 +32,26 @@
     "email": "bobjohnson@example.com",
     "image": "images/4.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
+  },
   {
     "id": 5,
     "name": "Rey Trach",
     "email": "bobjohnson@example.com",
     "image": "images/5.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
+  },
   {
     "id": 6,
     "name": "Curren Phen",
     "email": "bobjohnson@example.com",
     "image": "images/6.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 7,
@@ -61,9 +59,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/7.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
-    
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 8,
@@ -71,8 +68,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/8.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
   },
   {
     "id": 9,
@@ -80,8 +77,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/9.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 10,
@@ -89,8 +86,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/10.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 11,
@@ -98,8 +95,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/11.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 12,
@@ -107,8 +104,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/12.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 13,
@@ -116,8 +113,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/13.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 14,
@@ -125,8 +122,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/14.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 15,
@@ -134,8 +131,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/15.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 16,
@@ -143,8 +140,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/16.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 17,
@@ -152,8 +149,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/17.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 18,
@@ -161,8 +158,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/18.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 19,
@@ -170,8 +167,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/19.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 20,
@@ -179,8 +176,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/20.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 21,
@@ -188,8 +185,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/21.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
     "id": 22,
@@ -197,8 +194,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/22.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
     "id": 23,
@@ -206,8 +203,8 @@
     "email": "bobjohnson@example.com",
     "image": "images/23.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
     "id": 24,
@@ -215,174 +212,169 @@
     "email": "bobjohnson@example.com",
     "image": "images/24.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
-    "id":25,
-    "name":"Cajek Luan",
+    "id": 25,
+    "name": "Cajek Luan",
     "email": "cajekluan@gmail.com",
     "image": "images/25.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
+  },
   {
-    "id":26,
-    "name":"Deko Meian",
+    "id": 26,
+    "name": "Deko Meian",
     "email": "cajekluan@gmail.com",
     "image": "images/26.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
+  },
   {
-    "id":27,
-    "name":"Haeun Kim",
+    "id": 27,
+    "name": "Haeun Kim",
     "email": "cajekluan@gmail.com",
     "image": "images/27.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
+  },
   {
-    "id":28,
-    "name":"Johua Chirst",
+    "id": 28,
+    "name": "Johua Chirst",
     "email": "cajekluan@gmail.com",
     "image": "images/28.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Blacklist"
+  },
   {
-    "id":29,
-    "name":"Garnercho Kisrt",
+    "id": 29,
+    "name": "Garnercho Kisrt",
     "email": "cajekluan@gmail.com",
     "image": "images/29.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
-  }
-  ,
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
+  },
   {
-    "id":30,
-    "name":"Nisk Majeor",
+    "id": 30,
+    "name": "Nisk Majeor",
     "email": "cajekluan@gmail.com",
     "image": "images/30.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
   },
   {
-    "id":31,
-    "name":"Yern Kist",
+    "id": 31,
+    "name": "Yern Kist",
     "email": "cajekluan@gmail.com",
     "image": "images/31.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
-    "id":32,
-    "name":"Pier Asthie",
+    "id": 32,
+    "name": "Pier Asthie",
     "email": "cajekluan@gmail.com",
     "image": "images/32.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
-    "id":33,
-    "name":"Petr Crush",
+    "id": 33,
+    "name": "Petr Crush",
     "email": "cajekluan@gmail.com",
     "image": "images/33.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
-    "id":34,
-    "name":"Mendy Isk",
+    "id": 34,
+    "name": "Mendy Isk",
     "email": "cajekluan@gmail.com",
     "image": "images/34.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
-    "id":35,
-    "name":"Sadio Mane",
+    "id": 35,
+    "name": "Sadio Mane",
     "email": "cajekluan@gmail.com",
     "image": "images/35.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
-    "id":36,
-    "name":"Mohamed Salah",
+    "id": 36,
+    "name": "Mohamed Salah",
     "email": "cajekluan@gmail.com",
     "image": "images/36.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Chấp nhận"
+    "position": "Back-end: Java",
+    "status": "Chấp nhận"
   },
   {
-    "id":37,
-    "name":"Roberto Firmino",
+    "id": 37,
+    "name": "Roberto Firmino",
     "email": "cajekluan@gmail.com",
     "image": "images/37.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
-    "id":38,
-    "name":"Jota Juan",
+    "id": 38,
+    "name": "Jota Juan",
     "email": "cajekluan@gmail.com",
     "image": "images/38.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
   },
   {
-    "id":39,
-    "name":"Cristiano Ronaldo",
+    "id": 39,
+    "name": "Cristiano Ronaldo",
     "email": "cajekluan@gmail.com",
     "image": "images/39.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
   },
   {
-    "id":40,
-    "name":"Alisson Becker",
+    "id": 40,
+    "name": "Alisson Becker",
     "email": "cajekluan@gmail.com",
     "image": "images/40.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Blacklist"
+    "position": "Back-end: Java",
+    "status": "Blacklist"
   },
   {
-    "id":41,
-    "name":"Virgil Van Dijk",
+    "id": 41,
+    "name": "Virgil Van Dijk",
     "email": "cajekluan@gmail.com",
     "image": "images/41.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đang chấm"
+    "position": "Back-end: Java",
+    "status": "Đang chấm"
   },
   {
-    "id":42,
-    "name":"Konate Kevin",
+    "id": 42,
+    "name": "Konate Kevin",
     "email": "cajekluan@gmail.com",
     "image": "images/42.jpg",
     "date": "12-7-2023",
-    "position":"Back-end: Java",
-    "status":"Đã chấm"
+    "position": "Back-end: Java",
+    "status": "Đã chấm"
   }
 ]

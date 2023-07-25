@@ -6,7 +6,7 @@ const InterviewDetailDashboard = ({ dataDashboardDetail }) => {
 
     return (
         <div className='bg-white w-full h-[250px] rounded-xl flex-col'>
-            <div style={{ fontWeight: 500, fontSize: 30, paddingLeft: '13%', paddingTop: '2%' }}>{dataDashboardDetail.title}</div>
+            <div style={{ fontWeight: 500, fontSize: 30, paddingLeft: '13%', paddingTop: '2%' }}>{dataDashboardDetail.roomName}</div>
             <button
                 type="button" disabled
                 style={{
@@ -22,9 +22,9 @@ const InterviewDetailDashboard = ({ dataDashboardDetail }) => {
                     top: -35,
                 }}
             >
-                In Process
+                {dataDashboardDetail.status}
             </button>
-            <div style={{ position: 'relative', top: -20, fontWeight: 400, fontSize: 25, paddingLeft: '13%' }}>{dataDashboardDetail.description}</div>
+            <div style={{ position: 'relative', top: -20, fontWeight: 400, fontSize: 25, paddingLeft: '13%' }}>{dataDashboardDetail.roomDescription}</div>
             <div style={{ fontWeight: 500, fontSize: 18, paddingLeft: '13%' }}>
                 <span>Ngày bắt đầu</span>
                 <span style={{ paddingLeft: '13%' }}>Số người tham gia</span>
@@ -41,19 +41,20 @@ const InterviewDetailDashboard = ({ dataDashboardDetail }) => {
                     size="large"
                     maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', fontWeight: 500 }}
                 >
-                    <Avatar src="http://xsgames.co/randomusers/assets/avatars/male/0.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/female/34.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/female/7.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/male/75.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/female/5.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/male/24.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/female/6.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/female/15.jpg" />
-                    <Avatar src="https://xsgames.co/randomusers/assets/avatars/male/12.jpg" />
-
+                    {dataDashboardDetail.listParticipant.map((participant, index) => (
+                        <Avatar key={index} src={participant.urlAvatar} />
+                    ))}
                 </Avatar.Group>
             </div>
-        </div>
+            <div style={{ position: 'relative', bottom: 38, paddingLeft: '13%', fontSize: 18 }}>
+                <span style={{ fontWeight: 500, paddingRight: 30 }}>
+                    Meeting link:
+                </span>
+                <a href="https://meet.google.com/?pli=1" target="_blank" rel="noreferrer">
+                    https://meet.google.com/?pli=1
+                </a>
+            </div>
+        </div >
 
     )
 

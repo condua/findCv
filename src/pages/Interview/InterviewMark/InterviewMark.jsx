@@ -26,7 +26,7 @@ const InterviewMark = () => {
     return (
         <div className="flex mt-7">
             <div className="flex w-full absolute right-[1px] mt-[-99px] bg-white h-16 rounded-xl items-center">
-                <div className="ml-10 text-xl text">Buổi phỏng vấn</div>
+                <div className="ml-10 text-xl text">Phỏng vấn</div>
                 <button onClick={() => handleCancelClick(interID)} className=" text-sky-700 mx-10" style={{ paddingLeft: 900, fontWeight: 500, fontSize: 19 }}>Back</button>
 
             </div>
@@ -39,7 +39,7 @@ const InterviewMark = () => {
                         <div style={{ paddingTop: 10, fontWeight: 500, fontSize: 22 }}>Ứng viên</div>
                         <div className='flex' style={{ width: '300%' }}>
                             <DetailCard dataInterviewDetail={dataInterviewDetail} id={inforID} />
-                        </div>
+                        </div> 
 
                         <div style={{ paddingTop: 10, fontWeight: 500, fontSize: 22 }}>CV của ứng viên</div>
                         <div className='flex' style={{ width: '300%' }}>
