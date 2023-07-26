@@ -1,6 +1,5 @@
 import React from "react"
-import { connect } from "react-redux"
-import { mapDispatchToProps, mapStateToProps } from "../../components/rdSidebar"
+import { connect, useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {
     EditOutlined,
@@ -8,10 +7,23 @@ import {
     EnterOutlined,
     UserOutlined,
 } from "@ant-design/icons"
-import events from "./../../data/event"
+import { getEventsRequest } from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
+import { useEffect } from "react"
+import { useState } from "react"
 
-const Event = ({ collapsed }) => {
+const Event = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
+    // Lấy dữ liệu sự kiện từ Redux store
+    const events = useSelector((state) => state.events.events)
+    console.log(events)
+
     return (
         <div className="">
             <div className="flex w-full absolute right-[1px] mt-[-70px] bg-white h-16 rounded-xl items-center">
@@ -85,10 +97,10 @@ const Event = ({ collapsed }) => {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-self-end text-black font-semibold m-3 justify-around divide-slate-400 divide-black/50 ">
+                                <div className="flex justify-self-end text-black font-semibold mb-3 justify-around divide-slate-400 divide-black/50 ">
                                     <Link
                                         to={`edit/${event.id}`}
-                                        className="flex flex-1 items-center justify-center mt-3 cursor-pointer"
+                                        className="flex flex-1 items-center justify-center mt-5 cursor-pointer"
                                     >
                                         <EditOutlined className=" text-xl" />
                                     </Link>
@@ -104,4 +116,4 @@ const Event = ({ collapsed }) => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Event)
+export default Event
