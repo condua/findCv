@@ -1,4 +1,3 @@
-// src/actions/eventActions.js
 export const GET_EVENTS_REQUEST = 'GET_EVENTS_REQUEST';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
 export const GET_EVENTS_FAILURE = 'GET_EVENTS_FAILURE';
@@ -14,5 +13,25 @@ export const getEventsSuccess = (events) => ({
 
 export const getEventsFailure = (error) => ({
   type: GET_EVENTS_FAILURE,
+  payload: error,
+});
+
+
+export const CREATE_EVENT_REQUEST = 'CREATE_EVENT_REQUEST';
+export const CREATE_EVENT_SUCCESS = 'CREATE_EVENT_SUCCESS';
+export const CREATE_EVENT_FAILURE = 'CREATE_EVENT_FAILURE';
+
+export const createEventRequest = (eventData) => ({
+  type: CREATE_EVENT_REQUEST,
+  payload: eventData,
+});
+
+export const createEventSuccess = (event) => ({
+  type: CREATE_EVENT_SUCCESS,
+  payload: event,
+});
+
+export const createEventFailure = (error) => ({
+  type: CREATE_EVENT_FAILURE,
   payload: error,
 });

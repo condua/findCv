@@ -2,6 +2,9 @@ import { List, Breadcrumb } from "antd"
 import React from "react"
 import events from "../../../data/event"
 import { useNavigate, useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getEventsRequest } from "../../../redux/action/eventActions"
 
 const EventDetail = () => {
     const { id } = useParams()
@@ -9,6 +12,17 @@ const EventDetail = () => {
     const handleCancelClick = () => {
         navigate("/event", { replace: true })
     }
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
+    // Lấy dữ liệu sự kiện từ Redux store
+    const events = useSelector((state) => state.events.events)
+    console.log(events)
 
     return (
         <div>
@@ -45,6 +59,7 @@ const EventDetail = () => {
             <div className="flex p-2 rounded-md ">
                 {events.map((event) => {
                     if (event.id === parseInt(id)) {
+                        const parsedContent = JSON.parse(event.content);
                         return (
                             <div className="shadow-2xl">
                                 <div className="flex">
@@ -68,7 +83,7 @@ const EventDetail = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        {event.content.blocks.map((block) => {
+                                        {parsedContent.blocks.map((block) => {
                                             if (block.type === "header") {
                                                 return (
                                                     <div
