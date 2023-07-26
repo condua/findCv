@@ -69,7 +69,10 @@ function* getEvents() {
   }
   
   function deleteEventApi(eventId, accessToken) {
-    return axios.delete(`https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}` , {
+    return axios.delete(`https://qltd01.cfapps.us10-001.hana.ondemand.com/event` , {
+      params: {
+        eventId: eventId,
+      },
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
