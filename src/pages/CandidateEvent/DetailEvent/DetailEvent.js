@@ -1,15 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./DetailEvent.scss";
 import { useParams } from 'react-router-dom';
 import event from "../../../data/event.json"
 import Header from "./../../Header/Header";
 import { ListGroup } from 'react-bootstrap';
-
+import { getEventsRequest } from "../../../redux/action/eventActions"
+import { useDispatch, useSelector } from "react-redux"
 function DetailEvent(){
-   
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
+    // Lấy dữ liệu sự kiện từ Redux store
+    const events = useSelector((state) => state.events.events)
+
     const { id } = useParams();
     let keyId = parseInt(id);
-    const item = event.filter((item) => item.id === keyId);
+    const item = events.filter((item) => item.id === keyId);
+
     return (
         <div className = "detailevent">
         <Header/>
@@ -25,7 +36,7 @@ function DetailEvent(){
                                 <div className="m-auto">ssss</div>
                             </div>
                             <div>
-                                {item[0].content.blocks.map((block) => {
+                                {JSON.parse(item[0].content).blocks.map((block) => {
                                     if (block.type === "header") {
                                         return (
                                             <div

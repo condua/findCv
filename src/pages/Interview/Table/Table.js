@@ -5,6 +5,8 @@ import {BsCameraVideo} from "react-icons/bs"
 import {MdOutlineCalendarMonth} from "react-icons/md"
 import {BsChatDots} from "react-icons/bs"
 import { Link } from 'react-router-dom';
+import {TbPlayerTrackNextFilled} from "react-icons/tb"
+
 const Table = () => {
   const [tableData, setTableData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,17 +16,55 @@ const Table = () => {
   const sidebarRef = useRef(null);
   const containerRef = useRef(null);
   const [isToggled, setIsToggled] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
 
-  
+
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const handlePrevPage = () => {
+    setCurrentPage(prevPage => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(prevPage => prevPage + 1);
+  };
+  // useEffect(() => {
+  //   const filteredData = data.filter(
+  //     item =>
+  //       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       item.email.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  //   setTableData(filteredData.slice(startIndex, endIndex));
+    
+  // }, [searchQuery, currentPage]);
   useEffect(() => {
     const filteredData = data.filter(
       item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setTableData(filteredData);
-  }, [searchQuery]);
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    // Make sure the currentPage is within a valid range
+    const validPage = Math.max(1, Math.min(currentPage, totalPages));
+
+    // Calculate the starting index and ending index for the current page
+    const startIndex = (validPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    setTableData(filteredData.slice(startIndex, endIndex));
+    setCurrentPage(validPage);
+  }, [searchQuery, currentPage]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setCurrentPage(1); // Reset the currentPage to 1 when performing a search
+    setSearchQuery(e.target.value);
+  };
+
 
   const handleSortByName = () => {
     const sortedData = [...tableData].sort((a, b) => {
@@ -143,68 +183,80 @@ const Table = () => {
     }
   };
   return (
-    <div style={{width:'100%',height:'auto',backgroundColor:'#e9ecef',paddingBottom:'92px',paddingTop:'1px'}}>
+    
+    <div className='manage-candidate' style={{width:'100%',height:'auto',backgroundColor:'#e9ecef',paddingBottom:'92px',paddingTop:'1px'}} id='table-manage'>
+      <div className="flex w-full absolute right-[1px] mt-[-70px] bg-white h-16 rounded-xl items-center">
+                  <div className="ml-10 font-serif text-xl text">Quản lý ứng viên</div>
+              </div>
         <div className="outer-wrapper"  >
-        <div className="table-wrapper">
-          <input
-            className='searchItem'
-            style={{ width: '200px' }}
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search by name or email"
-          />
-          <div style={{width:'100%',height:'100%',overflowY:'scroll', marginTop:'20px'}}>
-          <table id="candidates" ref={containerRef} >
-            <thead>
-              <tr style={{ position: 'sticky', position: '-webkit-sticky', backgroundColor: 'blue' }}>
-                {/* <th onClick={handleSortById}>ID
-                {sortOrder === 'asc' ? ' ▲' : ' ▼'}
-                </th> */}
-                <th>Avatar</th>
-                <th onClick={handleSortByName}>
-                  Name
-                  {sortOrder === 'asc' ? ' ▲' : ' ▼'}
-                </th>
-                {/* <th onClick={handleSortByEmail}>
-                Email
-                {sortOrder === 'asc' ? ' ▲' : ' ▼'}
-                </th> */}
-                <th>Ngày phỏng vấn</th>
-                <th>Vị trí ứng tuyển</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map(item => (
-                <tr key={item.id} onClick={() => handleNameClick(item)} style={{cursor:'pointer'}}>
-                  {/* <td>{item.id}</td> */}
-                  <td style={{paddingRight:'5px'}}>
-                    <img className='avatar-img' src={item.image}/>
-                      
-                    
-                  </td>
-                  <td onClick={() => handleNameClick(item)} style={{cursor:'pointer'}}>
-                    <p style={{marginBottom:'10px'}}>{item.name}</p>
-                    <p>{item.email}</p>
-                  </td>
-                  <td>{item.date}</td>
-                  <td>{item.position}</td>
-                  <td>
-                    <div style={getStatusColor(item.status)}>
-                      {item.status}
-                    </div>
-                  </td>
-                  <td style={{alignItems:'center'}}><Link style={{textDecoration:'none'}} to={`/${item.id}`}><button className='edit-button'>Edit</button></Link></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          </div>
+          <div className="table-wrapper" >
+            <input
+              className='searchItem'
+              style={{ width: '200px' }}
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search by name or email"
+            />
+            <div style={{width:'100%',height:'100%', marginTop:'20px'}}>
+              <table id="candidates" ref={containerRef} >
+                <thead>
+                  <tr style={{ position: 'sticky', position: '-webkit-sticky', backgroundColor: 'blue' }}>
+                    {/* <th onClick={handleSortById}>ID
+                    {sortOrder === 'asc' ? ' ▲' : ' ▼'}
+                    </th> */}
+                    <th>Avatar</th>
+                    <th onClick={handleSortByName}>
+                      Name
+                      {sortOrder === 'asc' ? ' ▲' : ' ▼'}
+                    </th>
+                    {/* <th onClick={handleSortByEmail}>
+                    Email
+                    {sortOrder === 'asc' ? ' ▲' : ' ▼'}
+                    </th> */}
+                    <th>Ngày phỏng vấn</th>
+                    <th>Vị trí ứng tuyển</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.map(item => (
+                    <tr key={item.id} onClick={() => handleNameClick(item)} style={{cursor:'pointer'}}>
+                      {/* <td>{item.id}</td> */}
+                      <td style={{paddingRight:'5px'}}>
+                        <img className='avatar-img' src={item.image}/>
+                          
+                        
+                      </td>
+                      <td onClick={() => handleNameClick(item)} style={{cursor:'pointer'}}>
+                        <p style={{marginBottom:'10px'}}>{item.name}</p>
+                        <p>{item.email}</p>
+                      </td>
+                      <td>{item.date}</td>
+                      <td>{item.position}</td>
+                      <td>
+                        <div style={getStatusColor(item.status)}>
+                          {item.status}
+                        </div>
+                      </td>
+                      <td style={{alignItems:'center'}}><Link style={{textDecoration:'none'}} to={`./${item.id}`}><button className='edit-button'>Edit</button></Link></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              
+            </div>
+          
         </div>
+        <div className="pagination-table">
+              <button onClick={handlePrevPage} disabled={currentPage === 1} style={{marginRight:'10px'}}>Previous</button>
+              <span>Page {currentPage}/{Math.ceil(data.length/itemsPerPage)}</span>
+              <button onClick={handleNextPage} disabled={tableData.length < itemsPerPage} style={{marginLeft:'10px'}}>{/*<TbPlayerTrackNextFilled/>*/}Next</button>
+        </div>
+
         {isSidebarOpen && selectedPerson && (
-          <div className='container'>
+          <div className='container-table'>
             <div className="container-main" ref={sidebarRef}>
               <div className='containerAvatar'>
                 
@@ -215,7 +267,7 @@ const Table = () => {
                   
                   <p>Ứng tuyển: Java dev</p>
                   <p style={{marginTop:'10px'}}> Ngày ứng tuyển: 23/06/2023</p>
-                  <span style={{marginTop:'10px', cursor:'pointer'}}>
+                  <span style={{marginTop:'10px',display:'flex', cursor:'pointer'}}>
                   <BsCameraVideo/> 
                   <MdOutlineCalendarMonth style={{marginLeft:'10px'}}/>
                   <BsChatDots style={{marginLeft:'10px'}}/>
@@ -246,8 +298,8 @@ const Table = () => {
                     <div className='itemInfo'>
                       <h3>Số điện thoại:</h3>
                     </div>
-                    <div className='itemInfo'>
-                      <h3>Quốc gia:</h3>
+                    <div className='itemInfo' style={{height:'25%'}}>
+                      <h3 style={{marginBottom:'30px'}}>Địa chỉ:</h3>
                     </div>
                   </div>
 
@@ -266,8 +318,8 @@ const Table = () => {
                     <div className='itemInfo'>
                       <h3>Số điện thoại:</h3>
                     </div>
-                    <div className='itemInfo'>
-                      <h3>Dự án:</h3>
+                    <div className='itemInfo' style={{height:'25%'}}>
+                      <h3 style={{marginBottom:'30px'}}>Dự án:</h3>
                     </div>
                   </div>
                   }
@@ -277,10 +329,12 @@ const Table = () => {
             {/* Add more information as needed */}
           </div>
         </div>
-      )}
+      )} 
     </div>
     </div>
   );
 };
 
 export default Table;
+
+

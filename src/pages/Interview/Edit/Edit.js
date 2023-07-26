@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./Edit.scss"
 import data from '../data.json';
+import TextArea from 'antd/es/input/TextArea';
 
 const Edit = () => {
   const history = useNavigate();
   const { id } = useParams();
+  let keyId = parseInt(id);
 
   const candidate = data.find(item => item.id === parseInt(id));
 
@@ -32,24 +34,24 @@ const Edit = () => {
     event.preventDefault();
 
     // Create a copy of the data array
-    const updatedData = [...data];
+    // const updatedData = [...data];
 
-    // Update the candidate in the copied array
-    const updatedCandidate = {
-      ...candidate,
-      name: name,
-      email: email,
-      image: image
-    };
+    // // Update the candidate in the copied array
+    // const updatedCandidate = {
+    //   ...candidate,
+    //   name: name,
+    //   email: email,
+    //   image: image
+    // };
 
     // Find the index of the candidate in the copied array
-    const candidateIndex = updatedData.findIndex(item => item.id === parseInt(id));
+    // const candidateIndex = updatedData.findIndex(item => item.id === parseInt(id));
 
     // Replace the old candidate with the updated candidate
-    updatedData[candidateIndex] = updatedCandidate;
+    // updatedData[candidateIndex] = updatedCandidate;
 
     // Update the data in localStorage
-    localStorage.setItem('data', JSON.stringify(updatedData));
+    // localStorage.setItem('data', JSON.stringify(updatedData));
 
     // Redirect back to the home page after submitting
 
@@ -66,7 +68,7 @@ const Edit = () => {
      */}
       <div className='avatar-container'>
             <img className='avatar-edit' src={image} />
-            <h2>{name}</h2>
+            <h2>{candidate.name}</h2>
             <p>- Người phỏng vấn</p>
       </div>
 
@@ -75,11 +77,11 @@ const Edit = () => {
         <form onSubmit={handleSubmit} className='form-edit'>
           <div className='info-item' style={{marginTop:'15px'}}>
               <p>Họ và tên</p>
-              <input type='text' placeholder={name}/>
+              <input type='text' placeholder={candidate.name}/>
           </div>
           <div className='info-item'>
               <p>Tài khoản</p>
-              <input type='text' placeholder={name}/>
+              <input type='text' placeholder={candidate.name}/>
           </div>
           <div className='info-item'>
               <p>Email</p>
@@ -87,11 +89,11 @@ const Edit = () => {
           </div>
           <div className='info-item'>
               <p>Số điện thoại</p>
-              <input type='text' placeholder={name}/>
+              <input type='text' placeholder={candidate.name}/>
           </div>
           <div className='info-item'>
               <p>Địa chỉ</p>
-              <input type='text' placeholder={name}/>
+              <TextArea type='text' placeholder={candidate.name}/>
           </div>
           {/* <div className='info-item' style={{marginBottom:'10px'}}>
               <p>Sửa mật khẩu</p>

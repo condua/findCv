@@ -3,6 +3,11 @@ import { Layout, Dropdown, Space, Avatar } from "antd"
 import { DownOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { logout } from '../../redux/action/authActions';
+
 import ava from "../../assets/ava.jpg"
 
 const { Header } = Layout
@@ -12,11 +17,15 @@ const loggedInUser = JSON.parse(localStorage.getItem('loginUser'));
 
 
 const IRAHeader = ({ colorBgContainer }) => {
-    const navigate = useNavigate()
+    const auth = useSelector(state => state.auth.data)
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleLogout = () => {
-        localStorage.setItem("token", false)
-        navigate("/login")
-        window.location.reload();
+        dispatch(logout());
+        navigate('/login')
+        // window.location.reload();
 
     }
     const items = [
@@ -44,6 +53,7 @@ const IRAHeader = ({ colorBgContainer }) => {
             ),
         },
     ]
+    console.log(auth)
     return (
         <Header
             style={{ padding: 0, background: colorBgContainer }}
@@ -57,9 +67,9 @@ const IRAHeader = ({ colorBgContainer }) => {
                 >
                     <div className="flex">
                         <a onClick={(e) => e.preventDefault()}>
-                            <Avatar src={loggedInUser.image} className="mr-3 mb-1 "></Avatar>
+                            <Avatar src='' className="mr-3 mb-1 "></Avatar>
                             <Space>
-                                {loggedInUser.name}
+                                {/* Hello: {auth.userInfoEntity.fullName} */}
                                 <DownOutlined />
                             </Space>
                         </a>

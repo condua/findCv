@@ -1,6 +1,6 @@
 import React from "react"
 import { ConfigProvider, Layout, Menu } from "antd"
-import fpt from "../../assets/fpt.png"
+import fpt1 from "../../assets/fpt1.png"
 import { mapDispatchToProps, mapStateToProps } from "../rdSidebar"
 import { connect } from "react-redux"
 
@@ -48,7 +48,7 @@ const IRASidebar = ({
                             SetCollapsed(!collapsed)
                         }}
                     >
-                        <img alt="logo" className=" h-24 p-4" src={fpt}></img>
+                        <img alt="logo" className=" h-24 p-4" src={fpt1}></img>
                     </div>
                 ) : (
                     <div
@@ -57,7 +57,7 @@ const IRASidebar = ({
                             SetCollapsed(!collapsed)
                         }}
                     >
-                        <img alt="logo" className="h-full p-4" src={fpt}></img>
+                        <img alt="logo" className="h-full p-4" src={fpt1}></img>
                     </div>
                 )}
 

@@ -154,7 +154,7 @@ const Home = () => {
                                     </td>
                                     
                                     
-                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`/${item.id}`}>Edit</Link></button></td>
+                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`../managecandidate/${item.id}`}>Edit</Link></button></td>
                                 </tr>
                                 
                             ))}
@@ -164,7 +164,7 @@ const Home = () => {
                                 
                     <div className='event'>
                         {/* <BsCircle style={{color:'blue'}}/> */}
-                        <h2>Các sự kiện sắp tới của công ty</h2>
+                        <h2 style={{fontSize:'20px'}}>Các sự kiện sắp tới của công ty</h2>
                         <div className='event-list'>
                                 <Timeline style={{marginTop:'5px'}}
                                     items={event.map((event) => ({
