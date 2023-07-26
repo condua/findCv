@@ -15,7 +15,7 @@ const IRAHeader = ({ colorBgContainer }) => {
     const navigate = useNavigate()
     const handleLogout = () => {
         localStorage.setItem("token", false)
-        navigate("./login")
+        navigate("/login")
         window.location.reload();
 
     }
