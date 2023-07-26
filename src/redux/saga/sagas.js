@@ -5,6 +5,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, loginSuccess, loginFailure } from '../act
 import { GET_PROFILE_REQUEST, getProfileSuccess, getProfileFailure } from '../action/profileActions';
 import { GET_EVENTS_REQUEST, } from '../action/eventActions';
 import eventSaga from './eventSaga';
+import jobSaga from './jobSaga';
 
 function* login(action) {
   try {
@@ -65,4 +66,5 @@ export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
   yield takeLatest(GET_PROFILE_REQUEST, getProfile);
   yield eventSaga(); 
+  yield jobSaga();
 }

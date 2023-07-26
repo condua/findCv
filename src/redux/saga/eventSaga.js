@@ -8,6 +8,9 @@ import {
   getEventsFailure,
   createEventSuccess,
   createEventFailure,
+  DELETE_EVENT_REQUEST,
+  deleteEventSuccess,
+  deleteEventFailure,
 } from '../action/eventActions';
 
 function* getEvents() {
@@ -53,8 +56,29 @@ function* getEvents() {
     });
   }
 
+  function* deleteEvent(action) {
+    try {
+      const { eventId, accessToken } = action.payload;
+  
+      yield call(deleteEventApi, eventId, accessToken);
+  
+      yield put(deleteEventSuccess());
+    } catch (error) {
+      yield put(deleteEventFailure(error));
+    }
+  }
+  
+  function deleteEventApi(eventId, accessToken) {
+    return axios.delete(`https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}` , {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  }
+
 
 export default function* eventSaga() {
   yield takeLatest(GET_EVENTS_REQUEST, getEvents);
   yield takeLatest(CREATE_EVENT_REQUEST, createEvent);
+  yield takeLatest(DELETE_EVENT_REQUEST, deleteEvent);
 }
