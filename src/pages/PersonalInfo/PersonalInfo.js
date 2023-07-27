@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Footer from "./../Footer/Footer";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileRequest } from '../../redux/action/profileActions';
+import { uploadAvatarRequest } from '../../redux/action/uploadAvatarActions';
 
 function PersonalInfo() {
   const [data, setData] = useState({
@@ -26,31 +27,43 @@ function PersonalInfo() {
   });
 
   const accessToken = useSelector((state) => state.auth.accessToken);
- 
+  const profileData = useSelector((state) => state.profile.profileData);
+  const avatarUrl = useSelector((state) => state.uploadAvatar.avatarUrl);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    // Call the API to get the profile data
     dispatch(getProfileRequest(accessToken));
   }, [dispatch, accessToken]);
 
-  const profileData = useSelector((state) => state.profile.profileData);
   useEffect(() => {
-    // When the profile data is fetched, update the state
     if (profileData) {
       setData(profileData.data);
     }
   }, [profileData]);
-  console.log(profileData)
+  useEffect(() => {
+    if (avatarUrl) {
+      setData((prevData) => ({ ...prevData, avatar: avatarUrl }));
+    }
+  }, [avatarUrl]);
+
+  const [avatarFile, setAvatarFile] = useState(null);
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0]
+    console.log(file)
+    setAvatarFile(file);
+  };
+
+  const handleUploadAvatar = () => {
+    if (!avatarFile) return;
+
+    const formData = new FormData();
+    formData.append('file', avatarFile);
+    dispatch(uploadAvatarRequest(accessToken, formData));
+  };
   const handleSave = () => {
-    // Implement your API call here to save the personal information
-    // For now, I'm showing a toast to indicate that the data has been saved
     toast.success("Thông tin cá nhân đã được lưu", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000 });
   };
 
   const handlePasswordChange = () => {
-    // Implement password change logic here
-    // ...
   };
 
   return (
@@ -66,10 +79,17 @@ function PersonalInfo() {
               <div className="section">
                 <h1 className="section-title">Information</h1>
                 <div className="avatar-wrapper">
-                  <img src={data.avatar} alt="Avatar" className="avatar" />
-                  <Button variant="outline-success" className="change-avatar-btn">
+                <img src={data.avatar} alt="Avatar" className="avatar" />
+                  <label htmlFor="avatarInput" className="change-avatar-btn">
                     Change
-                  </Button>
+                  </label>
+                  <input
+                    id="avatarInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    style={{ display: 'none' }}
+                  />
                   <Form style={{ marginLeft: "10px" }}>
                     <Form.Group controlId="formHello">
                       <Form.Label>Chào bạn trở lại: <span style={{ fontSize: "18px", fontWeight: "500" }}>{data.name}</span></Form.Label>

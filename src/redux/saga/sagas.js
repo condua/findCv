@@ -4,6 +4,7 @@ import axios from 'axios';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, loginSuccess, loginFailure } from '../action/authActions';
 import { GET_PROFILE_REQUEST, getProfileSuccess, getProfileFailure } from '../action/profileActions';
 import { GET_EVENTS_REQUEST, } from '../action/eventActions';
+import { UPLOAD_AVATAR_REQUEST, uploadAvatarSuccess, uploadAvatarFailure } from '../action/uploadAvatarActions';
 import eventSaga from './eventSaga';
 
 function* login(action) {
@@ -58,11 +59,34 @@ function getProfileApi(accessToken) {
     },
   });
 }
+function* uploadAvatar(action) {
+  try {
+    const { accessToken, avatarFile } = action.payload;
+    const formData = new FormData();
+    formData.append('file', avatarFile);
 
+    const response = yield call(uploadAvatarApi, accessToken, formData);
+    const { data: responseData } = response;
+    const avatarUrl = responseData.avatarUrl;
 
+    yield put(uploadAvatarSuccess(avatarUrl));
+  } catch (error) {
+    yield put(uploadAvatarFailure('Failed to upload avatar'));
+  }
+}
+
+function uploadAvatarApi(accessToken, formData) {
+  return axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/profile/upload/avatar', formData, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+}
 
 export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
   yield takeLatest(GET_PROFILE_REQUEST, getProfile);
+  yield takeLatest(UPLOAD_AVATAR_REQUEST, uploadAvatar);
   yield eventSaga(); 
 }
