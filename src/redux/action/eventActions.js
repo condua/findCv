@@ -57,3 +57,26 @@ export const deleteEventFailure = (error) => ({
   type: DELETE_EVENT_FAILURE,
   payload: error,
 });
+
+
+export const UPDATE_EVENT_REQUEST = 'UPDATE_EVENT_REQUEST';
+export const UPDATE_EVENT_SUCCESS = 'UPDATE_EVENT_SUCCESS';
+export const UPDATE_EVENT_FAILURE = 'UPDATE_EVENT_FAILURE';
+
+export const updateEventRequest = (eventId, eventData, accessToken) => ({
+  type: UPDATE_EVENT_REQUEST,
+  payload: {
+    eventId,
+    eventData,
+    accessToken,
+  },
+});
+
+export const updateEventSuccess = () => ({
+  type: UPDATE_EVENT_SUCCESS,
+});
+
+export const updateEventFailure = (error) => ({
+  type: UPDATE_EVENT_FAILURE,
+  payload: error,
+});

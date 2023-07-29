@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import RichEditor from "../../../components/RichEditor"
 import events from "../../../data/event"
 import { useForm } from "antd/es/form/Form"
+import { useDispatch } from "react-redux"
+import { updateEventRequest } from "../../../redux/action/eventActions"
 const { TextArea } = Input
 
 const EventEdit = () => {
@@ -12,7 +14,7 @@ const EventEdit = () => {
     const [form] = useForm()
     const richEditor = useRef(null)
     const event = events.find((event) => event.id === parseInt(id))
-
+    const dispatch = useDispatch()
     const handleCancelClick = () => {
         navigate("/event", { replace: true })
     }
@@ -20,9 +22,10 @@ const EventEdit = () => {
     const handleSave = useCallback(async () => {
         const content = await richEditor.current.save()
         const data = await form.validateFields()
-        data.content = content
+        data.content = JSON.stringify(content)
+        dispatch(updateEventRequest(data))
         console.log(data)
-    }, [form])
+    }, [form, dispatch])
     const [image, setImage] = useState(event.image)
 
     return (

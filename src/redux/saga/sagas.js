@@ -1,9 +1,8 @@
 // src/redux/sagas.js
-import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, loginSuccess, loginFailure } from '../action/authActions';
 import { GET_PROFILE_REQUEST, getProfileSuccess, getProfileFailure } from '../action/profileActions';
-import { GET_EVENTS_REQUEST, } from '../action/eventActions';
 import eventSaga from './eventSaga';
 import jobSaga from './jobSaga';
 
@@ -65,6 +64,8 @@ function getProfileApi(accessToken) {
 export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
   yield takeLatest(GET_PROFILE_REQUEST, getProfile);
-  yield eventSaga(); 
-  yield jobSaga();
+  yield all([
+    jobSaga(), 
+    eventSaga()
+  ]);
 }

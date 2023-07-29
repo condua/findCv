@@ -116,11 +116,6 @@ const App = (props) => {
                     <Route path="/managecandidate" element={<IRALayout><Table/></IRALayout>} /> 
                     <Route path="managecandidate/:id" element={<IRALayout><Edit/></IRALayout>} /> 
 
-
-                    <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
-                    <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
-                    <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
-                            
                     <Route path="/interviewmain" element={<IRALayout><InterviewMain /></IRALayout>} />
                     <Route path="/interview/detail/:id" element={<IRALayout><InterviewDetail /></IRALayout>} />
                     <Route path="/interview/detail/:id/:mark_id" element={<IRALayout><InterviewMark /></IRALayout>} />
@@ -135,6 +130,9 @@ const App = (props) => {
                     <Route path="/recruitment/add" element={<IRALayout><RecruitAdd /></IRALayout>} />
                     <Route path="/recruitment/edit/:id" element={<IRALayout><RecruitEdit /></IRALayout>} />  
                     <Route path="/event" element={<IRALayout><Event /></IRALayout>}/>
+                    <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
+                    <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
+                    <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
                     <Route path='manage-candidate/:id' element={<IRALayout>< ManageCandidate /></IRALayout>} />
 
                 </Route>

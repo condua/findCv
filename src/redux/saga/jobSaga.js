@@ -11,12 +11,13 @@ function* getJobs() {
   try {
     const response = yield call(fetchJobsApi);
     const { data: responseData } = response;
-    console.log(responseData);
+    console.log(responseData)
     yield put(getJobsSuccess(responseData.data));
   } catch (error) {
     yield put(getJobsFailure(error));
   }
 }
+
 
 function fetchJobsApi() {
   return axios.get('https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting'); 

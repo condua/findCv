@@ -11,15 +11,16 @@ import {
   DELETE_EVENT_REQUEST,
   deleteEventSuccess,
   deleteEventFailure,
+  UPDATE_EVENT_REQUEST,
+  updateEventSuccess,
+  updateEventFailure,
 } from '../action/eventActions';
 
 function* getEvents() {
     try {
-      // Gọi API để lấy dữ liệu sự kiện
       const response = yield call(fetchEventsApi);
       const { data: responseData } = response;
       console.log(responseData)
-      // Lưu dữ liệu sự kiện vào Redux store
       yield put(getEventsSuccess(responseData.data));
     } catch (error) {
       yield put(getEventsFailure(error));
@@ -69,14 +70,34 @@ function* getEvents() {
   }
   
   function deleteEventApi(eventId, accessToken) {
-    return axios.delete(`https://qltd01.cfapps.us10-001.hana.ondemand.com/event` , {
-      params: {
-        eventId: eventId,
-      },
+    return axios.delete(`https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}` , {
+   
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+  }
+
+  function* updateEvent(action) {
+    try {
+      const { eventId, eventData, accessToken } = action.payload;
+        yield call(updateEventApi, eventId, eventData, accessToken);
+        yield put(updateEventSuccess());
+    } catch (error) {
+      yield put(updateEventFailure(error));
+    }
+  }
+  
+  function updateEventApi(eventId, eventData, accessToken) {
+    return axios.put(
+      `https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}`,
+      eventData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
   }
 
 
@@ -84,4 +105,5 @@ export default function* eventSaga() {
   yield takeLatest(GET_EVENTS_REQUEST, getEvents);
   yield takeLatest(CREATE_EVENT_REQUEST, createEvent);
   yield takeLatest(DELETE_EVENT_REQUEST, deleteEvent);
+  yield takeLatest(UPDATE_EVENT_REQUEST, updateEvent);
 }

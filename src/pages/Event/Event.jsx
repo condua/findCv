@@ -1,5 +1,5 @@
 import React from "react"
-import { connect, useDispatch, useSelector } from "react-redux"
+import {  useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {
     EditOutlined,
@@ -10,7 +10,6 @@ import {
 import { getEventsRequest, deleteEventRequest } from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
 import { useEffect } from "react"
-import { useState } from "react"
 
 const Event = () => {
     const dispatch = useDispatch()
