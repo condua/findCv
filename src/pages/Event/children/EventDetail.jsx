@@ -16,11 +16,9 @@ const EventDetail = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // Dispatch action để gọi API và lấy dữ liệu sự kiện
         dispatch(getEventsRequest())
     }, [dispatch])
 
-    // Lấy dữ liệu sự kiện từ Redux store
     const events = useSelector((state) => state.events.events)
     console.log(events)
 

@@ -65,7 +65,7 @@ export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
   yield takeLatest(GET_PROFILE_REQUEST, getProfile);
   yield all([
+    eventSaga(),
     jobSaga(), 
-    eventSaga()
   ]);
 }
