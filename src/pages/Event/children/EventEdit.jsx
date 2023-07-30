@@ -28,21 +28,15 @@ const EventEdit = () => {
 
     const event = useSelector((state) => state.events.events.find((event) => event.id === parseInt(id)));
 
-    const accessToken = useSelector((state) => state.auth.accessToken)
 
     const handleSave = useCallback(async () => {
         const content = await richEditor.current.save()
         const data = await form.validateFields()
         data.content = JSON.stringify(content)
-        const eventData = {
-            eventId: event.id,
-            eventData: data,
-            accessToken: accessToken, 
-          };
-        await dispatch(updateEventRequest(eventData));
+        await dispatch(updateEventRequest(event.id, data));
         await dispatch(getEventsRequest())
         console.log(data)
-    }, [form, event.id, accessToken, dispatch])
+    }, [form, event.id, dispatch])
 
     const [image, setImage] = useState(event.image)
 
@@ -117,7 +111,7 @@ const EventEdit = () => {
                                         <div className="w-full p-0">
                                             <RichEditor
                                                 editorCore={richEditor}
-                                                value={event.content}
+                                                value={JSON.parse(event.content)}
                                             />
                                         </div>
                                     </div>

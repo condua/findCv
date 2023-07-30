@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import RichEditor from "../../../components/RichEditor"
 import { useForm } from "antd/es/form/Form"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import {
     createEventRequest,
     getEventsRequest,
@@ -21,17 +21,17 @@ const EventAdd = () => {
     const handleCancelClick = () => {
         navigate("/event", { replace: true })
     }
-    const accessToken = useSelector((state) => state.auth.accessToken)
     const handleSave = useCallback(async () => {
         const content = await richEditor.current.save()
         const data = await form.validateFields()
         data.content = JSON.stringify(content)
+        data.status = true
         console.log(data)
-        await dispatch(createEventRequest(data, accessToken))
+        await dispatch(createEventRequest(data))
         await dispatch(getEventsRequest())
 
         navigate("/event", { replace: true })
-    }, [form, dispatch, navigate, accessToken])
+    }, [form, dispatch, navigate])
 
     const [image, setImage] = useState(null)
 

@@ -85,23 +85,30 @@ function deleteEventApi(eventId, accessToken) {
 
 function* updateEvent(action) {
     try {
-        const { eventId, eventData, accessToken } = action.payload
-        yield call(updateEventApi, eventId, eventData, accessToken)
+        const accessToken = yield select((state) => state.auth.accessToken)
+        const headers = {
+            Authorization: `Bearer ${accessToken}`,
+        }
+        const eventId = action.payload.eventId
+        const eventData = action.payload.eventData
+        console.log(eventId)
+        yield call(updateEventApi, eventId, eventData, headers)
+        
         yield put(updateEventSuccess())
     } catch (error) {
         yield put(updateEventFailure(error))
     }
 }
 
-function updateEventApi(eventId, eventData, accessToken) {
+function updateEventApi(eventId,eventData, headers) {
     return axios.put(
-        `https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}`,
+        `https://qltd01.cfapps.us10-001.hana.ondemand.com/event`,
         eventData,
-        {
-
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+        
+        { params: {
+            id: eventId,
+          },
+            headers
         }
     )
 }

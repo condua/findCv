@@ -63,12 +63,11 @@ export const UPDATE_EVENT_REQUEST = 'UPDATE_EVENT_REQUEST';
 export const UPDATE_EVENT_SUCCESS = 'UPDATE_EVENT_SUCCESS';
 export const UPDATE_EVENT_FAILURE = 'UPDATE_EVENT_FAILURE';
 
-export const updateEventRequest = (eventId, eventData, accessToken) => ({
+export const updateEventRequest = (eventId, eventData) => ({
   type: UPDATE_EVENT_REQUEST,
   payload: {
     eventId,
     eventData,
-    accessToken,
   },
 });
 

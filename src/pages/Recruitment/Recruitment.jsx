@@ -8,7 +8,7 @@ import {
     EnterOutlined,
     StopOutlined,
 } from "@ant-design/icons"
-import { getJobsRequest } from "../../redux/action/jobActions"
+import { deleteJobRequest, getJobsRequest } from "../../redux/action/jobActions"
 import { useDispatch, useSelector } from "react-redux"
 
 const Recruitment = () => {
@@ -21,7 +21,10 @@ const Recruitment = () => {
     const jobs = useSelector((state) => state.jobs.jobs)
     console.log(jobs)
 
-
+    const handleDeleteJob = (jobId) => {
+        console.log(jobId)
+        dispatch(deleteJobRequest(jobId))
+    }
    
 
     return (
@@ -70,7 +73,7 @@ const Recruitment = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-y-8 gap-x-4 ">
                     {jobs.map((job) => (
-                        <div className="flex w-full h-36 bg-white rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200">
+                        <div className="flex w-full bg-white rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200">
                             <div className="flex justify-center w-2/5">
                         
                                 <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
@@ -112,7 +115,7 @@ const Recruitment = () => {
                                     <EnterOutlined />
                                 </div>
                                 <div className="flex justify-center text-xl h-1/3">
-                                    <StopOutlined />
+                                    <StopOutlined onClick={() => handleDeleteJob(job.id)}/>
                                 </div>
                             </div>
                         </div>
