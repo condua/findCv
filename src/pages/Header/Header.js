@@ -195,21 +195,12 @@ function Header({userData}) {
           {isLoggedIn ? (
             <div className="d-flex align-items-center">
               <div onClick={handleDropdownToggle}>
-<<<<<<< HEAD
                 <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfo.fullName}</span>
                 {/* {reponse.data.userInfo.fullName} */}
               </div>
               <div className="me-2" style = {{display: "flex"}}>
                 <img
                   src={reponse.data.userInfo.avatar}
-=======
-                <span style = {{fontWeight: "700", color: "#6f716f"}}>{data.fullName}</span>
-                
-              </div>
-              <div className="me-2" style = {{display: "flex"}}>
-                <img
-                  src={data.avatar}
->>>>>>> 6b4325835c54a14a9f7db1d6867977fad9af89ba
                   alt="User Avatar"
                   className="user-avatar"
                   onClick={handleDropdownToggle}

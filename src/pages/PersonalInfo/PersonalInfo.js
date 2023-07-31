@@ -100,18 +100,11 @@ function PersonalInfo() {
   // };
   const handlePasswordChange = () => {
   };
-<<<<<<< HEAD
   reponse.data.userInfo.avatar = data.avatar;
   reponse.data.userInfo.fullName = data.fullName;
   return (
     <>
       <Header userData = {reponse.data.userInfo}/>
-=======
- 
-  return (
-    <>
-      <Header userData = {data}/>
->>>>>>> 6b4325835c54a14a9f7db1d6867977fad9af89ba
   
       <div className="personalinfo">
         <Container>
