@@ -54,6 +54,7 @@ function Header({userData}) {
   else {
     isLoggedIn = 0;
   }
+  console.log("Data login: ", reponse)
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login')
@@ -173,17 +174,18 @@ function Header({userData}) {
           {isLoggedIn ? (
             <div className="d-flex align-items-center">
               <div onClick={handleDropdownToggle}>
-                <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfoEntity.fullName}</span>
-                
+                <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfo.fullName}</span>
+                {/* {reponse.data.userInfo.fullName} */}
               </div>
               <div className="me-2" style = {{display: "flex"}}>
                 <img
-                  src={reponse.data.userInfoEntity.avatar}
+                  src={reponse.data.userInfo.avatar}
                   alt="User Avatar"
                   className="user-avatar"
                   onClick={handleDropdownToggle}
                   
                 />
+                {/* {reponse.data.userInfo.avatar} */}
                 {!isDropdownOpen ? <i className="bi bi-chevron-down ms-1"></i> : ''}
 
               </div>

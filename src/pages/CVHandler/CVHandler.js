@@ -132,8 +132,8 @@ function CVHandler() {
   // };
   const handlePasswordChange = () => {
   };
-  reponse.data.userInfoEntity.avatar = data.avatar;
-  reponse.data.userInfoEntity.fullName = data.fullName;
+  reponse.data.userInfo.avatar = data.avatar;
+  reponse.data.userInfo.fullName = data.fullName;
 
   const handleSaveCVDetails = () => {
     // Thực hiện lưu thông tin CV
@@ -145,7 +145,7 @@ function CVHandler() {
   };
   return (
     <>
-    <Header userData = {reponse.data.userInfoEntity}/>
+    <Header userData = {reponse.data.userInfo}/>
     <div className = "cvhandler">
       <Container>
         <Row>
