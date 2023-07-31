@@ -34,7 +34,7 @@ function* login(action) {
 
 function* getProfile(action) {
   try {
-   
+    console.log("RUNNING HERE")
     const { accessToken } = action.payload;
     const response = yield call(getProfileApi, accessToken);
     const { data: responseData } = response;

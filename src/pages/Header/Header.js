@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './Header.scss';
 
 function Header({userData}) {
+ 
   const [isCompanyHovered, setCompanyHovered] = useState(false);
   const [isProfileHovered, setProfileHovered] = useState(false);
   const [isJobMenuOpen, setJobMenuOpen] = useState(false);
@@ -42,13 +43,28 @@ function Header({userData}) {
   const handleProfileMouseLeave = () => {
     setProfileHovered(false);
   };
-
+  
+  const [data, setData] = useState({
+    address: "",
+    avatar: "",
+    cv_pdf: null,
+    email: "",
+    experience: "",
+    fullName: "",
+    gender: "",
+    language: [],
+    phone: "",
+    skill: [],  
+  });
+  
   // const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const reponse = useSelector(state => state.auth)
+  const profileData = useSelector((state) => state.profile.profileData);
   if (reponse.data !== null) {
     isLoggedIn = 1;
+    console.log(reponse.data)
     // toast.success("Đăng nhập thành công", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000 });
   }
   else {
@@ -58,7 +74,14 @@ function Header({userData}) {
     dispatch(logout());
     navigate('/login')
   };
+ 
   
+    useEffect(() => {
+      if (profileData) {
+        setData(profileData.data);
+      }
+    }, [profileData]);
+    console.log("Response Data Login:" ,profileData)
   // useEffect(() => {
   //   const storedLoggedInStatus = localStorage.getItem('isLoggedIn');
   //   if (storedLoggedInStatus) {
@@ -101,8 +124,6 @@ function Header({userData}) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
-
   return (
     <Navbar expand="lg" className={`bg-body-tertiary${isScrolled ? ' scrolled' : ''}`}>
       <Container fluid>
@@ -173,12 +194,12 @@ function Header({userData}) {
           {isLoggedIn ? (
             <div className="d-flex align-items-center">
               <div onClick={handleDropdownToggle}>
-                <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfoEntity.fullName}</span>
+                <span style = {{fontWeight: "700", color: "#6f716f"}}>{data.fullName}</span>
                 
               </div>
               <div className="me-2" style = {{display: "flex"}}>
                 <img
-                  src={reponse.data.userInfoEntity.avatar}
+                  src={data.avatar}
                   alt="User Avatar"
                   className="user-avatar"
                   onClick={handleDropdownToggle}
