@@ -27,7 +27,7 @@ function PersonalInfo() {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const reponse = useSelector(state => state.auth)
   const profileData = useSelector((state) => state.profile.profileData);
-  console.log("PROFILE", profileData)
+  console.log("USER DATA", profileData)
   // const {avatarUrl} = useSelector((state) => state.uploadAvatar);
   
   // console.log(avatarUrl)
@@ -86,12 +86,9 @@ function PersonalInfo() {
   // };
   const handleSave = () => {
     try {
-      console.log("UPDATA DATA",data)
-      console.log("ACCESS TOKEN", accessToken)
       dispatch(updateProfileRequest(accessToken, data));
       toast.success("Personal information updated successfully", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000 });
     } catch (error) {
-      console.error('Update Error:', error);
       toast.error("Failed to update personal information", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000 });
     }
   };

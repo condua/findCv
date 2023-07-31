@@ -64,13 +64,11 @@ function Header({userData}) {
   const profileData = useSelector((state) => state.profile.profileData);
   if (reponse.data !== null) {
     isLoggedIn = 1;
-    console.log(reponse.data)
     // toast.success("Đăng nhập thành công", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000 });
   }
   else {
     isLoggedIn = 0;
   }
-  console.log("Data login: ", reponse)
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login')
@@ -82,7 +80,6 @@ function Header({userData}) {
         setData(profileData.data);
       }
     }, [profileData]);
-    console.log("Response Data Login:" ,profileData)
   // useEffect(() => {
   //   const storedLoggedInStatus = localStorage.getItem('isLoggedIn');
   //   if (storedLoggedInStatus) {

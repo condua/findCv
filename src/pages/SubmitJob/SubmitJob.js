@@ -6,12 +6,12 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import SelectOption from './../SelectOption/SelectOption';
 import { Link } from 'react-router-dom';
-import jobList from '../../data/jobList.json';
 import Footer from "./../Footer/Footer";
+import { useSelector } from 'react-redux';
+import { EnvironmentTwoTone, EditOutlined } from '@ant-design/icons';
 
 function SubmitJob() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterDate, setFilterDate] = useState('');
   const [sortOrder, setSortOrder] = useState('');
 
   const sortOptions = [
@@ -19,123 +19,113 @@ function SubmitJob() {
     { label: 'Oldest', value: 'oldest' },
   ];
 
-  const convertToSortableDate = (dateString) => {
-    const [datePart, timePart] = dateString.split(' ');
-    const [day, month, year] = datePart.split('-');
-    const [time, period] = timePart.split(' ');
-    const [hours, minutes] = time.split(':');
-    let convertedDate = new Date(year, month - 1, day, hours, minutes);
-    
-    if (period === 'PM') {
-      convertedDate.setHours(convertedDate.getHours() + 12);
-    }
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const profileData = useSelector((state) => state.profile.profileData);
+  const data = profileData?.data?.listJobPosting || []; // Khởi tạo biến data rỗng nếu không có dữ liệu.
 
-    return convertedDate;
-  };
-
-  const sortedJobs = jobList.sort((a, b) => {
-    const timeA = convertToSortableDate(a.appliedTime).getTime();
-    const timeB = convertToSortableDate(b.appliedTime).getTime();
-    if (sortOrder === 'mostRecent') {
-      return timeB - timeA;
-    } else if (sortOrder === 'oldest') {
-      return timeA - timeB;
-    }
-    return 0;
+  const sortedJobs = data.sort((a, b) => {
+    const jobNameA = a.name.toLowerCase();
+    const jobNameB = b.name.toLowerCase();
+    return jobNameA.localeCompare(jobNameB);
   });
 
   const filteredJobs = sortedJobs.filter((job) => {
-    const jobPosition = job.position.toLowerCase();
-    const jobDate = job.appliedAt.toLowerCase();
-    return (
-      jobPosition.includes(searchTerm.toLowerCase()) &&
-      jobDate.includes(filterDate.toLowerCase())
-    );
+    const jobName = job.name.toLowerCase();
+    return jobName.includes(searchTerm.toLowerCase());
   });
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilterDate(e.target.value);
-  };
-
   const handleSortOrder = (e) => {
     setSortOrder(e.target.value);
   };
 
+  const handleDeleteJob = (jobId) => {
+    // Xử lý xóa công việc
+  };
+
   return (
     <>
-    <Header />
-    <div className = "submittedjob">
-      <Container>
-        <Row>
-          <Col xs={4} style={{ backgroundColor: '#e9eaec' }}>
-            <SelectOption />
-          </Col>
-          <Col style={{ backgroundColor: '#e9eaec', marginLeft: '20px' }}>
-            <div className="job-list-container">
-              <div className="filters">
-                <input
-                  type="text"
-                  placeholder="Search by job title"
-                  value={searchTerm}
-                  onChange={handleSearch}
-                />
-                <select value={filterDate} onChange={handleFilter}>
-                  <option value="">All Dates</option>
-                  <option value="today">Today</option>
-                  <option value="this week">This Week</option>
-                  <option value="this month">This Month</option>
-                </select>
-                <div className="sort">
-                  <select value={sortOrder} onChange={handleSortOrder}>
-                    <option value="">Sort By</option>
-                    {sortOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+      <Header />
+      <div className="submittedjob">
+        <Container>
+          <Row>
+            <Col xs={4} style={{ backgroundColor: '#e9eaec' }}>
+              <SelectOption />
+            </Col>
+            <Col style={{ backgroundColor: '#e9eaec', marginLeft: '20px' }}>
+              <div className="job-list-container">
+                <div className="filters">
+                  <input
+                    type="text"
+                    placeholder="Search by job name"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                  />
+                  <div className="sort">
+                    <select value={sortOrder} onChange={handleSortOrder}>
+                      <option value="">Sort By</option>
+                      {sortOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <ul className="job-list">
-                {filteredJobs.map((job) => (
-                  <li key={job.id}>
-                    <div className="job-item">
-                      <div className="logo">
-                        <img src={job.logoUrl} alt={job.position} />
+                <div className="job-list" style = {{marginBottom: "20px"}}>
+                  {filteredJobs.map((job) => (
+                    <div key={job.id} className="flex w-full bg-white rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200 mt-2">
+                      <div className="flex justify-center w-2/5">
+                        <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
+                          <img
+                            alt="cava"
+                            className="w-full h-full object-cover"
+                            src={job.image}
+                          />
+                        </div>
                       </div>
-                      <div className="job-details">
-                        <div className="name-and-salary">
-                          <Link to={`/body/detailjob/${job.id}`}>
-                            <h3>{job.position}</h3>
-                          </Link>
-                          <p className="salary">{job.salary}</p>
+                      <div className="flex w-full">
+                        <div className="flex flex-col w-full p-3">
+                          <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
+                            {job.name}
+                          </div>
+                          <div className="flex text-sm my-1 ">
+                            {job.position}
+                          </div>
+                          <div className="flex text-sm my-1 ">
+                            Language: {job.language}
+                          </div>
+                          <div className="flex my-1 text-sm text-lime-600 font-mono font-medium">
+                            CV đã tải lên:
+                            <a href={profileData.data.cv_pdf} target="_blank" rel="noreferrer" className="ml-1 text-blue-500 underline">
+                              CV_PDF
+                            </a>
+                          </div>
+                          <div className="flex text-sm my-1 ">
+                            <EnvironmentTwoTone
+                              twoToneColor="#52c41a"
+                              className="mx-1"
+                            />{" "}
+                            Location: {job.location}
+                          </div>
                         </div>
-                        <p>{job.company}</p>
-                        <p>
-                          CV đã ứng tuyển:{" "}
-                          <a href={job.cvUrl} target="_blank" rel="noreferrer">
-                            CV tải lên
-                          </a>
-                        </p>
-                        <div className="status">
-                          <p>{job.status}</p>
-                          <p>Vào lúc: {job.appliedTime}</p>
-                        </div>
+                        
+                      </div>
+                      <div className="flex flex-col w-3/12 my-5 font-mono font-bold text-lime-700 mt-3">
+                        {job.salary}
                       </div>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-    <Footer/>
+                  ))}
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <Footer />
     </>
   );
 }
