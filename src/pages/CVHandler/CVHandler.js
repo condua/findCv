@@ -32,6 +32,7 @@ function CVHandler() {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const reponse = useSelector(state => state.auth)
   const profileData = useSelector((state) => state.profile.profileData);
+  console.log("PROFILE CV", profileData)
   // const {avatarUrl} = useSelector((state) => state.uploadAvatar);
   
   // console.log(avatarUrl)
@@ -132,8 +133,12 @@ function CVHandler() {
   // };
   const handlePasswordChange = () => {
   };
+<<<<<<< HEAD
   reponse.data.userInfo.avatar = data.avatar;
   reponse.data.userInfo.fullName = data.fullName;
+=======
+  
+>>>>>>> 6b4325835c54a14a9f7db1d6867977fad9af89ba
 
   const handleSaveCVDetails = () => {
     // Thực hiện lưu thông tin CV

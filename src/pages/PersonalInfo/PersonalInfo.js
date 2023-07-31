@@ -27,6 +27,7 @@ function PersonalInfo() {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const reponse = useSelector(state => state.auth)
   const profileData = useSelector((state) => state.profile.profileData);
+  console.log("PROFILE", profileData)
   // const {avatarUrl} = useSelector((state) => state.uploadAvatar);
   
   // console.log(avatarUrl)
@@ -62,6 +63,7 @@ function PersonalInfo() {
       });
       console.log('Upload Success:', response.data);
       setData(response.data.data);
+      
     } catch (error) {
       console.error('Upload Error:', error);
     }
@@ -98,11 +100,18 @@ function PersonalInfo() {
   // };
   const handlePasswordChange = () => {
   };
+<<<<<<< HEAD
   reponse.data.userInfo.avatar = data.avatar;
   reponse.data.userInfo.fullName = data.fullName;
   return (
     <>
       <Header userData = {reponse.data.userInfo}/>
+=======
+ 
+  return (
+    <>
+      <Header userData = {data}/>
+>>>>>>> 6b4325835c54a14a9f7db1d6867977fad9af89ba
   
       <div className="personalinfo">
         <Container>
