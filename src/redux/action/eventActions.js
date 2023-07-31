@@ -35,3 +35,25 @@ export const createEventFailure = (error) => ({
   type: CREATE_EVENT_FAILURE,
   payload: error,
 });
+
+export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST';
+export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
+export const DELETE_EVENT_FAILURE = 'DELETE_EVENT_FAILURE';
+
+export const deleteEventRequest = (eventId, accessToken) => ({
+  type: DELETE_EVENT_REQUEST,
+  payload: {
+    eventId,
+    accessToken,
+  },
+});
+
+
+export const deleteEventSuccess = () => ({
+  type: DELETE_EVENT_SUCCESS,
+});
+
+export const deleteEventFailure = (error) => ({
+  type: DELETE_EVENT_FAILURE,
+  payload: error,
+});

@@ -7,7 +7,7 @@ import {
     EnterOutlined,
     UserOutlined,
 } from "@ant-design/icons"
-import { getEventsRequest } from "../../redux/action/eventActions"
+import { getEventsRequest, deleteEventRequest } from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -23,6 +23,12 @@ const Event = () => {
     // Lấy dữ liệu sự kiện từ Redux store
     const events = useSelector((state) => state.events.events)
     console.log(events)
+
+    const accessToken = useSelector((state) => state.auth.accessToken);
+
+    const handleDeleteEvent = (eventId) => {
+        dispatch(deleteEventRequest(eventId, accessToken));
+      };
 
     return (
         <div className="">
@@ -105,7 +111,7 @@ const Event = () => {
                                         <EditOutlined className=" text-xl" />
                                     </Link>
                                     <EnterOutlined className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
-                                    <StopOutlined className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
+                                    <StopOutlined onClick={() => handleDeleteEvent(event.id)} className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
                                 </div>
                             </div>
                         </div>

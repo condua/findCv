@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
-import userData from '../../data/userData.json';
+// import userData from '../../data/userData.json';
 import { useSelector, useDispatch } from 'react-redux';
 // import { login, logout } from '../../redux/action/action.js';
 import { logout } from '../../redux/action/authActions';
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import './Header.scss';
 
-function Header() {
+function Header({userData}) {
   const [isCompanyHovered, setCompanyHovered] = useState(false);
   const [isProfileHovered, setProfileHovered] = useState(false);
   const [isJobMenuOpen, setJobMenuOpen] = useState(false);
@@ -77,7 +77,7 @@ function Header() {
   // };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { name, avatar } = userData;
+  // const { name, avatar } = userData;
   const user =  useSelector(state => state.auth.data);
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -172,18 +172,22 @@ function Header() {
           </Nav>
           {isLoggedIn ? (
             <div className="d-flex align-items-center">
-              <div className="me-2">
+              <div onClick={handleDropdownToggle}>
+                <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfoEntity.fullName}</span>
+                
+              </div>
+              <div className="me-2" style = {{display: "flex"}}>
                 <img
                   src={reponse.data.userInfoEntity.avatar}
                   alt="User Avatar"
                   className="user-avatar"
                   onClick={handleDropdownToggle}
+                  
                 />
+                {!isDropdownOpen ? <i className="bi bi-chevron-down ms-1"></i> : ''}
+
               </div>
-              <div onClick={handleDropdownToggle}>
-                <span style = {{fontWeight: "700", color: "#6f716f"}}>{reponse.data.userInfoEntity.fullName}</span>
-                <i className="bi bi-chevron-down ms-1"></i>
-              </div>
+              
               {isDropdownOpen && (
                 <NavDropdown
                   title=""
