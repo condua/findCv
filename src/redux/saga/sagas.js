@@ -1,8 +1,8 @@
 // src/redux/sagas.js
-import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, loginSuccess, loginFailure } from '../action/authActions';
-import { GET_PROFILE_REQUEST, getProfileSuccess, getProfileFailure, UPDATE_PROFILE_REQUEST, updateProfileSuccess, updateProfileFailure } from '../action/profileActions';
+import { GET_PROFILE_REQUEST,UPDATE_PROFILE_REQUEST, getProfileSuccess, getProfileFailure,updateProfileFailure,updateProfileSuccess } from '../action/profileActions';
 import { GET_EVENTS_REQUEST, } from '../action/eventActions';
 import { UPLOAD_AVATAR_REQUEST, uploadAvatarSuccess, uploadAvatarFailure } from '../action/uploadAvatarActions';
 import eventSaga from './eventSaga';

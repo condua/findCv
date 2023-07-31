@@ -1,5 +1,5 @@
 import React from "react"
-import { connect, useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {
     EditOutlined,
@@ -7,10 +7,13 @@ import {
     EnterOutlined,
     UserOutlined,
 } from "@ant-design/icons"
-import { getEventsRequest, deleteEventRequest } from "../../redux/action/eventActions"
+import {
+    getEventsRequest,
+    deleteEventRequest,
+} from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
 import { useEffect } from "react"
-import { useState } from "react"
+import format from "date-fns/format"
 
 const Event = () => {
     const dispatch = useDispatch()
@@ -24,11 +27,13 @@ const Event = () => {
     const events = useSelector((state) => state.events.events)
     console.log(events)
 
-    const accessToken = useSelector((state) => state.auth.accessToken);
+    const accessToken = useSelector((state) => state.auth.accessToken)
 
     const handleDeleteEvent = (eventId) => {
-        dispatch(deleteEventRequest(eventId, accessToken));
-      };
+        console.log(eventId)
+        console.log(accessToken)
+        dispatch(deleteEventRequest(eventId, accessToken))
+    }
 
     return (
         <div className="">
@@ -76,45 +81,53 @@ const Event = () => {
                 </div>
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-y-8 gap-x-12">
                     {events.map((event) => (
-                        <div className="transition-all ease-out hover:scale-105 w-full flex flex-col bg-white shadow-xl rounded-md">
-                            <Link className="mb-2" to={`${event.id}`}>
-                                <div className="justify-center cursor-pointer">
-                                    <img
-                                        alt="banner"
-                                        className="w-full h-[200px] object-cover rounded-t-md"
-                                        src={event.image}
-                                    ></img>
-                                </div>
-                            </Link>
-                            <div className="h-full flex flex-col justify-between">
-                                <div className="flex flex-col mx-4">
-                                    <div className="font-medium text-slate-400 flex justify-between pt-4">
-                                        <div>{event.time}</div>
-                                        <div className="flex gap-1 items-center justify-center">
-                                            <UserOutlined />
-                                            <div>{event.author}</div>
+                        event.status ?  (
+                            <div key={event.id} className="transition-all ease-out hover:scale-105 w-full flex flex-col bg-white shadow-xl rounded-md">
+                                <Link className="mb-2" to={`${event.id}`}>
+                                    <div className="justify-center cursor-pointer">
+                                        <img
+                                            alt="banner"
+                                            className="w-full h-[200px] object-cover rounded-t-md"
+                                            src={event.image}
+                                        />
+                                    </div>
+                                </Link>
+                                <div className="h-full flex flex-col justify-between">
+                                    <div className="flex flex-col mx-4">
+                                        <div className="font-medium text-slate-400 flex justify-between pt-4">
+                                            <div>
+                                                {format(new Date(event.time), "PPP")}
+                                                {/* {event.time} */}
+                                            </div>
+                                            <div className="flex gap-1 items-center justify-center">
+                                                <UserOutlined />
+                                                <div>{event.author}</div>
+                                            </div>
+                                        </div>
+                                        <div className="pt-2 font-mono font-semibold text-2xl">
+                                            {event.title}
+                                        </div>
+                                        <div className="pt-2 font-sans text-md">
+                                            {event.article}
                                         </div>
                                     </div>
-                                    <div className=" pt-2 font-mono font-semibold text-2xl">
-                                        {event.name}
-                                    </div>
-                                    <div className=" pt-2 font-sans text-md">
-                                        {event.article}
-                                    </div>
-                                </div>
 
-                                <div className="flex justify-self-end text-black font-semibold mb-3 justify-around divide-slate-400 divide-black/50 ">
-                                    <Link
-                                        to={`edit/${event.id}`}
-                                        className="flex flex-1 items-center justify-center mt-5 cursor-pointer"
-                                    >
-                                        <EditOutlined className=" text-xl" />
-                                    </Link>
-                                    <EnterOutlined className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
-                                    <StopOutlined onClick={() => handleDeleteEvent(event.id)} className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
+                                    <div className="flex justify-self-end text-black font-semibold mb-3 justify-around divide-slate-400 divide-black/50 ">
+                                        <Link
+                                            to={`edit/${event.id}`}
+                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer"
+                                        >
+                                            <EditOutlined className="text-xl" />
+                                        </Link>
+                                        <EnterOutlined className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
+                                        <StopOutlined
+                                            onClick={() => handleDeleteEvent(event.id)}
+                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : null
                     ))}
                 </div>
             </div>

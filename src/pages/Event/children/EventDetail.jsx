@@ -1,10 +1,10 @@
 import { List, Breadcrumb } from "antd"
 import React from "react"
-import events from "../../../data/event"
 import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getEventsRequest } from "../../../redux/action/eventActions"
+import { format } from "date-fns"
 
 const EventDetail = () => {
     const { id } = useParams()
@@ -16,11 +16,9 @@ const EventDetail = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // Dispatch action để gọi API và lấy dữ liệu sự kiện
         dispatch(getEventsRequest())
     }, [dispatch])
 
-    // Lấy dữ liệu sự kiện từ Redux store
     const events = useSelector((state) => state.events.events)
     console.log(events)
 
@@ -71,13 +69,13 @@ const EventDetail = () => {
                                 </div>
                                 <div className="bg-white flex flex-col px-16 pb-7">
                                     <div className="flex font-mono font-extrabold text-5xl my-7 ">
-                                        {event.name}
+                                        {event.title}
                                     </div>
                                     <div className="flex font-sans font-light text-xl mb-7 ">
                                         {event.article}
                                     </div>
                                     <div className="flex justify-between font-serif text-lg">
-                                        <div className="flex">{event.time}</div>
+                                        <div className="flex">{format(new Date(event.time), "PPP")}</div>
                                         <div className="m-auto">
                                             {event.author}
                                         </div>

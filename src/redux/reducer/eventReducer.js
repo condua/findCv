@@ -8,6 +8,9 @@ import {
     DELETE_EVENT_REQUEST,
     DELETE_EVENT_SUCCESS,
     DELETE_EVENT_FAILURE,
+    UPDATE_EVENT_REQUEST,
+    UPDATE_EVENT_SUCCESS,
+    UPDATE_EVENT_FAILURE,
   } from '../action/eventActions';
 
   const initialState = {
@@ -71,6 +74,23 @@ import {
                 loading: false,
                 error: action.payload,
               };
+              case UPDATE_EVENT_REQUEST:
+                return {
+                  ...state,
+                  loading: true,
+                  error: null,
+                };
+              case UPDATE_EVENT_SUCCESS:
+                return {
+                  ...state,
+                  loading: false,
+                };
+              case UPDATE_EVENT_FAILURE:
+                return {
+                  ...state,
+                  loading: false,
+                  error: action.payload,
+                };
       default:
         return state;
     }

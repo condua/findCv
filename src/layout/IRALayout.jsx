@@ -52,9 +52,10 @@ const items_interviwer = [
 ]
 
 const items_recruiter = [
-    { key: "/recruitment", icon: <HomeOutlined />, label: "Home" },
+    { key: "/", icon: <HomeOutlined />, label: "Home" },
     { type: "divider" },
-    
+    { key: "/event", icon: <FireOutlined />, label: "Event" },
+    { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
     // { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
     { key: "/manage-user", icon: <FileSearchOutlined />, label: "Manage User" },
     { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },

@@ -1,7 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import DataCard from "../../components/DataCard"
-import recruits from "./../../data/recruit"
 
 import {
     EnvironmentTwoTone,
@@ -9,8 +8,25 @@ import {
     EnterOutlined,
     StopOutlined,
 } from "@ant-design/icons"
+import { deleteJobRequest, getJobsRequest } from "../../redux/action/jobActions"
+import { useDispatch, useSelector } from "react-redux"
 
 const Recruitment = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getJobsRequest());
+      }, [dispatch]);
+
+    const jobs = useSelector((state) => state.jobs.jobs)
+    console.log(jobs)
+
+    const handleDeleteJob = (jobId) => {
+        console.log(jobId)
+        dispatch(deleteJobRequest(jobId))
+    }
+   
+
     return (
         <div>
             {" "}
@@ -56,50 +72,50 @@ const Recruitment = () => {
                     </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-y-8 gap-x-4 ">
-                    {recruits.map((recruit) => (
-                        <div className="flex w-full h-36 bg-white rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200">
+                    {jobs.map((job) => (
+                        <div className="flex w-full bg-white rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200">
                             <div className="flex justify-center w-2/5">
                         
                                 <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
                                     <img
                                         alt="cava"
                                         className="w-full h-full object-cover"
-                                        src={recruit.image}
+                                        src={job.image}
                                     ></img>
                                 </div>
                             </div>
                             <div className="flex w-full">
                                 <div className="flex flex-col w-full p-3">
                                     <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
-                                        {recruit.name}
+                                        {job.name}
                                     </div>
                                     <div className="flex text-sm my-1 ">
-                                        Position: {recruit.position}
+                                        Position: {job.position}
                                     </div>
                                     <div className="flex  text-sm">
-                                        Language: {recruit.language}
+                                        Language: {job.language}
                                     </div>
                                     <div className="flex my-3 text-sm text-lime-600 font-mono font-medium">
                                         <EnvironmentTwoTone
                                             twoToneColor="#52c41a"
                                             className="mx-1"
                                         />{" "}
-                                        {recruit.location}
+                                        {job.location}
                                     </div>
                                 </div>
                                 <div className="flex w-5/12 my-5 font-mono font-bold text-lime-700">
-                                    {recruit.salary}
+                                    {job.salary}
                                 </div>
                             </div>
                             <div className="flex flex-col w-2/12 ">
-                                <Link to={`edit/${recruit.id}`} className="flex justify-center text-xl h-1/3" >
+                                <Link to={`edit/${job.id}`} className="flex justify-center text-xl h-1/3" >
                                     <EditOutlined />
                                 </Link>
                                 <div className="flex justify-center text-xl h-1/3">
                                     <EnterOutlined />
                                 </div>
                                 <div className="flex justify-center text-xl h-1/3">
-                                    <StopOutlined />
+                                    <StopOutlined onClick={() => handleDeleteJob(job.id)}/>
                                 </div>
                             </div>
                         </div>
