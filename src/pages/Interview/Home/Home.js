@@ -2,6 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import "./home.scss"
 import data from "../data.json"
+import { connect, useDispatch, useSelector } from "react-redux"
+import { getEventsRequest } from "../../../redux/action/eventActions"
+
 
 import lastestInterviews from "../lastestInterviews.json"
 import {BsCircle} from "react-icons/bs"
@@ -17,7 +20,36 @@ const Home = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [events, setEvents] = useState([]);
     const currentUser = useUser()
-        
+    const [eventTable, setEventTable] = useState([]);
+    const apiUrl = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/event';
+
+    const formatDate = (inputDate) => {
+        const date = new Date(inputDate);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        return `${day}-${month}-${year}`;
+      };
+    
+    
+    const dispatch = useDispatch()
+    const getAllUser = useSelector(state => state.getuser.usernames.data.data)
+    console.log(getAllUser)
+    const fetchData = async () => {
+        try {
+          const response = await axios.get(apiUrl);
+          setEventTable(response.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        fetchData();
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
     function getRandomColor() {
         // const colors = ['green', 'red', 'gray', 'blue', 'purple'];
         // let currentIndex = 0;
@@ -47,14 +79,18 @@ const Home = () => {
 
     useEffect(() => {
         fetchEvents();
+        dispatch(getEventsRequest())
+    }, [dispatch]);
+    const event_title = useSelector((state) => state.events)
 
-    }, []);
+    console.log(event_title)
 
     const fetchEvents = async () => {
         try {
           const response = await axios.get('./event.json');
           const data = response.data;
           setEvents(data);
+          console.log(data)
         } catch (error) {
           console.error('Error fetching events:', error);
         }
@@ -73,7 +109,7 @@ const Home = () => {
       const getStatusColor = (status) => {
 
         switch (status) {
-          case 'In Progress':
+          case 'INPROCESS':
             return {
                 padding:'6px, 12px, 6px, 12px',
                 textAlign:'center',
@@ -132,21 +168,21 @@ const Home = () => {
                                 <th>Họ và tên</th>
                                 <th>Ngày phỏng vấn</th>
                                 <th>Vị trí ứng tuyển</th>
-                                <th>Status</th>
+                                {/* <th>Status</th> */}
                                 <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {tableData.map(item => (
+                            {getAllUser.map(item => (
                                 
                                 <tr key={item.id}>
-                                    <td> <img src={item.image} className='ava'/></td>
+                                    <td> <img src={item.avt} className='ava'/></td>
                                     <td>
                                         <p>{item.name}</p>
                                         <p>{item.email}</p>    
                                     </td>
-                                    <td>{item.date}</td>
-                                    <td>{item.position}</td>
+                                    <td>{item.dateRegister}</td>
+                                    {/* <td>{item.position}</td> */}
                                     <td>
                                         <div style={getStatusColor(item.status)}>
                                             {item.status}
@@ -154,7 +190,7 @@ const Home = () => {
                                     </td>
                                     
                                     
-                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`../managecandidate/${item.id}`}>Edit</Link></button></td>
+                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`../managecandidate/${item.id}`}>View</Link></button></td>
                                 </tr>
                                 
                             ))}
@@ -166,13 +202,13 @@ const Home = () => {
                         {/* <BsCircle style={{color:'blue'}}/> */}
                         <h2 style={{fontSize:'20px'}}>Các sự kiện sắp tới của công ty</h2>
                         <div className='event-list'>
-                                <Timeline style={{marginTop:'5px'}}
-                                    items={event.map((event) => ({
+                                <Timeline style={{marginTop:'5px',marginLeft:'20px'}}
+                                    items={eventTable.map((event) => ({
                                         color:getRandomColor(),
                                         children: (
                                             <>
-                                                <p>{event.name}</p>
-                                                <p>{event.date}</p>
+                                                <p>{event.title}</p>    
+                                                <p>{formatDate(event.time)}</p>
                                             </>
                                         ),
                                     }))}

@@ -24,19 +24,19 @@ const items_admin = [
     { key: "/interviewer", icon: <HomeOutlined />, label: "Home" },
     { type: "divider" },
     { key: "/event", icon: <FireOutlined />, label: "Event" },
+    { key: "/managecandidate", icon: <VideoCameraOutlined />, label: "Candidates Management" },
+
     { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
+
     { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
-    // { key: "/login", icon: <FileSearchOutlined />, label: "Login" },
-    // { key: "/register", icon: <FileSearchOutlined />, label: "Register" },
-    // { key: "/resetpassword", icon: <FileSearchOutlined />, label: "Reset Password" },
+    { key: "/room", icon: <FileSearchOutlined />, label: "Room" },
+
     { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
-    // { key: "/addmorequestions", icon: <FileSearchOutlined />, label: "Add More Questions" },
     { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
     { key: "/manage-user", icon: <FileSearchOutlined />, label: "Manage User" },
     { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },
     { key: "/result", icon: <FileSearchOutlined />, label: "Result" },
     { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },
-    // { key: "/manage-candidate", icon: <FileSearchOutlined />, label: "Manage Candidate" },
 ]
 
 const items_interviwer = [
@@ -47,17 +47,16 @@ const items_interviwer = [
 
     { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
 
-    { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
+    { key: "/event", icon: <FileSearchOutlined />, label: "Event" },
 
 ]
 
 const items_recruiter = [
-    { key: "/", icon: <HomeOutlined />, label: "Home" },
+    { key: "/recruitment", icon: <HomeOutlined />, label: "Home" },
     { type: "divider" },
-    { key: "/event", icon: <FireOutlined />, label: "Event" },
-    { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
+    
     // { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
-    { key: "/manage-user", icon: <FileSearchOutlined />, label: "Manage User" },
+    { key: "/room", icon: <FileSearchOutlined />, label: "Room" },
     { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },
     { key: "/result", icon: <FileSearchOutlined />, label: "Result" },
     { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },

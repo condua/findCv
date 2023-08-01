@@ -4,35 +4,42 @@ import { Link } from "react-router-dom"
 import {
     EditOutlined,
     StopOutlined,
-    EnterOutlined,
+    CalendarOutlined,
     UserOutlined,
 } from "@ant-design/icons"
-import {
-    getEventsRequest,
-    deleteEventRequest,
-} from "../../redux/action/eventActions"
+import { getEventsRequest } from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
 import { useEffect } from "react"
 import format from "date-fns/format"
+import axios from "axios"
 
 const Event = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // Dispatch action để gọi API và lấy dữ liệu sự kiện
         dispatch(getEventsRequest())
     }, [dispatch])
 
-    // Lấy dữ liệu sự kiện từ Redux store
     const events = useSelector((state) => state.events.events)
     console.log(events)
 
     const accessToken = useSelector((state) => state.auth.accessToken)
 
-    const handleDeleteEvent = (eventId) => {
-        console.log(eventId)
-        console.log(accessToken)
-        dispatch(deleteEventRequest(eventId, accessToken))
+    const handleDeleteEvent = async (eventId) => {
+        try {
+            await axios.delete(
+                `https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${eventId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+
+            dispatch(getEventsRequest())
+        } catch (error) {
+            console.error("Error while deleting event:", error)
+        }
     }
 
     return (
@@ -80,9 +87,12 @@ const Event = () => {
                     </Link>
                 </div>
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-y-8 gap-x-12">
-                    {events.map((event) => (
-                        event.status ?  (
-                            <div key={event.id} className="transition-all ease-out hover:scale-105 w-full flex flex-col bg-white shadow-xl rounded-md">
+                    {events.map((event) =>
+                        event.status ? (
+                            <div
+                                key={event.id}
+                                className="transition-all ease-out hover:scale-105 w-full flex flex-col bg-white shadow-xl rounded-md"
+                            >
                                 <Link className="mb-2" to={`${event.id}`}>
                                     <div className="justify-center cursor-pointer">
                                         <img
@@ -95,9 +105,15 @@ const Event = () => {
                                 <div className="h-full flex flex-col justify-between">
                                     <div className="flex flex-col mx-4">
                                         <div className="font-medium text-slate-400 flex justify-between pt-4">
-                                            <div>
-                                                {format(new Date(event.time), "PPP")}
-                                                {/* {event.time} */}
+                                            <div className="flex gap-1">
+                                                <CalendarOutlined />
+                                                <div>
+                                                    {format(
+                                                        new Date(event.time),
+                                                        "PPP"
+                                                    )}
+                                                    {/* {event.time} */}
+                                                </div>
                                             </div>
                                             <div className="flex gap-1 items-center justify-center">
                                                 <UserOutlined />
@@ -115,20 +131,21 @@ const Event = () => {
                                     <div className="flex justify-self-end text-black font-semibold mb-3 justify-around divide-slate-400 divide-black/50 ">
                                         <Link
                                             to={`edit/${event.id}`}
-                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer"
+                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer transition-all duration-300 hover:scale-125"
                                         >
                                             <EditOutlined className="text-xl" />
                                         </Link>
-                                        <EnterOutlined className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl" />
                                         <StopOutlined
-                                            onClick={() => handleDeleteEvent(event.id)}
-                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl"
+                                            onClick={() =>
+                                                handleDeleteEvent(event.id)
+                                            }
+                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl transition-all duration-300 hover:scale-125 hover:text-red-600"
                                         />
                                     </div>
                                 </div>
                             </div>
                         ) : null
-                    ))}
+                    )}
                 </div>
             </div>
         </div>

@@ -91,7 +91,7 @@ function* updateEvent(action) {
         }
         const eventId = action.payload.eventId
         const eventData = action.payload.eventData
-        console.log(eventId)
+        console.log(eventData)
         yield call(updateEventApi, eventId, eventData, headers)
         
         yield put(updateEventSuccess())

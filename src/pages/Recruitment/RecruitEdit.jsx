@@ -1,22 +1,24 @@
 import React from "react"
 import DynamicFormItem from "./DynamicFormItem"
-import {  Form, Input,  Breadcrumb, Select, Image } from "antd"
+import { Form, Input, Breadcrumb, Select, Image, Upload, Button } from "antd"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "antd/es/form/Form"
 import { useState } from "react"
 import { useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getJobsRequest, updateJobRequest } from "../../redux/action/jobActions"
+import { useSelector } from "react-redux"
+import { UploadOutlined } from "@ant-design/icons"
+import axios from "axios"
 
 const RecruitEdit = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const handleCancelClick = () => {
         navigate("/recruitment", { replace: true })
     }
-    const job = useSelector((state) => state.jobs.jobs.find((job) => job.id === parseInt(id)))
+    const job = useSelector((state) =>
+        state.jobs.jobs.find((job) => job.id === parseInt(id))
+    )
 
     console.log(job)
     const [form] = useForm()
@@ -39,7 +41,9 @@ const RecruitEdit = () => {
         { label: "Nha Trang", value: "Nha Trang" },
     ]
 
-    const [image, setImage] = useState(null)
+    const [inputImageURL, setInputImageURL] = useState("")
+    const [imageFile, setImageFile] = useState(null)
+    const accessToken = useSelector((state) => state.auth.accessToken)
     const handleSave = useCallback(async () => {
         try {
             const data = await form.validateFields()
@@ -48,17 +52,37 @@ const RecruitEdit = () => {
             data.requirements = data.requirements?.join(", ") || ""
             data.interest = data.interest?.join(", ") || ""
             data.language = data.language?.join(", ") || ""
-          
-            await dispatch(updateJobRequest(job.id, data))
-            await dispatch(getJobsRequest())
+
+            console.log(data)
+            const formData = new FormData()
+            formData.append("file", imageFile)
+            const imageResponse = await axios.post(
+                "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+            data.image = imageResponse.data.data
+
+            await axios.put(
+                `https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting/${job.id}`,
+                data,
+                {
+                    
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
 
             navigate("/recruitment", { replace: true })
-
-
         } catch (error) {
             console.error("Form submission failed:", error)
         }
-    }, [form, dispatch, job.id, navigate])
+    }, [form, imageFile, accessToken, job.id, navigate])
 
     return (
         <div className="">
@@ -92,29 +116,47 @@ const RecruitEdit = () => {
                     },
                 ]}
             />
-            <Form form={form} layout="vertical" >
+            <Form form={form} layout="vertical">
                 <div className="bg-white px-24 py-16 flex flex-col rounded-3xl w-4/5 mx-auto">
                     <div className="text-zinc-900 text-3xl font-serif mb-11">
                         Thông tin tuyển dụng
                     </div>
-                    <div className="flex gap-4 items-center justify-between mb-3">
+                    <div className="flex flex-col items-center justify-between">
                         <Image
                             alt="logo"
                             className="object-cover "
-                            width={225}
-                            height={170}
-                            src={image ? image : "error"}
-                            fallback="https://kmarket.ro/assets/images/no-image.svg"
+                            width={150}
+                            height={150}
+                           
+                            src={inputImageURL ? inputImageURL : "error"}
+                            fallback={job.image}
                         />
-                        <Form.Item name="image" className=" w-11/12 ">
-                            <Input
-                                placeholder="Logo Adress goes here..."
-                                className="font-sans text-gray-500"
-                                onChange={(event) =>
-                                    setImage(event.target.value)
+                        <Upload
+                            maxCount={1}
+                            type="image"
+                            className=" mb-10 mt-3 w-1/5"
+                            beforeUpload={(file) => {
+                                if (
+                                    file.type !== "image/png" &&
+                                    file.type !== "image/jpeg"
+                                )
+                                    return Upload.LIST_IGNORE
+                                const fileReader = new FileReader()
+                                fileReader.readAsDataURL(file)
+                                fileReader.onload = () => {
+                                    setInputImageURL(fileReader.result)
                                 }
-                            />
-                        </Form.Item>
+                                setImageFile(file)
+                                return false
+                            }}
+                            onRemove={() => {
+                                setInputImageURL("error")
+                            }}
+                        >
+                            <Button icon={<UploadOutlined />}>
+                                Click to Upload
+                            </Button>
+                        </Upload>
                     </div>
                     <Form.Item label="Name" name="name">
                         <Input
@@ -153,7 +195,11 @@ const RecruitEdit = () => {
                     </div>
 
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="Experience" className="w-1/3" name="experience">
+                        <Form.Item
+                            label="Experience"
+                            className="w-1/3"
+                            name="experience"
+                        >
                             <Input
                                 className="w-full"
                                 size="large"
@@ -171,7 +217,11 @@ const RecruitEdit = () => {
                                 defaultValue={job.salary}
                             />
                         </Form.Item>
-                        <Form.Item label="Enrollment" className="w-1/3" name="workingForm">
+                        <Form.Item
+                            label="Enrollment"
+                            className="w-1/3"
+                            name="workingForm"
+                        >
                             <Input
                                 className="w-full"
                                 size="large"
@@ -193,7 +243,11 @@ const RecruitEdit = () => {
                                 size="large"
                             />
                         </Form.Item>
-                        <Form.Item label="Location" className="w-4/5" name="detailLocation">
+                        <Form.Item
+                            label="Location"
+                            className="w-4/5"
+                            name="detailLocation"
+                        >
                             <Input
                                 className="w-full"
                                 size="large"
@@ -203,7 +257,11 @@ const RecruitEdit = () => {
                     </div>
 
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="Quantity" className=" w-2/6" name="number">
+                        <Form.Item
+                            label="Quantity"
+                            className=" w-2/6"
+                            name="number"
+                        >
                             <Input
                                 className="w-full"
                                 size="large"
@@ -230,17 +288,17 @@ const RecruitEdit = () => {
                     <DynamicFormItem
                         name="detailJob"
                         label="Job Details"
-                        initialValue={job.detailJob.split(", ")}
+                        initialValue={job.detailJob.split("\n")}
                     />
                     <DynamicFormItem
                         name="requirements"
                         label="Requirements"
-                        initialValue={job.requirements.split(", ")}
+                        initialValue={job.requirements.split("\n")}
                     />
                     <DynamicFormItem
                         name="interest"
                         label="Interests"
-                        initialValue={job.interest.split(", ")}
+                        initialValue={job.interest.split("\n")}
                     />
                 </div>
                 <Form.Item className="">

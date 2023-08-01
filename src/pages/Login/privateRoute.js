@@ -22,7 +22,7 @@ const PrivateRoute = ({ path, element, Roles }) => {
     else if(location.pathname ==="/reset"){
       return <Navigate to="/reset" />
     }
-    return <Navigate to="/register" />
+    return <Navigate to="/" />
   }
   console.log(location)
   // Roles = auth.role

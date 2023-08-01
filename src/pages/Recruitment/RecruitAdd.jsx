@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 import DynamicFormItem from "./DynamicFormItem"
-import { Form, Input, Breadcrumb, Select, Image } from "antd"
+import { Form, Input, Breadcrumb, Select, Image, Upload, Button } from "antd"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "antd/es/form/Form"
-import { useDispatch } from "react-redux"
+import { UploadOutlined } from "@ant-design/icons"
+import {  useSelector } from "react-redux"
 import { useCallback } from "react"
-import { createJobRequest, getJobsRequest } from "../../redux/action/jobActions"
+import axios from "axios"
 
 const RecruitAdd = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const handleCancelClick = () => {
         navigate("/recruitment", { replace: true })
@@ -34,27 +34,49 @@ const RecruitAdd = () => {
         { label: "Nha Trang", value: "Nha Trang" },
     ]
 
-    const [image, setImage] = useState(null)
+    const [inputImageURL, setInputImageURL] = useState("")
+    const [imageFile, setImageFile] = useState(null)
+    const accessToken = useSelector((state) => state.auth.accessToken)
 
     const handleSave = useCallback(async () => {
         try {
             const data = await form.validateFields()
 
-            data.detailJob = data.detailJob.join(", ")
-            data.requirements = data.requirements.join(", ")
-            data.interest = data.interest.join(", ")
-            data.language = data.language.join(", ")
+            data.detailJob = data.detailJob.join("\n")
+            data.requirements = data.requirements.join("\n")
+            data.interest = data.interest.join("\n")
+            data.language = data.language.join("\n")
 
             console.log(data)
+            const formData = new FormData()
+            formData.append("file", imageFile)
 
-            await dispatch(createJobRequest(data))
-            await dispatch(getJobsRequest())
+            const imageResponse = await axios.post(
+                "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+            data.image = imageResponse.data.data
+
+            await axios.post(
+                "https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting",
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
 
             navigate("/recruitment", { replace: true })
         } catch (error) {
             console.error("Form validation failed:", error)
         }
-    }, [form, dispatch, navigate])
+    }, [accessToken, form, imageFile, navigate])
 
     return (
         <div className="">
@@ -93,24 +115,41 @@ const RecruitAdd = () => {
                     <div className="text-zinc-900 text-3xl font-serif mb-11">
                         Thông tin tuyển dụng
                     </div>
-                    <div className="flex gap-4 items-center justify-between mb-3">
+                    <div className="flex flex-col mx-72 justify-between ">
                         <Image
                             alt="logo"
                             className="object-cover "
-                            width={225}
-                            height={170}
-                            src={image ? image : "error"}
+                            width={150}
+                            height={150}
+                            src={inputImageURL ? inputImageURL : "error"}
                             fallback="https://kmarket.ro/assets/images/no-image.svg"
                         />
-                        <Form.Item name="image" className=" w-11/12 ">
-                            <Input
-                                placeholder="Logo Adress goes here..."
-                                className="font-sans text-gray-500"
-                                onChange={(event) =>
-                                    setImage(event.target.value)
+                        <Upload
+                            maxCount={1}
+                            type="image"
+                            className=" mb-10 mt-3 w-full"
+                            beforeUpload={(file) => {
+                                if (
+                                    file.type !== "image/png" &&
+                                    file.type !== "image/jpeg"
+                                )
+                                    return Upload.LIST_IGNORE
+                                const fileReader = new FileReader()
+                                fileReader.readAsDataURL(file)
+                                fileReader.onload = () => {
+                                    setInputImageURL(fileReader.result)
                                 }
-                            />
-                        </Form.Item>
+                                setImageFile(file)
+                                return false
+                            }}
+                            onRemove={() => {
+                                setInputImageURL("error")
+                            }}
+                        >
+                            <Button icon={<UploadOutlined />}>
+                                Click to Upload
+                            </Button>
+                        </Upload>
                     </div>
                     <Form.Item label="Name" name="name" required>
                         <Input className="w-full" size="large" />

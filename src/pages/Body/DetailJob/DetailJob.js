@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -10,11 +10,21 @@ import data from '../../../data/data.json'
 import { useParams } from 'react-router-dom';
 import "./DetailJob.scss"
 import Footer from "./../../Footer/Footer";
+import { getJobsRequest } from "../../../redux/action/jobActions"
+import { useDispatch, useSelector } from "react-redux"
 
 function DetailJob() {
+    
     const { id } = useParams();
     let keyId = parseInt(id);
-    const item = data.filter((item) => item.id === keyId);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(getJobsRequest());
+    }, [dispatch]);
+  
+    const jobs = useSelector((state) => state.jobs.jobs.filter(job => job.status === true));
+    const item = jobs.filter((item) => item.id === keyId);
     console.log(item)
     return (
         <>
@@ -219,7 +229,7 @@ function DetailJob() {
                     <div style = {{width: "100%", marginLeft: "20px", marginTop: "10px"}}>
                     <h2> <span style = {{borderLeft: "6px solid #00b14f", marginLeft: "-20px"}}></span><span style = {{marginLeft: "10px"}}>Mô tả công việc</span></h2>
                     <>
-                    {item[0].detailjob.map(item=> (
+                    {item[0].detailJob.split("\n").map(item=> (
                         <p style = {{marginLeft: "20px"}}> - {item} </p>
                     ))}
                     </>
@@ -229,7 +239,7 @@ function DetailJob() {
                     <div style = {{width: "100%", marginLeft: "20px", marginTop: "10px"}}>
                     <h2> <span style = {{borderLeft: "6px solid #00b14f", marginLeft: "-20px"}}></span><span style = {{marginLeft: "10px"}}>Yêu cầu ứng viên</span></h2>
                     <>
-                    {item[0].requirements.map(item=> (
+                    {item[0].requirements.split("\n").map(item=> (
                         <p style = {{marginLeft: "20px"}}> - {item} </p>
                     ))}
                     </>
@@ -239,7 +249,7 @@ function DetailJob() {
                     <div style = {{width: "100%", marginLeft: "20px", marginTop: "10px"}}>
                     <h2> <span style = {{borderLeft: "6px solid #00b14f", marginLeft: "-20px"}}></span><span style = {{marginLeft: "10px"}}>Quyền lợi</span></h2>
                     <>
-                    {item[0].interest.map(item=> (
+                    {item[0].interest.split("\n").map(item=> (
                         <p style = {{marginLeft: "20px"}}> - {item} </p>
                     ))}
                     </>

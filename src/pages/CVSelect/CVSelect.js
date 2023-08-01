@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
+import CV from '../Cv/index'
 import './CVSelect.scss';
 
 function CVSelect() {
@@ -29,7 +30,7 @@ function CVSelect() {
       </Row>
       <Row>
         <NavLink
-          to="/cvbuilder"
+          to="/cv"
           className={`item ${isProfileHovered ? 'text-success' : ''}`}
           onMouseEnter={handleProfileMouseEnter}
           onMouseLeave={handleProfileMouseLeave}

@@ -15,9 +15,8 @@ import Table from "./pages/Interview/Table/Table";
 // import PrivateRoute from "./pages/Interview/Login/PrivateRoute"
 // import Navbar from "./pages/Interview/Navbar/Navbar";
 import Login from "./pages/Login/Login"
-import Register from "./pages/Interview/Register/Register"
+import Register from "./pages/Register/Register"
 
-import ResetPassword from "./pages/Interview/ResetPassword/ResetPassword"
 
 import RecruitAdd from "./pages/Recruitment/RecruitAdd"
 import Recruitment from "./pages/Recruitment/Recruitment"
@@ -66,12 +65,22 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized"
 
 import PrivateRoute from "./pages/Login/privateRoute"
 
+import Eventtest from "./pages/Interview/Table/Eventtest"
+
+import RecruitDetail from "./pages/Recruitment/RecruitDetail"
+
+import GetUser from "./pages/Login/GetUser"
+import RefreshToken from "./pages/Login/RefreshToken"
+import Verify from "./pages/Register/Verify"
+import Cv from "./pages/Cv/index"
+
+import UserInfo from "./pages/UserInfo/UserInfo"
+import ResetPassword from "./pages/Register/ResetPassword"
 const App = (props) => {
     return (
         <>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+            {/* <Routes> */}
+                
 
                 {/* <Route path="/" element={<CandidateHome />} />
                 <Route path="/company" element={<Company />} />
@@ -90,32 +99,45 @@ const App = (props) => {
 
                 {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
 
-            </Routes>
+            {/* </Routes> */}
             
             <Routes>        
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/verify" element={<Verify/> }/>
+                <Route path="/resetpassword" element={<ResetPassword/> }/>
+
+                {/* <Route path="/eventtest" element={<Eventtest/> }/> */}
+
+                <Route path="/" element={<CandidateHome />} />
+                <Route path="/company" element={<Company />} />
+                <Route path="/cv" element={<Cv />} />
+                <Route path="/body" element={<Body />} />
+                <Route path="/body/detailjob/:id" element={<DetailJob />} />
+                <Route path="/candidateevent" element={<CandidateEvent />} />
+                <Route path="/candidateevent/detailevent/:id" element={<DetailEvent/>}/>
+
                 <Route exact path='/' element={<PrivateRoute Roles={['CANDIDATE','ADMIN']}/>}>
+
                     <Route path="/" element={<CandidateHome />} />
-                    <Route path="/company" element={<Company />} />
-                    <Route path="/body" element={<Body />} />
-                    <Route path="/body/detailjob/:id" element={<DetailJob />} />
-                    <Route path="/candidateevent" element={<CandidateEvent />} />
-                    <Route path="/candidateevent/detailevent/:id" element={<DetailEvent/>}
-                    />
+                    
                     <Route path="/personal-info" element={<PersonalInfo />} />
-                    <Route path="/interview" element={<Interview />} />
                     <Route path="/submitjob" element={<SubmitJob />} />
                     <Route path="/cvhandler" element={<CVHandler />} />
-                    <Route path="/cvbuilder" element={<CVBuilder />} />
+                    {/* <Route path="/cvbuilder" element={<CVBuilder />} /> */}
                 </Route> 
                 
                 <Route exact path='/' element={<PrivateRoute Roles={['INTERVIEWER', 'ADMIN']}/>}>
+                    <Route path="/getuser" element={<IRALayout><GetUser/> </IRALayout>}/>
+
                     {/* <Route path="" element={<IRALayout><Home/></IRALayout>} /> 
                     <Route path="/home" element={<IRALayout><Home/></IRALayout>} />  */}
                     <Route path="/interviewer" element={<IRALayout><Home/></IRALayout>} /> 
 
                     <Route path="/managecandidate" element={<IRALayout><Table/></IRALayout>} /> 
                     <Route path="managecandidate/:id" element={<IRALayout><Edit/></IRALayout>} /> 
-                    
+
+
                     <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
                     <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
                     <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
@@ -130,15 +152,20 @@ const App = (props) => {
                 </Route>
 
                 <Route exact path='/' element={<PrivateRoute Roles={['RECRUITER', 'ADMIN']}/>}>
+                    
+                    <Route path='/room' element={<IRALayout><Room/></IRALayout>} />
+                    <Route path='/room/:id/detail' element={<IRALayout><Room /></IRALayout>} />
+                    <Route path='/room/:id/edit' element={<IRALayout><RoomEdit /></IRALayout>} />
+                    <Route path='/room/create' element={<IRALayout><RoomAdd /></IRALayout>} />
+                    <Route path='/room/:id/candidate' element={<IRALayout><AddCandidate /></IRALayout>} />
+                    <Route path='/room/:id/candidate/interviewerassign' element={<IRALayout><AddInterviewer /></IRALayout>} /> 
+                    <Route path="/recruitment/:id" element={<IRALayout><RecruitDetail /></IRALayout>} />
+
                     <Route path="/recruitment" element={<IRALayout><Recruitment /></IRALayout>} />
                     <Route path="/recruitment/add" element={<IRALayout><RecruitAdd /></IRALayout>} />
                     <Route path="/recruitment/edit/:id" element={<IRALayout><RecruitEdit /></IRALayout>} />  
                     <Route path="/event" element={<IRALayout><Event /></IRALayout>}/>
-                    <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
-                    <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
-                    <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
                     <Route path='manage-candidate/:id' element={<IRALayout>< ManageCandidate /></IRALayout>} />
-
                 </Route>
 
 
@@ -154,7 +181,11 @@ const App = (props) => {
                     <Route path="dashboard" element={<IRALayout>< Dashboard /></IRALayout>} />
                     <Route path="result" element={<IRALayout>< Result/></IRALayout>} />
                 </Route>
-                
+
+                <Route exact path='/' element={<PrivateRoute Roles={['INTERVIEWER','RECRUITER','ADMIN']}/>}>
+                    <Route path="/userinfo" element={<IRALayout><UserInfo/></IRALayout> }/>
+
+                </Route>
                 <Route exact path='/' element={<PrivateRoute Roles={['CANDIDATE','INTERVIEWER','RECRUITER','ADMIN']}/>}>
                     <Route path='*' element={<IRALayout><Unauthorized /></IRALayout>} />
 

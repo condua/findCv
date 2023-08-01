@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { Outlet, useLocation } from "react-router-dom"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 import google from "../../assets/google.jpg"
+import api from './api'
 import "./Login.scss"
 
 const Login = () => {
@@ -19,9 +20,13 @@ const Login = () => {
     const [password, setPassword] = useState("")
 
     const response = useSelector((state) => state.auth)
-    console.log(response)
+    const status = useSelector((state) => state)
+    console.log(status)
+    const [error, setError] = useState('');
 
     const [eye, setEye] = useState(<AiOutlineEye />)
+    const statusCode = useSelector((state) => state.auth.error) ;
+
     const handleToggle = () => {
         if (show === true) {
             setType("password")
@@ -54,6 +59,18 @@ const Login = () => {
         handleResponse()
     }, [handleResponse])
 
+    const handleBeforeUnload = (event) => {
+        dispatch(logout())
+      };
+    
+      useEffect(() => {
+        // Đăng ký sự kiện "beforeunload" khi component được mount
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        // Hủy đăng ký sự kiện khi component bị unmount
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }, []);
     const handleLogin = () => {
         dispatch(loginRequest(email, password))
     }
@@ -74,7 +91,7 @@ const Login = () => {
     }
     return (
         <div className="login">
-            <dive className="form-login">
+            <div className="form-login">
                 <div className="text-login">
                     <h3
                         style={{
@@ -140,10 +157,11 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         style={{ paddingRight: "40px" }}
                     />
+                    {statusCode && statusCode !== 200 && <div style={{color:'red'}}>Tài khoản hoặc mật khẩu không đúng</div>}
                     <span
-                        style={{ fontWeight: "bold", textDecoration: "none" }}
+                        style={{ fontWeight: "bold", textDecoration: "none",marginTop:'20px' }}
                     >
-                        <a href="/reset" id="a-resetpassword">
+                        <a href="/resetpassword" id="a-resetpassword">
                             Quên mật khẩu ?
                         </a>
                     </span>
@@ -151,7 +169,14 @@ const Login = () => {
                 <button className="login-button" onClick={handleLogin}>
                     <h2 style={{ fontSize: "25px" }}>Đăng nhập</h2>
                 </button>
-            </dive>
+                    {/* <span
+                        style={{ fontWeight: "bold", textDecoration: "none",marginTop:'10px' }}
+                    > Bạn đã có tài khoản nhưng chưa xác thực ? 
+                        <a href="/verify" id="a-resetpassword">
+                            Xác thực ngay 
+                        </a>
+                    </span> */}
+            </div>
         </div>
     )
 }
