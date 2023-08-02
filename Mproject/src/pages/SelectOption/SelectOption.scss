@@ -1,0 +1,21 @@
+.item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .item:hover {
+    color: #28a745;
+  }
+  
+  .item i {
+    margin-right: 5px;
+  }
+  
+  .text-success {
+    color: #28a745 !important;
+  }
+  

@@ -1,0 +1,44 @@
+[
+    {
+        "key": "E1",
+        "position": "Intern",
+        "skill": "React, JavaScript",
+        "questionContent": "Khả năng giao tiếp tiếng Anh có tốt không?",
+        "answerContent": "Tốt, Khá, Trung bình"
+    },
+    {
+        "key": "E2",
+        "position": "Junior Developer",
+        "skill": "Java, Spring Boot",
+        "questionContent": "Bạn tự tin như thế nào về khả năng nói tiếng Anh?",
+        "answerContent": "Rất tự tin, Tự tin, Tự tin mức độ trung bình"
+    },
+    {
+        "key": "E3",
+        "position": "Software Engineer",
+        "skill": "Python, Django",
+        "questionContent": "Bạn cảm thấy thoải mái khi giao tiếp bằng tiếng Anh bằng văn bản?",
+        "answerContent": "Có, Rất thoải mái, Thoải mái mức độ trung bình, Thoải mái mức độ thấp"
+    },
+    {
+        "key": "E4",
+        "position": "Frontend Developer",
+        "skill": "HTML, CSS, JavaScript",
+        "questionContent": "Bạn đã tham gia bất kỳ kỳ thi trình độ tiếng Anh nào như TOEFL hoặc IELTS chưa?",
+        "answerContent": "Có, Đạt điểm cao, Có, Đạt điểm trung bình, Không, Tôi chưa tham gia bất kỳ kỳ thi nào"
+    },
+    {
+        "key": "E5",
+        "position": "Backend Developer",
+        "skill": "Node.js, Express",
+        "questionContent": "Bạn thường xuyên sử dụng tiếng Anh để đọc các bài viết hoặc tài liệu kỹ thuật không?",
+        "answerContent": "Thường xuyên, Thỉnh thoảng, Hiếm khi"
+    },
+    {
+        "key": "E6",
+        "position": "Full Stack Developer",
+        "skill": "React, Node.js, MongoDB",
+        "questionContent": "Bạn có cảm thấy thoải mái giao tiếp bằng tiếng Anh với khách hàng quốc tế không?",
+        "answerContent": "Có, Rất thoải mái, Thoải mái mức độ trung bình, Thoải mái mức độ thấp"
+    }
+]

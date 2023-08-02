@@ -1,0 +1,120 @@
+// SubmitJob.scss
+.submittedjob {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+.job-list-container {
+    margin-top: 20px;
+  }
+  
+  .filters {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-end; /* Đặt ô Search và ô Filter ở góc bên phải */
+  
+    input[type='text'] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+  
+    select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+  
+  .job-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  
+    li {
+      margin-bottom: 20px;
+      background-color: #fff; /* Đặt màu nền là màu trắng */
+  
+      .job-item {
+        display: flex;
+        align-items: center;
+  
+        .logo {
+          width: 100px;
+          height: 100px;
+          margin-right: 20px;
+          border: 1px solid #ccc; /* Thêm viền nhỏ cho hình ảnh */
+          margin-left: 10px; /* Di chuyển hình ảnh cách viền trái */
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+  
+        .job-details {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          padding: 10px;
+  
+          .name-and-salary {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+          }
+  
+          h3 {
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+          }
+  
+          p {
+            margin: 0;
+            color: #666;
+          }
+  
+          .salary {
+            margin-top: 10px;
+            color: #228b22;
+            font-weight: bold;
+          }
+  
+          .cv-link {
+            margin-top: 5px;
+            font-size: 14px;
+  
+            a {
+              color: #007bff;
+              text-decoration: none;
+  
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+  
+          .status {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+  .sort {
+    margin-left: 10px; /* Khoảng cách giữa ô Filter và ô Sort */
+    select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+}

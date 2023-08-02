@@ -1,9 +1,13 @@
-import {} from "@ant-design/icons"
-import { Form, DatePicker, Input, Image } from "antd"
+import { UploadOutlined } from "@ant-design/icons"
+import { Form, DatePicker, Input, Image, Upload, Button } from "antd"
 import React, { useCallback, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import RichEditor from "../../../components/RichEditor"
 import { useForm } from "antd/es/form/Form"
+import {  useSelector } from "react-redux"
+
+import axios from "axios";
+
 
 const { TextArea } = Input
 
@@ -16,14 +20,45 @@ const EventAdd = () => {
         navigate("/event", { replace: true })
     }
 
-    const handleSave = useCallback(async () => {
-        const content = await richEditor.current.save()
-        const data = await form.validateFields()
-        data.content = JSON.stringify(content)
-        console.log(data)
-    }, [form])
+    const [inputImageURL, setInputImageURL] = useState("")
+    const [imageFile, setImageFile] = useState(null)
+    const accessToken = useSelector((state) => state.auth.accessToken);
 
-    const [image, setImage] = useState(null)
+    const handleSave = useCallback(async () => {
+        try {
+          const content = await richEditor.current.save();
+          const data = await form.validateFields();
+          data.content = JSON.stringify(content);
+      
+          const formData = new FormData();
+          formData.append("file", imageFile);
+      
+          const imageResponse = await axios.post("https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload", formData, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          data.image = imageResponse.data.data
+          
+          await axios.post("https://qltd01.cfapps.us10-001.hana.ondemand.com/event", data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+          });
+        
+      
+        navigate("/event", { replace: true });
+        } catch (error) {
+          console.error("Error while saving:", error);
+        }
+      }, [form, imageFile, accessToken, navigate]);
+      
+
+    // const handleImageUpload = useCallback(() => {
+    //     const formData = new FormData()
+    //     formData.append("file", inputImageURL)
+    //     //dispatch(uploadImageRequest(formData))
+    // }, [dispatch])
 
     return (
         <div>
@@ -48,24 +83,41 @@ const EventAdd = () => {
                                     width="100%"
                                     height="450px"
                                     className="object-cover"
-                                    src={image ? image : "error"}
+                                    src={
+                                        inputImageURL ? inputImageURL : "error"
+                                    }
                                     fallback="https://kmarket.ro/assets/images/no-image.svg"
                                 />
-                                <Form.Item
-                                    name="image"
-                                    className="absolute w-2/5 bottom-3"
-                                >
-                                    <Input
-                                        placeholder="Image Adress goes here..."
-                                        className="font-sans text-gray-500"
-                                        onChange={(event) =>
-                                            setImage(event.target.value)
-                                        }
-                                    />
-                                </Form.Item>
+                                
                             </div>
 
                             <div className="flex flex-col p-10 bg-white ">
+                            <Upload
+                                    maxCount={1}
+                                    type="image"
+                                    className=" mb-10 w-1/4"
+                                    beforeUpload={(file) => {
+                                        if (
+                                            file.type !== "image/png" &&
+                                            file.type !== "image/jpeg"
+                                        )
+                                            return Upload.LIST_IGNORE
+                                        const fileReader = new FileReader()
+                                        fileReader.readAsDataURL(file)
+                                        fileReader.onload = () => {
+                                            setInputImageURL(fileReader.result)
+                                        }
+                                        setImageFile(file)
+                                        return false
+                                    }}
+                                    onRemove={() => {
+                                        setInputImageURL("error")
+                                    }}
+                                >
+                                    <Button icon={<UploadOutlined />}>
+                                        Click to Upload
+                                    </Button>
+                                </Upload>
                                 <Form.Item name="time">
                                     <DatePicker bordered={false} />
                                 </Form.Item>

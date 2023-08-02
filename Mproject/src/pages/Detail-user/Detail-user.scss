@@ -1,0 +1,200 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.Detail-user-container {
+    // min-height: 100vh;
+    background-color: #E9ECEF;
+    padding: 10px;
+    background-size: cover;
+}
+.Detail-user-tab-name{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+.Detail-user-content-tab-name{
+    font-size: 30px;
+    font-weight: 550;
+}
+.Detail-user-button-back{
+    color: white;
+    background-color: blue;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.Detail-user-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top:20px;
+}
+.Detail-user-infor{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+.Detail-user-activity{
+    width: 33%;
+    height: 870px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.Detail-user-user{
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Detail-user-detail-infor{
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    border-radius: 10px;
+}
+.Detail-user-title-activity{
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+.Detail-user-timeline{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.Detail-user-timeline {
+    .ant-timeline-item-content {
+      font-size: 16px;
+    }
+  }
+.Detail-user-timeline .ant-timeline-item-head {
+    transform: scale(2);
+  }
+.Detail-user-name{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.Detail-user-position{
+    color: gray;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.Detail-user-username{
+    color: gray;
+}
+.Detail-user-avt {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+  
+.Detail-user-avt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.Detail-user-info-container{
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    h2{
+        height: 8%;
+        margin-top: 20px;
+        margin-left: 20px;
+        text-align: left;
+    }
+    .Detail-user-form-edit{
+        width: 100%;
+        height: 84%;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid #cbcfd3;
+
+        
+        .Detail-user-info-item{
+            width: 95%;
+            display: flex;
+            align-items: center;
+            background-color: #FFFFFF;
+            height: 15%;
+            p{
+                margin-right: 100px;
+                width: 10%;
+            }
+            input{
+                width: 80%;
+                margin-top: 20px;
+                height: 60%;
+                border-radius: 6px;
+                background-color: #F5F8FA;
+                border: none;
+                box-sizing: border-box;
+            }
+            textarea{
+                width: 80%;
+                margin-top: 20px;
+                height: 100%;
+                border-radius: 6px;
+                background-color: #F5F8FA;
+                border: none;
+                box-sizing: border-box;
+                padding: 10px;
+            }
+            input, textarea[type="text"]{
+                padding-left: 10px;
+            }
+            
+        }
+    }
+}
+
+.Detail-user-button{
+    margin-top: 20px;
+}
+.Detail-user-button-close{
+    border: none;
+    border-radius: 7px;
+    width: 60px;
+    height: 40px;
+    margin-right: 20px;
+    color: gray;
+    background-color: rgb(219, 219, 219);
+    font-weight: bold;
+    cursor: pointer;
+}
+.Detail-user-button-save{
+    border: none;
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+    background-color: #00A3FF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Detail-user-link{
+    text-decoration: none;
+    color: white;
+}

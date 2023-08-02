@@ -1,0 +1,73 @@
+{
+    "users": [
+      {
+        "name": "Hưng",
+        "username": "john",
+        "password": "pass123",
+        "image": "images/1.jpg"
+
+      },
+      {
+        "name": "Phúc",
+        "username": "jane",
+        "password": "secret456",
+        "image": "images/2.jpg"
+
+      },
+      {
+        "name": "Phúc",
+        "username": "phuc1755",
+        "password": "123",
+        "image": "images/3.jpg"
+
+      }
+      ,
+      {
+        "name":"Phúc",
+        "username": "admin",
+        "password": "admin",
+        "image": "images/40.jpg"
+      },
+      {
+        "name":"Hưng",
+        "username": "admin2",
+        "password": "admin",
+        "image": "images/2.jpg"
+      },
+      {
+        "name":"Lộc",
+        "username": "admin3",
+        "password": "admin",
+        "image": "images/3.jpg"
+      }
+      ,
+      {
+        "name":"Khiêm",
+        "username": "admin4",
+        "password": "admin",
+        "image": "images/4.jpg"
+      }
+      ,
+      {
+        "name":"Qui",
+        "username": "admin5",
+        "password": "admin",
+        "image": "images/5.jpg"
+      }
+      ,
+      {
+        "name":"Thắng",
+        "username": "admin6",
+        "password": "admin",
+        "image": "images/6.jpg"
+      }
+      ,
+      {
+        "name":"Nghĩa",
+        "username": "admin7",
+        "password": "admin",
+        "image": "images/1.jpg"
+      }
+  
+    ]
+  }

@@ -1,0 +1,7 @@
+Các api cần dùng:
+- API POST login (done)
+- API POST register (done)
+- API GET user role ==='CANDIDATE' (in progress)
+- API PUT user role ==='CANDIDATE' (in progress)
+- API Get event
+- API GET interview room (cụ thể lấy các room diễn ra gần đây)

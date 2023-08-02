@@ -1,0 +1,140 @@
+$blue_font_color: #1e90ff;
+
+.page {
+    .cv-ipt {
+        width: 100%;
+        white-space: pre-wrap;
+        border: none;
+        outline-width: 1px;
+        padding: 2px;
+        border-radius: 4px;
+        outline-color: rgba(0, 0, 0, 0.2);
+    }
+    .name {
+        color: $blue_font_color;
+        font-size: 40px;
+        font-weight: bold;
+        padding: 0;
+    }
+    .info {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 1px;
+    }
+    .info-val {
+        font-size: 14px;
+    }
+    hr {
+        border: 1px solid blue;
+        margin: 2px 0 10px 0;
+    }
+}
+
+@mixin small-btn {
+    &::before {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        height: 100%;
+        left: -40px;
+        width: 50px;
+    }
+    .btn-add {
+        top: 5px;
+        padding: 0;
+        padding-bottom: 4px;
+    }
+    .btn-remv {
+        top: 31px;
+        padding: 0;
+    }
+    button {
+        display: none;
+        position: absolute;
+        left: -35px;
+        font-size: 22px;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+    }
+    &:hover button {
+        display: inline-flex;
+    }
+}
+
+.info-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 10px;
+    @include small-btn();
+}
+
+.section {
+    flex: 1;
+    margin: 16px 0;
+
+    .para {
+        min-width: 100%;
+        font-size: 16px;
+        white-space: pre-wrap;
+    }
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 0;
+        color: $blue_font_color;
+    }
+    .tbl {
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 10px;
+        width: 100%;
+        white-space: pre-wrap;
+        @include small-btn();
+
+        tr:first-child {
+            font-weight: bold;
+        }
+        tr td:first-child {
+            width: 25%;
+            vertical-align: text-top;
+        }
+        tr td:nth-child(2) {
+            width: 75%;
+        }
+    }
+    .proj-tbl {
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+        @include small-btn();
+
+        table {
+            width: 100%;
+        }
+        .proj-name {
+            font-weight: bold;
+        }
+        .proj-time {
+            display: inline-block;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 2px;
+            min-width: 40px;
+            margin-bottom: 8px;
+        }
+        td {
+            border: 2px solid rgba($blue_font_color, 0.8);
+            padding: 4px;
+        }
+        tr td:first-child {
+            font-weight: bold;
+            width: 25%;
+        }
+        tr td:nth-child(2) {
+            width: 75%;
+        }
+    }
+}

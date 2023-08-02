@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -8,30 +8,42 @@ import "./CandidateEvent.scss";
 import Header from "./../Header/Header";
 import event from "../../data/event.json";
 import Footer from "./../Footer/Footer";
+import { useDispatch, useSelector } from "react-redux"
+import { getEventsRequest } from "../../redux/action/eventActions"
 
 function CandidateEvent() {
   const EVENTS_PER_PAGE = 3;
-  const eventdata = event;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showResults, setShowResults] = useState(true);
-  const totalEventPage = Math.ceil(eventdata.length / EVENTS_PER_PAGE);
-  const paginatedData = eventdata.slice(
-    (currentPage - 1) * EVENTS_PER_PAGE,
-    currentPage * EVENTS_PER_PAGE
-  );
+  
+  const dispatch = useDispatch()
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        dispatch(getEventsRequest())
+    }, [dispatch])
 
-  const handleNextPage = () => {
-    if (currentPage < totalEventPage) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
+    // Lấy dữ liệu sự kiện từ Redux store
+    const events = useSelector((state) => state.events.events)
+    console.log(events)
+    const eventdata = events;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [showResults, setShowResults] = useState(true);
+    const totalEventPage = Math.ceil(events.length / EVENTS_PER_PAGE);
+    const paginatedData = events.slice(
+      (currentPage - 1) * EVENTS_PER_PAGE,
+      currentPage * EVENTS_PER_PAGE
+    );
+  
+    const handlePrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage((prevPage) => prevPage - 1);
+      }
+    };
+  
+    const handleNextPage = () => {
+      if (currentPage < totalEventPage) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    };
   return (
     <>
     <Header />
@@ -53,7 +65,7 @@ function CandidateEvent() {
               <div className="event-heading">
                 <h2 className="event-title">Sự kiện đang diễn ra</h2>
               </div>
-              {paginatedData.map((item) => (
+              {events.map((item) => (
                 <div key={item.id} className="event-card">
                   <img src={item.image} alt="Pictures" className="event-image" />
                   <div className="event-details">

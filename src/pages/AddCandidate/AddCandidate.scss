@@ -1,4 +1,66 @@
 .AddCandidate-Home {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .DateAndTime {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .square {
+
+    width: 48%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .square h6 {
+    font-size: 14px;
+    padding: 7px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .square select,
+  .square input,
+  .square .DateAndTime {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    height: 70%;
+    border-radius: 4px;
+  }
+
+  .ButtonContainer {
+    display: flex;
+    position: relative;
+    left: 138vh;
+  }
+
+  #save-button {
+    width: 120px;
+    padding: 10px 10px 30px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  #save-button:hover {
+    background-color: #0056b3;
+  }
+
   .outer-wrapper {
     width: 90%;
     background-color: white;
@@ -55,23 +117,23 @@
     display: none;
   }
 
-  @media screen and (max-width:"600px") {
+  // @media screen and (max-width:"600px") {
 
-    .outer-wrapper {
-      width: 80%;
-      background-color: white;
-      border: 5px solid white;
-      margin: 55px 0px 0px 40px;
-      border-radius: 30px;
+  //   .outer-wrapper {
+  //     width: 80%;
+  //     background-color: white;
+  //     border: 5px solid white;
+  //     margin: 55px 0px 0px 40px;
+  //     border-radius: 30px;
 
-      .table-wrapper {
+  //     .table-wrapper {
 
-        height: 500px;
-        overflow-y: scroll;
-        margin: 20px;
-      }
-    }
-  }
+  //       height: 500px;
+  //       overflow-y: scroll;
+  //       margin: 20px;
+  //     }
+  //   }
+  // }
 
   /* Hide scrollbar for IE, Edge and Firefox */
 
@@ -330,4 +392,12 @@
     border: 1px solid #00A3FF;
 
   }
+}
+
+.interviewer-name {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: #00A3FF;
+  color: white;
 }

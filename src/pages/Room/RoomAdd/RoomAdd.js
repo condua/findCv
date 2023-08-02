@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import "./RoomAdd.scss"
-import data from '../data.json';
-import { Button, DatePicker } from 'antd';
-import { EditOutlined, EyeOutlined, CalendarOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import './RoomAdd.scss';
+import { DatePicker } from 'antd';
+import { CalendarOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { API_URL } from '../../../constants/common';
 
+import axios from 'axios';
 
 const RoomAdd = () => {
+    const accessToken = useSelector(state => state.auth.accessToken);
+
     const history = useNavigate();
-    let { id } = useParams();
-    const [info, setInfo] = useState(data.find((item) =>
-        item.RoomId === parseInt(id)
-    ))
-    const [imagePreview, setImagePreview] = useState(null);
-    const [selectedTime, setSelectedTime] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const [roomSkill, setRoomSkill] = useState('');
+    const [jobPostId, setjobPostId] = useState('');
+    const [roomDescription, setRoomDescription] = useState('');
+    const [linkMeet, setlinkMeet] = useState('');
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
-
-    const handleTimeChange = (event) => {
-        setSelectedTime(event.target.value);
-    };
     const handleDatePickerChange = (dates) => {
         if (dates) {
             setStartDate(dates[0]);
@@ -30,6 +30,57 @@ const RoomAdd = () => {
             setEndDate(null);
         }
     };
+
+    // const handleSaveChanges = async () => {
+    //     const newRoom = {
+    // roomName: roomName,
+    // roomSkill: roomSkill,
+    // roomDescription: roomDescription,
+    // startDate: startDate ? startDate.format('YYYY-MM-DD') : null,
+    // endDate: endDate ? endDate.format('YYYY-MM-DD') : null,
+    // status: 'Đang mở',
+    //     };
+
+    //     try {
+    //         const response = await axios.post(
+    //             `${API_URL}/interview/create-interview`,
+    //             newRoom,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`,
+    //                 },
+    //             }
+    //         );
+
+    //         history('/Room');
+    //     } catch (error) {
+    //         console.error('Error adding room:', error);
+    //     }
+    // };
+    const handleaddRoom = async () => {
+        const roomurl = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/interview/create-interview';
+        try {
+            const payload = {
+                jobPostId: 2,
+                roomName: roomName,
+                roomSkill: roomSkill,
+                roomDescription: roomDescription,
+                startDate: startDate ? startDate.format('DD-MM-YYYY') : null,
+                endDate: endDate ? endDate.format('DD-MM-YYYY') : null,
+                status: 'Đang mở',
+                linkmeet: linkMeet
+            };
+            const response = await axios.post(roomurl, payload, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            console.log(' Response:', response.data);
+        } catch (error) {
+            console.error('Event Error:', error);
+        }
+    };
+
     return (
         <div className='RoomAdd-home'>
             <div className='container-company'>
@@ -38,19 +89,18 @@ const RoomAdd = () => {
                     <div className='form-edit'>
                         <div className='info-item'>
                             <span>Tên phòng họp</span>
-                            <input />
+                            <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
                         </div>
                         <div className='info-item'>
                             <span>Kĩ năng</span>
-                            <input />
+                            <input type="text" value={roomSkill} onChange={(e) => setRoomSkill(e.target.value)} />
                         </div>
                         <div className='info-item'>
                             <span>Mô tả phòng họp</span>
-                            <input />
+                            <input type="text" value={roomDescription} onChange={(e) => setRoomDescription(e.target.value)} />
                         </div>
                         <div className='info-item'>
                             <span>Thời gian</span>
-
                             <DatePicker.RangePicker
                                 style={{
                                     width: '80%',
@@ -64,18 +114,23 @@ const RoomAdd = () => {
                                 value={[startDate, endDate]}
                                 onChange={handleDatePickerChange}
                                 allowClear={false}
+                                format="DD-MM-YYYY"
                                 suffixIcon={<CalendarOutlined style={{ color: '#8c8c8c' }} />}
                             />
                         </div>
                         <div className='info-item'>
                             <span>Link phòng họp</span>
-                            <input />
+                            <input type="text" value={linkMeet} onChange={(e) => setlinkMeet(e.target.value)} />
                         </div>
-
                     </div>
-                    <Link to={'/Room'}>
-                        <button className='BackButton'>Lưu thay đổi</button>
-                    </Link>
+                    <div className='buttons'>
+                        <Link to={'/Room'}>
+                            <button className='BackButton' onClick={handleaddRoom}>
+                                Lưu thay đổi
+                            </button>
+                            <button className='BackButton'>Quay lại</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

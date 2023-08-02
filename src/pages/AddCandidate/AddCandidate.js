@@ -1,10 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-import data from './data.json';
 import './AddCandidate.scss';
 import { BsCameraVideo } from "react-icons/bs"
 import { MdOutlineCalendarMonth } from "react-icons/md"
-import { useNavigate, useParams, Link, useHistory } from 'react-router-dom';
+import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { BsChatDots } from "react-icons/bs"
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { API_URL } from '../../constants/common';
+import { Typography, Space, Card, Button, Pagination, DatePicker } from 'antd';
+
+
 const AddCandidate = () => {
   const [tableData, setTableData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,19 +17,120 @@ const AddCandidate = () => {
   const [selectedPerson, setSelectedPerson] = useState({});
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const [selectedCandidateName, setSelectedCandidateName] = useState('');
+  const [selectedCandidateID, setSelectedCandidateID] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [Des, setDes] = useState('');
+  const [selectedInterviewers, setSelectedInterviewers] = useState([]);
   const containerRef = useRef(null);
   const [isToggled, setIsToggled] = useState(true);
   let { id } = useParams();
+  const idAsLong = parseFloat(id);
   const navigate = useNavigate();
+  const accessToken = useSelector(state => state.auth.accessToken)
+
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API_URL}/interview/candidates/2`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setTableData(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    const filteredData = data.filter(
-      item =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setTableData(filteredData);
-  }, [searchQuery]);
+    fetchData()
+  }, [])
+
+  const handleSubmit = async () => {
+    const url = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/interview/candidateAssign';
+    try {
+      const payload = {
+        candidateId: selectedCandidateID,
+        date: selectedDate ? selectedDate.format('DD-MM-YYYY') : null,
+        time: selectedTime,
+        interviewId: idAsLong
+      };
+      const response = await axios.post(url, payload, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      console.log(' Response:', response.data);
+    } catch (error) {
+      console.error('Event Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    setSelectedInterviewers(state.interviewers)
+  }, [])
+
+  // useEffect(() => {
+  //   const filteredData = data.filter(
+  //     item =>
+  //       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       item.email.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  //   setTableData(filteredData);
+  // }, [searchQuery]);
+  // "candidateId": 0,
+  // "interviewId": 0,
+  // "date": "string",
+  // "time": "string",
+  // "description": "string"
+
+  const generateTimeOptions = () => {
+    const startTime = 7;
+    const endTime = 18;
+    const timeIntervals = 30;
+
+    const timeOptions = [];
+
+    for (let hour = startTime; hour < endTime; hour++) {
+      for (let minute = 0; minute < 60; minute += timeIntervals) {
+        const startShift = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        const endShift = `${(hour + Math.floor((minute + timeIntervals) / 60)).toString().padStart(2, '0')}:${(
+          (minute + timeIntervals) % 60
+        ).toString().padStart(2, '0')}`;
+        const shiftOption = `${startShift} to ${endShift}`;
+        timeOptions.push(
+          <option key={shiftOption} value={shiftOption}>
+            {shiftOption}
+          </option>
+        );
+      }
+    }
+
+    return timeOptions;
+  };
+
+  const location = useLocation();
+  const state = location.state || {};
+  const interviewerName = state.interviewerName || '';
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
+  };
+
+  const handleDateChange = (date, dateString) => {
+    setSelectedDate(date);
+  };
+
+  useEffect(() => {
+    console.log(state);
+  }, [state])
 
   const handleSortByName = () => {
     const sortedData = [...tableData].sort((a, b) => {
@@ -144,11 +250,110 @@ const AddCandidate = () => {
     }
   };
   const handleAddButton = (item) => {
-    navigate(`/room/${id}/candidate/interviewerassign`, { state: { candidateName: item.name } });
+    setSelectedCandidateName(item.fullName);
+    setSelectedCandidateID(item.userId);
   };
 
   return (
     <div className='AddCandidate-Home'>
+      {/* New row with two squares arranged horizontally */}
+      <div className='row'>
+        <div className='square'>
+          <h6>Date</h6>
+          <DatePicker
+            style={{
+              width: '100%',
+              marginTop: '0px',
+              height: '70%',
+              borderRadius: '6px',
+              backgroundColor: '#e9ecef',
+              border: 'none',
+              boxSizing: 'border-box',
+
+            }}
+            format="DD-MM-YYYY"
+            value={selectedDate}
+            onChange={handleDateChange}
+          />
+        </div>
+        <div className='square'>
+          <h6>Name candidate:{selectedCandidateName} </h6>
+          <h6>Name interviewer: {selectedInterviewers?.map((interviewer) => {
+
+            return (<Link to={`/user/${interviewer.id}`}>
+              <span className='interviewer-name'>{interviewer.usernameReal}</span>
+            </Link>)
+          })}</h6>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='square'>
+          <h6>Time</h6>
+          <select
+            className='info'
+            value={selectedTime}
+            onChange={handleTimeChange}
+            style={{
+              width: '100%',
+              marginTop: '0px',
+              height: '70%',
+              borderRadius: '6px',
+              backgroundColor: '#e9ecef',
+              border: 'none',
+              boxSizing: 'border-box',
+            }}
+          >
+            <option value=''>-- Chọn thời gian --</option>
+            {generateTimeOptions()}
+          </select>
+
+        </div>
+        <div className='square'>
+          <h6>Date and time</h6>
+          <div className='DateAndTime'>
+            <DatePicker
+              style={{
+                width: '50%',
+                marginTop: '0px',
+                height: '100%',
+                borderRadius: '6px',
+                backgroundColor: '#e9ecef',
+                border: 'none',
+                boxSizing: 'border-box',
+              }}
+              disabled='true'
+              format="DD-MM-YYYY"
+              value={selectedDate}
+              onChange={handleDateChange}
+            />
+            <select
+              style={{
+                width: '50%',
+                marginTop: '0px',
+                height: '100%',
+                borderRadius: '6px',
+                backgroundColor: '#e9ecef',
+                border: 'none',
+                boxSizing: 'border-box',
+              }}
+              disabled='true'
+              className='info'
+              value={selectedTime}
+              onChange={handleTimeChange}
+
+            >
+              <option value=''>-- Chọn thời gian --</option>
+              {generateTimeOptions()}
+            </select>
+          </div>
+        </div>
+      </div>
+
+{/* 
+      <div className='ButtonContainer'>
+        <Button onClick={handleSubmit} id='save-button'>Lưu</Button>
+      </div> */}
       <div style={{ width: '100%', height: 'auto', backgroundColor: '#e9ecef', paddingBottom: '92px', paddingTop: '1px' }}>
         <div className="outer-wrapper"  >
           <div className="table-wrapper">
@@ -161,10 +366,10 @@ const AddCandidate = () => {
                 placeholder="Search by name or email"
 
               />
-              <span class="search-icon"></span>
+              <span className="search-icon"></span>
             </div>
 
-            <div style={{ width: '100%', height: '100%', overflowY: 'scroll', marginTop: '20px' }}>
+            <div style={{ width: '100%', height: '100%', marginTop: '20px' }}>
               <table id="candidates" ref={containerRef} >
                 <thead>
                   <tr style={{ position: 'sticky', position: '-webkit-sticky', backgroundColor: 'blue' }}>
@@ -180,7 +385,7 @@ const AddCandidate = () => {
                 Email
                 {sortOrder === 'asc' ? ' ▲' : ' ▼'}
                 </th> */}
-                    <th>Ngày phỏng vấn</th>
+                    <th>Kinh nghiệm</th>
                     <th>Vị trí ứng tuyển</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -191,26 +396,26 @@ const AddCandidate = () => {
                     <tr key={item.id} onClick={() => handleNameClick(item)} style={{ cursor: 'pointer' }}>
                       {/* <td>{item.id}</td> */}
                       <td style={{ paddingRight: '5px' }}>
-                        <img className='avatar-img' src={item.image} />
+                        <img className='avatar-img' src={item.avatar} />
 
 
                       </td>
                       <td onClick={() => handleNameClick(item)} style={{ cursor: 'pointer' }}>
-                        <p style={{ marginBottom: '10px' }}>{item.name}</p>
+                        <p style={{ marginBottom: '10px' }}>{item.fullName}</p>
                         <p>{item.email}</p>
                       </td>
-                      <td>{item.date}</td>
-                      <td>{item.position}</td>
+                      <td>{item.experience}</td>
+                      <td>{item.skill}</td>
                       <td>
-                        <div style={getStatusColor(item.status)}>
-                          {item.status}
+                        <div style={getStatusColor(item.interviewStatus)}>
+                          {item.interviewStatus}
                         </div>
                       </td>
-                      <td style={{ alignItems: 'center' }}><Link style={{ textDecoration: 'none' }}
-                        onClick={() => handleAddButton(item)}
-                        to={{
-                          pathname: `/room/${id}/candidate/interviewerassign`,
-                          state: { candidateName: item.name }
+                      <td style={{ alignItems: 'center' }}><Link
+                        style={{ textDecoration: 'none' }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddButton(item);
                         }}
                       ><button className='edit-button'>Thêm</button></Link></td>
                     </tr>

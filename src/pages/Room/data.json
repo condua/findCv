@@ -1,7 +1,6 @@
 [
     {
         "RoomId": 1,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "ReactJS room",
         "RoomSkill": "Web Development",
         "RoomDescription": "This is a project about web development.",
@@ -11,7 +10,6 @@
     },
     {
         "RoomId": 2,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "Angular room",
         "RoomSkill": "Data Analysis",
         "RoomDescription": "This is a project about data analysis.",
@@ -21,7 +19,6 @@
     },
     {
         "RoomId": 3,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -31,7 +28,6 @@
     },
     {
         "RoomId": 4,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -41,7 +37,6 @@
     },
     {
         "RoomId": 5,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -51,7 +46,6 @@
     },
     {
         "RoomId": 6,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -61,7 +55,6 @@
     },
     {
         "RoomId": 7,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -71,7 +64,6 @@
     },
     {
         "RoomId": 8,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -81,7 +73,6 @@
     },
     {
         "RoomId": 9,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -91,7 +82,6 @@
     },
     {
         "RoomId": 10,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -101,7 +91,6 @@
     },
     {
         "RoomId": 11,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",
@@ -111,7 +100,6 @@
     },
     {
         "RoomId": 12,
-        "RoomLogo": "https://lezebre.lu/images/detailed/17/30476-Perodua-Myvi.png",
         "RoomName": "VueJS room",
         "RoomSkill": "Software Development",
         "RoomDescription": "This is a project about software development.",

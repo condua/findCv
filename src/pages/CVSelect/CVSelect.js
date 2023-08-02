@@ -29,7 +29,7 @@ function CVSelect() {
       </Row>
       <Row>
         <NavLink
-          to="/cvbuilder"
+          to="/cv"
           className={`item ${isProfileHovered ? 'text-success' : ''}`}
           onMouseEnter={handleProfileMouseEnter}
           onMouseLeave={handleProfileMouseLeave}

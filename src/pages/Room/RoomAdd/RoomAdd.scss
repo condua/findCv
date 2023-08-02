@@ -16,7 +16,6 @@
     background-color: #FFFFFF;
 
     .BackButton {
-      position: absolute;
       background-color: #f1fafe;
       border-radius: 10px;
       color: #00a3ff;
@@ -358,4 +357,10 @@
   .timeline .ant-timeline-item-head {
     transform: scale(2);
   }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

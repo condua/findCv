@@ -11,6 +11,9 @@ import data from "../../data/data.json"
 import events from "../../data/event.json"
 import EventBox from "./EventBox/EventBox";
 import { Typography,Grid } from "@mui/material";
+import { BiCaretUp, BiCaretDown } from 'react-icons/bi';
+import {PieChart, Pie,Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from 'recharts';
+import { useSpring, animated } from 'react-spring';
 
 function CandidateHome() {
   const texts = [
@@ -20,12 +23,10 @@ function CandidateHome() {
     'Phúc lợi tốt',
     'Mức lương cao'
   ];
+  const props = useSpring({ x: 1 });
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0); 
-  const [currentIndex1, setCurrentIndex1] = useState(0);
-  
-
-  
+  const [currentIndex1, setCurrentIndex1] = useState(0);  
   const totalBoxes = data.length;
   const itemsPerPage = 5;
   const recentEvents = events.slice(-5);
@@ -44,7 +45,15 @@ function CandidateHome() {
       prevIndex === totalBoxes - itemsPerPage ? 0 : prevIndex + itemsPerPage
     );
   };
+  useEffect(() => {
+    // Sử dụng setInterval để thay đổi giá trị currentIndex sau mỗi 3 giây
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 2000);
 
+    // Xóa interval khi component unmount để tránh memory leak
+    return () => clearInterval(interval);
+  }, []);
   const currentIndexRef = useRef(0);
 
   // useEffect(() => {
@@ -57,8 +66,23 @@ function CandidateHome() {
   //   };
   // }, []);
 
-  
-
+  const dataChart = [
+    { name: '12 Jun', value: 25 },
+    { name: '30 Jun', value: 30 },
+    { name: '15 Jul', value: 50 },
+    { name: '30 Jul', value: 40 },
+    { name: '8 Aug', value: 45 },
+  ];
+  const dataPie = [
+    { name: 'New', value: 30 },
+    { name: 'Subscribe', value: 70 },
+  ];
+  const colorsPie = ['#4eebe5', '#2b84c8'];
+  const colors = ['#f0b238', '#ec5540'];
+  useEffect(() => {
+    // Thiết lập giá trị cho showModal sau khi trang đã được tải hoàn thành
+    setShowModal(true);
+  }, []);
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -66,11 +90,19 @@ function CandidateHome() {
     <>
     <Header />
     <div className="candidatehome">
-      <Modal show={showModal} onHide={handleCloseModal} size="lg">
-        <Modal.Header closeButton>
+      <Modal show={showModal} onHide={handleCloseModal} size="lg" style = {{color: "black"}}>
+        <Modal.Header>
           <Modal.Title className="modal-title">
             <span className = "modal-title-logo">PRIMECMR</span> - Tiếp lợi thế, nối thành công
           </Modal.Title>
+          <button
+          className="close"
+          style={{width: "30px" ,height: "30px", color: 'red', fontSize: '24px', display: "flex", marginLeft:"240px", borderRadius: "40px", border: "1px solid black"}}
+          onClick={handleCloseModal}
+          
+        >
+          <span style = {{marginLeft: "7px", marginTop: "-2px"}}>&times;</span>
+        </button>
         </Modal.Header>
         <Modal.Body>
           <iframe
@@ -128,16 +160,150 @@ function CandidateHome() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleCloseModal}>
+          <Button variant="outline-success" onClick={handleCloseModal}>
             Tìm hiểu thêm
           </Button>
         </Modal.Footer>
       </Modal>
+      <div className="homesidenew">
+      <Row style = {{height: "600px"}}>
+        <Col className="col1" xs={8}>
+          <div className="image-container" style={{ height: "100%", display: "flex" }}>
+            <div className="white-area"></div>
+            <div className="img-container" style={{ display: "flex",flex: "1" }}>
+              <div style = {{zIndex: "2", marginTop: "20%", marginLeft: "10%", width: "70%", display:"flex", flexDirection: "column"}}>
+                <span style = {{fontSize: "41px", fontWeight:"600"}}> Unlock Pro Inside </span>
+                <Button variant="outline-dark" style = {{width: "50%"}}> View More </Button>
+              </div>
+              <img
+                src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t1.15752-9/363884917_1011318203399397_3022744282137691245_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=S9s1vs8kUg4AX_rXUDg&_nc_ht=scontent.fsgn2-6.fna&oh=03_AdQr44i-tBtA3wfJM0NpoizUvvWUkZ4wjJgQ4y6gMnOGjg&oe=64ECADAA"
+                alt="Image"
+              />
+            <div className = "boxinsight">
+              <Row style = {{width: "90%", marginLeft: "10%"}}>
+                <Col>
+                  <Row> <span style = {{fontSize: "15px", fontWeight: "600"}}>Active User</span> </Row>
+                  <Row > 
+                    <span style = {{fontSize: "45px", fontWeight: "700", display: "flex"}}>678
+                      <Col style = {{fontSize: "13px", color: "green", display: "flex", marginTop: "15px"}}>
+                      <BiCaretUp className="green-icon" style={{ fontSize: "20px" }}/>
+                      <span className="percentage">32%</span> 
+                    </Col>
+                    </span>
+                  </Row>
+                </Col>  
+                <Col>
+                  <Row> <span style = {{fontSize: "15px", fontWeight: "600"}}>New</span> </Row>
+                  <Row > 
+                    <span style = {{fontSize: "45px", fontWeight: "700", display: "flex"}}>256
+                      <Col style = {{fontSize: "13px", color: "green", display: "flex", marginTop: "15px"}}>
+                      <BiCaretUp className="green-icon" style={{ fontSize: "20px" }}/>
+                      <span className="percentage">48%</span> 
+                    </Col>
+                    </span>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row> <span style = {{fontSize: "15px", fontWeight: "600"}}>Cancel</span> </Row>
+                  <Row > 
+                    <span style = {{fontSize: "45px", fontWeight: "700", display: "flex"}}>12
+                      <Col style = {{fontSize: "13px", color: "red", display: "flex", marginTop: "15px"}}>
+                      <BiCaretDown className="red-icon" style={{ fontSize: "20px", marginTop: "-3px" }}/>
+                      <span className="percentage">30%</span> 
+                    </Col>
+                    </span>
+                  </Row>
+                </Col>
+              </Row>
+            </div>
+            </div>
+          </div>
+        </Col>
+        <Col>
+          <Row style = {{backgroundColor: "white", border: "1px solid #ede8e8", borderRadius: "20px", width: "100%", height: "55%", boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
+          <span style = {{display: "flex", justifyContent: "center", fontSize: "30px", fontWeight: "600"}}> Membership</span>
+          <div style={{ width: '100%', height: '100%' ,marginLeft: "-20px"}}>
+            <ResponsiveContainer width="100%" height="85%" >
+              <BarChart data={dataChart} fill="transparent">
+                <XAxis dataKey="name"  />
+                <YAxis  />
+                
+                {/* Ẩn các đường kẻ */}
+                <Bar dataKey="value" fill="green">
+                  {dataChart.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={colors[index % colors.length]} radius={[10, 10, 0, 0]} />
+                  ))}
+                </Bar>
+                
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          </Row>
+            <Row
+                style={{
+                  backgroundColor: 'white',
+                  border: '1px solid #ede8e8',
+                  borderRadius: '20px',
+                  width: '100%',
+                  height: '45%',
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: "10px"
+                }}
+              >
+              <Col>
+                <PieChart width={300} height={300} style = {{marginBottom: "20px", marginTop: "-50px"}}>
+                    <Pie
+                      data={dataPie}
+                      cx={150}
+                      cy={150}
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                      animationBegin={0}
+                      animationDuration={1500}
+                      strokeWidth={2} // Tăng kích thước đường viền lên gấp 3 lần
+                    >
+                      {dataPie.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={colorsPie[index]} />
+                      ))}
+                    </Pie>
+                    <Legend />
+                  </PieChart>
+              </Col>
+              
+              <Col style = {{width: "100%", height: "80%"}}>
+              <span style = {{ fontSize: "40px", fontWeight: "600", marginLeft: "-30px"}}> Audiences</span>
+              <span style = {{fontSize: "45px", fontWeight: "700", marginLeft: "20px"}}> 68% </span>
+              <Row style = {{marginLeft: "-30px"}}>
+                <Col style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ backgroundColor: "#4eebe5", width: "15px", height: "15px", borderRadius: "5px" }}></div>
+                  <span style = {{marginLeft: "5px", fontWeight: "600"}}>New</span>
+                  <BiCaretUp className="red-icon" style={{color: "green", fontSize: "20px", marginTop: "0px", marginLeft: "5px", marginRight: "-5px" }} />
+                  <span className="percentage" style={{ marginLeft: "5px" , color: "green", fontWeight: "600"}}>30%</span>
+                </Col>
+
+                <Col style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ backgroundColor: "#2b84c8", width: "15px", height: "15px", borderRadius: "5px" }}></div>
+                  <span style = {{marginLeft: "5px", fontWeight: "600"}}>Subscribe</span>
+                  <BiCaretUp className="red-icon" style={{color: "green", fontSize: "20px", marginTop: "0px", marginLeft: "5px", marginRight: "-5px" }} />
+                  <span className="percentage" style={{ marginLeft: "5px" , color: "green", fontWeight: "600"}}>30%</span>
+                </Col>
+              </Row>
+
+              </Col>
+            </Row>
+        </Col>
+      </Row>
+    </div>
       <div className="homeheader">
         <div className="homeheader-left">
           <Col>
             <Row>
-              <p className="hometext">Ứng tuyển bất cứ nơi đâu!</p>
+              <p className="hometext" style = {{fontSize: "40px", fontWeight: "600"}}>Ứng tuyển bất cứ nơi đâu!</p>
             </Row>
             <Row>
               <p className="hometext">
@@ -213,6 +379,82 @@ function CandidateHome() {
         </div>
       </div>
       <div style = {{boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)"}}><hr/></div>
+      <Container style={{ textAlign: "center", marginBottom: "20px" }}>
+      <div
+        className="containerbanner"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "left",
+        }}
+      >
+        <div
+          className="headerbanner"
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: "white",
+            padding: "10px",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            borderRadius: "8px",
+            marginBottom: "10px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "40px",
+              fontWeight: "700",
+              color: "#146014",
+              margin: "0",
+              flexGrow: "1",
+            }}
+          >
+            Top Vị Trí Hàng Đầu
+          </p>
+          <div
+            className="buttons"
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              variant="outline-success"
+              onClick={handlePrev}
+              style={{
+                margin: "0 5px",
+                padding: "0",
+                width: "30px",
+                height: "30px",
+              }}
+              className="rounded-circle"
+            >
+              &lt;
+            </Button>
+            <Button
+              variant="outline-success"
+              onClick={handleNext}
+              style={{
+                margin: "0 5px",
+                padding: "0",
+                width: "30px",
+                height: "30px",  
+              }}
+              className="rounded-circle"
+            >
+              &gt;
+            </Button>
+          </div>
+        </div>
+      <div className="bodybanner w-100"  >
+        <div className="flex-container" >{showBoxes}</div>
+        </div>
+    </div>
+       
+      </Container>
       <div className="homecontainer">
         <Container>
           <div className="homecontainer-header" style = {{boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", paddingBottom: "20px"}}>
@@ -310,82 +552,7 @@ function CandidateHome() {
           </div>
         </Container>
       </div>
-      <Container style={{ textAlign: "center", marginBottom: "20px" }}>
-      <div
-        className="containerbanner"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "left",
-        }}
-      >
-        <div
-          className="headerbanner"
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: "white",
-            padding: "10px",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-            borderRadius: "8px",
-            marginBottom: "10px",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "40px",
-              fontWeight: "700",
-              color: "#146014",
-              margin: "0",
-              flexGrow: "1",
-            }}
-          >
-            Top Vị Trí Hàng Đầu
-          </p>
-          <div
-            className="buttons"
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              variant="outline-success"
-              onClick={handlePrev}
-              style={{
-                margin: "0 5px",
-                padding: "0",
-                width: "30px",
-                height: "30px",
-              }}
-              className="rounded-circle"
-            >
-              &lt;
-            </Button>
-            <Button
-              variant="outline-success"
-              onClick={handleNext}
-              style={{
-                margin: "0 5px",
-                padding: "0",
-                width: "30px",
-                height: "30px",  
-              }}
-              className="rounded-circle"
-            >
-              &gt;
-            </Button>
-          </div>
-        </div>
-      <div className="bodybanner w-100"  >
-        <div className="flex-container" >{showBoxes}</div>
-        </div>
-    </div>
-       
-      </Container>
+      
     <Container style = {{width: "100%"}}>
     <p style={{
               fontSize: "40px",

@@ -1,0 +1,120 @@
+.detailjob{
+   background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+.detailjobbanner{
+    background: transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0);
+    margin-bottom: -10px;
+}
+.detailjobbanner p{
+    margin-top: 60px;
+    font-size: 25px;
+    margin-left: 80px;
+    font-weight: 500;
+    color: #00b14f;
+}
+.detailjobbanner span{
+    margin-top: 10px;
+    font-size: 17px;
+    margin-left: 80px;
+}
+.detailjobposition{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+
+}
+.detailjobposition .detailjobpositionimage{
+    border: 1px solid green;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 80px;
+    
+}
+.detailjobposition .detailjobpositiontext{
+    margin-top: 28px;
+    text-align: left;
+}
+.detailjobposition .detailjobpositiontext .ptext1{
+    font-size: 30px;
+    font-weight: 600;
+    color: #00b14f;
+}
+.detailjobposition .detailjobpositiontext .ptext2{
+    font-size: 18px;
+    font-weight: 400;
+}
+.detailjobposition .detailjobpositiontext span{
+    font-size: 15px;
+    font-weight: 400;
+}
+.detailjobpositionbanner{
+    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+    background-image: url("https://static.topcv.vn/v4/image/job-detail/job-detail-tab-bar.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80px;
+}
+.detailjobpositionbody{
+    background-color: white;
+    
+}
+.detailjobpositionbody h2{
+    
+    color: #212f3f;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 24px;
+    padding-left: 10px;
+    margin-left: 30px;
+    padding-top: 20px;
+}
+.detailflex{
+    display: flex;
+    margin-bottom: 30px;
+}
+.detailflexleft{
+    width: 65%;
+}
+.detailflexright{
+    width: 40%;
+}
+.detailflexright h3{
+    color: #212f3f;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 16px;
+    padding: 0 -10px;
+    margin-top: -2px;
+    margin-left: -10px;
+}
+.detailflexright p,li{
+    color: #212f3f;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-left: 30px;
+    padding-right: 50px;
+}
+.detailflexright span{
+    color: #00b14f;
+    display: grid;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+    margin-left: 30px;
+    padding-right: 50px;
+}
+}

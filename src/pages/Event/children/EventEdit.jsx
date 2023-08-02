@@ -1,9 +1,14 @@
-import {  Form,  DatePicker, Input, Image } from "antd"
-import React, { useCallback, useRef, useState } from "react"
+import { Form, DatePicker, Input, Image, Upload, Button } from "antd"
+import { UploadOutlined } from "@ant-design/icons"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import RichEditor from "../../../components/RichEditor"
-import events from "../../../data/event"
 import { useForm } from "antd/es/form/Form"
+import { useDispatch, useSelector } from "react-redux"
+import { getEventsRequest } from "../../../redux/action/eventActions"
+import moment from "moment/moment"
+import axios from "axios"
+
 const { TextArea } = Input
 
 const EventEdit = () => {
@@ -11,19 +16,53 @@ const EventEdit = () => {
     const navigate = useNavigate()
     const [form] = useForm()
     const richEditor = useRef(null)
-    const event = events.find((event) => event.id === parseInt(id))
-
+    const dispatch = useDispatch()
     const handleCancelClick = () => {
         navigate("/event", { replace: true })
     }
 
+    useEffect(() => {
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
+    const event = useSelector((state) =>
+        state.events.events.find((event) => event.id === parseInt(id))
+    )
+
+    const accessToken = useSelector((state) => state.auth.accessToken)
+    const [inputImageURL, setInputImageURL] = useState("")
+    const [imageFile, setImageFile] = useState(null)
     const handleSave = useCallback(async () => {
         const content = await richEditor.current.save()
         const data = await form.validateFields()
-        data.content = content
-        console.log(data)
-    }, [form])
-    const [image, setImage] = useState(event.image)
+        data.content = JSON.stringify(content)
+        const formData = new FormData()
+        formData.append("file", imageFile)
+
+        const imageResponse = await axios.post(
+            "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        )
+
+        data.image = imageResponse.data.data
+
+        await axios.put(
+            `https://qltd01.cfapps.us10-001.hana.ondemand.com/event/${event.id}`,
+            data,
+            {
+                
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        )
+        navigate("/event", { replace: true });
+    }, [form, imageFile, accessToken, event.id, navigate])
 
     return (
         <div>
@@ -42,34 +81,52 @@ const EventEdit = () => {
                 <div className="flex justify-center">
                     <div className="justify-center flex flex-col w-4/5">
                         <Form form={form}>
-                        <div className="flex relative justify-center">
+                            <div className="flex relative justify-center">
                                 <Image
                                     alt="banner "
                                     width="100%"
                                     height="450px"
                                     className="object-cover"
-                                    src={image ? image : "error"}
-                                    fallback="https://kmarket.ro/assets/images/no-image.svg"
+                                    src={
+                                        inputImageURL ? inputImageURL : "error"
+                                    }
+                                    fallback={event.image}
                                 />
-                                <Form.Item
-                                    name="image"
-                                    className="absolute w-2/5 bottom-3"
-                                >
-                                    <Input
-                                        placeholder="Image Adress goes here..."
-                                        className="font-sans text-gray-500"
-                                        onChange={(event) =>
-                                            setImage(event.target.value)
-                                        }
-                                        defaultValue={image}
-                                    />
-                                </Form.Item>
                             </div>
-                           
 
                             <div className="flex flex-col p-10 bg-white ">
+                                <Upload
+                                    maxCount={1}
+                                    type="image"
+                                    className=" mb-10 w-1/4"
+                                    beforeUpload={(file) => {
+                                        if (
+                                            file.type !== "image/png" &&
+                                            file.type !== "image/jpeg"
+                                        )
+                                            return Upload.LIST_IGNORE
+                                        const fileReader = new FileReader()
+                                        fileReader.readAsDataURL(file)
+                                        fileReader.onload = () => {
+                                            setInputImageURL(fileReader.result)
+                                        }
+                                        setImageFile(file)
+                                        return false
+                                    }}
+                                    onRemove={() => {
+                                        setInputImageURL("error")
+                                    }}
+                                >
+                                    <Button icon={<UploadOutlined />}>
+                                        Click to Upload
+                                    </Button>
+                                </Upload>
                                 <Form.Item name="time">
-                                    <DatePicker bordered={false} />
+                                    <DatePicker
+                                        bordered={false}
+                                        defaultValue={moment(event.time)}
+                                        format="YYYY-MM-DD"
+                                    />
                                 </Form.Item>
 
                                 <Form.Item name="title" className="w-full">
@@ -78,7 +135,7 @@ const EventEdit = () => {
                                         placeholder="Title goes here..."
                                         bordered={false}
                                         className=" text-3xl font-semibold"
-                                        defaultValue={event.name}
+                                        defaultValue={event.title}
                                         autoSize
                                     />
                                 </Form.Item>
@@ -96,7 +153,9 @@ const EventEdit = () => {
                                         <div className="w-full p-0">
                                             <RichEditor
                                                 editorCore={richEditor}
-                                                value={event.content}
+                                                value={JSON.parse(
+                                                    event.content
+                                                )}
                                             />
                                         </div>
                                     </div>

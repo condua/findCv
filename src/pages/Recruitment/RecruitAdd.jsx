@@ -1,14 +1,16 @@
 import React, { useState } from "react"
 import DynamicFormItem from "./DynamicFormItem"
-import { Button, Form, Input, Row, Col, Breadcrumb, Select, Image } from "antd"
+import { Form, Input, Breadcrumb, Select, Image, Upload, Button } from "antd"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "antd/es/form/Form"
+import { UploadOutlined } from "@ant-design/icons"
+import {  useSelector } from "react-redux"
+import { useCallback } from "react"
+import axios from "axios"
 
 const RecruitAdd = () => {
-    const onFinish = (values) => {
-        console.log(values)
-    }
     const navigate = useNavigate()
+
     const handleCancelClick = () => {
         navigate("/recruitment", { replace: true })
     }
@@ -32,13 +34,49 @@ const RecruitAdd = () => {
         { label: "Nha Trang", value: "Nha Trang" },
     ]
 
-    const [image, setImage] = useState(null)
+    const [inputImageURL, setInputImageURL] = useState("")
+    const [imageFile, setImageFile] = useState(null)
+    const accessToken = useSelector((state) => state.auth.accessToken)
 
-    
-    const handleSave =  () => {
-        const data =  form.validateFields()
-        console.log(data)
-    }
+    const handleSave = useCallback(async () => {
+        try {
+            const data = await form.validateFields()
+
+            data.detailJob = data.detailJob.join("\n")
+            data.requirements = data.requirements.join("\n")
+            data.interest = data.interest.join("\n")
+            data.language = data.language.join("\n")
+
+            console.log(data)
+            const formData = new FormData()
+            formData.append("file", imageFile)
+
+            const imageResponse = await axios.post(
+                "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+            data.image = imageResponse.data.data
+
+            await axios.post(
+                "https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting",
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+
+            navigate("/recruitment", { replace: true })
+        } catch (error) {
+            console.error("Form validation failed:", error)
+        }
+    }, [accessToken, form, imageFile, navigate])
 
     return (
         <div className="">
@@ -72,38 +110,56 @@ const RecruitAdd = () => {
                     },
                 ]}
             />
-            <Form onFinish={onFinish} form={form} layout="vertical">
+            <Form form={form} layout="vertical">
                 <div className="bg-white px-24 py-16 flex flex-col rounded-3xl w-4/5 mx-auto">
                     <div className="text-zinc-900 text-3xl font-serif mb-11">
                         Thông tin tuyển dụng
                     </div>
-                    <div className="flex gap-4 items-center justify-between mb-3">
+                    <div className="flex flex-col mx-72 justify-between ">
                         <Image
                             alt="logo"
                             className="object-cover "
-                            width={225}
-                            height={170}
-                            src={image ? image : "error"}
+                            width={150}
+                            height={150}
+                            src={inputImageURL ? inputImageURL : "error"}
                             fallback="https://kmarket.ro/assets/images/no-image.svg"
                         />
-                        <Form.Item
-                            name="image"
-                            className=" w-11/12 "
-                        >
-                            <Input
-                                placeholder="Logo Adress goes here..."
-                                className="font-sans text-gray-500"
-                                onChange={(event) =>
-                                    setImage(event.target.value)
+                        <Upload
+                            maxCount={1}
+                            type="image"
+                            className=" mb-10 mt-3 w-full"
+                            beforeUpload={(file) => {
+                                if (
+                                    file.type !== "image/png" &&
+                                    file.type !== "image/jpeg"
+                                )
+                                    return Upload.LIST_IGNORE
+                                const fileReader = new FileReader()
+                                fileReader.readAsDataURL(file)
+                                fileReader.onload = () => {
+                                    setInputImageURL(fileReader.result)
                                 }
-                            />
-                        </Form.Item>
+                                setImageFile(file)
+                                return false
+                            }}
+                            onRemove={() => {
+                                setInputImageURL("error")
+                            }}
+                        >
+                            <Button icon={<UploadOutlined />}>
+                                Click to Upload
+                            </Button>
+                        </Upload>
                     </div>
-                    <Form.Item label="Name" name="name">
+                    <Form.Item label="Name" name="name" required>
                         <Input className="w-full" size="large" />
                     </Form.Item>
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="Tech" name="language" className="w-3/5 items-center">
+                        <Form.Item
+                            label="Tech"
+                            name="language"
+                            className="w-3/5 items-center"
+                        >
                             <Select
                                 mode="multiple"
                                 allowClear
@@ -112,7 +168,11 @@ const RecruitAdd = () => {
                                 size="large"
                             />
                         </Form.Item>
-                        <Form.Item label="Position" name="position" className="w-2/5">
+                        <Form.Item
+                            label="Position"
+                            name="position"
+                            className="w-2/5"
+                        >
                             <Select
                                 placeholder="Please select"
                                 options={positionOptions}
@@ -122,35 +182,59 @@ const RecruitAdd = () => {
                     </div>
 
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="Experience" className="w-1/3">
+                        <Form.Item
+                            label="Experience"
+                            className="w-1/3"
+                            name="experience"
+                        >
                             <Input className="w-full" size="large" />
                         </Form.Item>
-                        <Form.Item label="Salary" name="salary" className="w-1/3">
+                        <Form.Item
+                            label="Salary"
+                            name="salary"
+                            className="w-1/3"
+                        >
                             <Input className="w-full" size="large" />
                         </Form.Item>
-                        <Form.Item label="Enrollment" className="w-1/3">
+                        <Form.Item
+                            label="Enrollment"
+                            className="w-1/3"
+                            name="workingForm"
+                        >
                             <Input className="w-full" size="large" />
                         </Form.Item>
                     </div>
 
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="City" className=" w-1/5">
+                        <Form.Item
+                            label="City"
+                            name="location"
+                            className=" w-1/5"
+                        >
                             <Select
                                 placeholder="Please select"
                                 options={cityOptions}
                                 size="large"
                             />
                         </Form.Item>
-                        <Form.Item label="Location" className="w-4/5">
+                        <Form.Item
+                            label="Location"
+                            className="w-4/5"
+                            name="detailLocation"
+                        >
                             <Input className="w-full" size="large" />
                         </Form.Item>
                     </div>
 
                     <div className="flex w-full justify-start gap-14">
-                        <Form.Item label="Quantity" className=" w-2/6">
+                        <Form.Item
+                            label="Quantity"
+                            className=" w-2/6"
+                            name="number"
+                        >
                             <Input className="w-full" size="large" />
                         </Form.Item>
-                        <Form.Item label="Sex" className=" w-2/6">
+                        <Form.Item label="Sex" className=" w-2/6" name="sex">
                             <Select
                                 placeholder="Please select"
                                 options={[
@@ -172,8 +256,10 @@ const RecruitAdd = () => {
                 </div>
                 <Form.Item className="">
                     <div className="flex my-10 w-full justify-center gap-10 ml-56">
-                        <button                                         onClick={handleSave}
- className="hover:scale-110 w-28 shadow-xl relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                        <button
+                            onClick={handleSave}
+                            className="hover:scale-110 w-28 shadow-xl relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                        >
                             <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                             <span className="relative">Add</span>
                         </button>

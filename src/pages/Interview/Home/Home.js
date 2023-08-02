@@ -2,6 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import "./home.scss"
 import data from "../data.json"
+import { connect, useDispatch, useSelector } from "react-redux"
+import { getEventsRequest } from "../../../redux/action/eventActions"
+
 
 import lastestInterviews from "../lastestInterviews.json"
 import {BsCircle} from "react-icons/bs"
@@ -17,7 +20,36 @@ const Home = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [events, setEvents] = useState([]);
     const currentUser = useUser()
-        
+    const [eventTable, setEventTable] = useState([]);
+    const apiUrl = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/event';
+
+    const formatDate = (inputDate) => {
+        const date = new Date(inputDate);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        return `${day}-${month}-${year}`;
+      };
+    
+    
+    const dispatch = useDispatch()
+    const getAllUser = useSelector(state => state.getuser.usernames.data.data)
+    console.log(getAllUser)
+    const fetchData = async () => {
+        try {
+          const response = await axios.get(apiUrl);
+          setEventTable(response.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+    useEffect(() => {
+        // Dispatch action để gọi API và lấy dữ liệu sự kiện
+        fetchData();
+        dispatch(getEventsRequest())
+    }, [dispatch])
+
     function getRandomColor() {
         // const colors = ['green', 'red', 'gray', 'blue', 'purple'];
         // let currentIndex = 0;
@@ -46,19 +78,23 @@ const Home = () => {
  
 
     useEffect(() => {
-        fetchEvents();
+        // fetchEvents();
+        dispatch(getEventsRequest())
+    }, [dispatch]);
+    const event_title = useSelector((state) => state.events)
 
-    }, []);
+    console.log(event_title)
 
-    const fetchEvents = async () => {
-        try {
-          const response = await axios.get('./event.json');
-          const data = response.data;
-          setEvents(data);
-        } catch (error) {
-          console.error('Error fetching events:', error);
-        }
-      };
+    // const fetchEvents = async () => {
+    //     try {
+    //       const response = await axios.get('./event.json');
+    //       const data = response.data;
+    //       setEvents(data);
+    //       console.log(data)
+    //     } catch (error) {
+    //       console.error('Error fetching events:', error);
+    //     }
+    //   };
     
     // const fetchInterviews{
     //     try {
@@ -73,7 +109,7 @@ const Home = () => {
       const getStatusColor = (status) => {
 
         switch (status) {
-          case 'In Progress':
+          case 'INPROCESS':
             return {
                 padding:'6px, 12px, 6px, 12px',
                 textAlign:'center',
@@ -95,11 +131,11 @@ const Home = () => {
                 borderRadius:'30px',
                 fontWeight:'bolder'
                 };
-          case 'Approved':
+          case 'ACCEPT':
             return {
                 padding:'6px, 12px, 6px, 12px',
                 textAlign:'center',
-                color:'#50CD89',
+                color:'rgb(10 181 0)',
                 backgroundColor:'#E8FFF3',
                 border:'none',
                 padding:'8px 6px',
@@ -130,23 +166,38 @@ const Home = () => {
                             <tr style={{ position: 'sticky', position: '-webkit-sticky', backgroundColor: '#FFFFFF',color:'black' }}>
                                 <th>Avatar</th>
                                 <th>Họ và tên</th>
-                                <th>Ngày phỏng vấn</th>
+                                <th>Ngày khởi tạo</th>
                                 <th>Vị trí ứng tuyển</th>
-                                <th>Status</th>
-                                <th>Details</th>
+                                <th>Trạng thái</th>
+                                <th>Chi tiết</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {tableData.map(item => (
+                            {getAllUser.map(item => (
                                 
                                 <tr key={item.id}>
-                                    <td> <img src={item.image} className='ava'/></td>
-                                    <td>
+                                    {/* <td> <img src={item.avt} className='ava'/></td> */}
+                                        <td>
+                                            {item.avt ? (
+                                                <img src={item.avt} className='ava' alt="User Avatar" />
+                                            ) : (
+                                                <img src="https://www.senviet.art/wp-content/uploads/edd/2017/09/fpt.jpg" className='ava' alt="Default Avatar" />
+                                            )}
+                                            </td>
+                                        <td>
                                         <p>{item.name}</p>
                                         <p>{item.email}</p>    
                                     </td>
-                                    <td>{item.date}</td>
-                                    <td>{item.position}</td>
+                                    <td>{formatDate(item.dateRegister)}</td>
+                                    <td>
+                                       <div>
+                                        {item.listJobPosting.map(position => (
+                                            <p>{position.position}</p>
+                                        )
+                                        )}
+                                       </div>
+                                    </td>
+                                    {/* <td>{item.position}</td> */}
                                     <td>
                                         <div style={getStatusColor(item.status)}>
                                             {item.status}
@@ -154,7 +205,7 @@ const Home = () => {
                                     </td>
                                     
                                     
-                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`/${item.id}`}>Edit</Link></button></td>
+                                    <td><button className='button-edit' style={{ border: '1px solid #00A3FF'}}><Link style={{textDecoration:'none', color:'black'}} to={`../managecandidate/${item.id}`}>View</Link></button></td>
                                 </tr>
                                 
                             ))}
@@ -164,20 +215,27 @@ const Home = () => {
                                 
                     <div className='event'>
                         {/* <BsCircle style={{color:'blue'}}/> */}
-                        <h2>Các sự kiện sắp tới của công ty</h2>
+                        <h2 style={{fontSize:'20px'}}>Các sự kiện của công ty</h2>
                         <div className='event-list'>
-                                <Timeline style={{marginTop:'5px'}}
-                                    items={event.map((event) => ({
-                                        color:getRandomColor(),
+                        <Timeline style={{ marginTop: '5px', marginLeft: '20px' }}
+                            items={eventTable.map((event) => {
+                                // Kiểm tra điều kiện event.status === true
+                                if (event.status === true) {
+                                    return {
+                                        color: getRandomColor(),
                                         children: (
                                             <>
-                                                <p>{event.name}</p>
-                                                <p>{event.date}</p>
+                                                <p>{event.title}</p>
+                                                <p>{formatDate(event.time)}</p>
                                             </>
                                         ),
-                                    }))}
-                                />
-                        </div>
+                                    };
+                                }
+                                // Nếu event.status === false hoặc không có status, không tạo item cho Timeline
+                                return null;
+                            })}
+                        />
+                    </div>
                         
                        
                         {/* <div className='event-list'>
