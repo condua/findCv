@@ -182,10 +182,10 @@ function Cv({ cvref }) {
 		<div style = {{width: "80%", marginLeft: "10%", marginRight: "10%", marginBottom: "20px"}}>
 			<Container style = {{width: "100%"}}>
 				<Row>
-				<Col xs={2} className="sidebar" >
-					<CVSelect/>
-				</Col>
-				<Col xs = {10}>
+				<Col className="sidebar" style = {{height:"200px",width: "14%", marginRight: "1%"}}>
+            		<CVSelect/>
+          		</Col>
+				  <Col xs = {10} className = "newmain" style = {{width: "85%", backgroundColor: "white"}}>
 		<div className='cv' ref = {pagesPDF} style = {{backgroundImage: "url('https://cv.fullstack.edu.vn/backgrounds/graph-dot-top-458966.svg')"}}>
 			<div className='page' ref={cvref}>
 				<div>

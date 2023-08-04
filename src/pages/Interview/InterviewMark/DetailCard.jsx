@@ -5,23 +5,22 @@ import { useState } from "react";
 const DetailCard = ({ dataInterviewDetail, id }) => {
 
 
-    const getObjectByDetailID = (dataInterviewDetail, id) => {
-        return dataInterviewDetail.find(item => item.detailID === id);
+    const getInforCandidate = (dataInterviewDetail, id) => {
+        return dataInterviewDetail.find(item => item.itemId == id);
     };
 
-    const data = getObjectByDetailID(dataInterviewDetail, id);
+    const data = getInforCandidate(dataInterviewDetail, id);
 
-
+    // console.log("dataCandidate", dataInterviewDetail)
 
     return (
 
-        < div className='bg-white w-1/4 h-[240px] rounded-xl' style={{marginTop: 10}} >
+        < div className='bg-white w-1/4 h-[240px] rounded-xl' style={{ marginTop: 10 }} >
             <Avatar
-                src={data.avatar}
+                // src={data.avatar}
                 style={{ width: 50, height: 50, position: 'relative', left: '42%', top: '5%' }}
             />
             <div style={{ fontWeight: 500, fontSize: 19, paddingTop: '4%', paddingLeft: '0%', textAlign: 'center' }}>{data.name}</div>
-            <div style={{ fontWeight: 300, fontSize: 16, paddingLeft: '1%', textAlign: 'center' }}>{data.position}</div>
             <div style={{ paddingTop: '4%', paddingLeft: '10%', fontSize: 15 }}>
                 <label style={{ paddingRight: 95 }}>Kỹ năng</label>
                 <label>Kinh nghiệm</label>
@@ -34,7 +33,12 @@ const DetailCard = ({ dataInterviewDetail, id }) => {
                 <label>{data.experience}</label>
             </div>
 
-            <div style={{textAlign: 'center'}}>
+            <div style={{ textAlign: 'center'}}>
+                <label style={{ fontWeight: 500 }}>Thời gian:</label>
+                <label style={{ fontWeight: 400, paddingLeft: 10 }}>{data.date} ({data.time})</label>
+            </div>
+
+            <div style={{ textAlign: 'center', paddingTop: 10 }}>
                 <label
                     style={{
                         height: 26,

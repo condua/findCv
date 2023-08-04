@@ -34,33 +34,20 @@
 }
 .Blacklist-search-container-blacklist{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-.Blacklist-form-blacklist{
-    width: 40%;
 }
 .Blacklist-form-search-blacklist{
-    width: 100%;
+    width: 60%;
     height: 40px;
     border-radius: 10px;
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     padding: 0px 15px;
-    font-weight: bold;
-    color: grey;
     
 }
-.Blacklist-select-date, .Blacklist-select-position{
-    width: 28%;
-    border-radius: 10px;
-    height: 40px;
-    font-size: 16px;
-    padding: 0px 15px;
-    font-weight: bold;
-    color: grey;
+.Blacklist-form-blacklist{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 
@@ -102,7 +89,7 @@
 .Blacklist-name-candidate{
     width: 30%;
 }
-.Blacklist-permission-candidate, .Blacklist-date-register-candidate, .Blacklist-position, .Blacklist-status{
+.Blacklist-permission-candidate, .Blacklist-status, .Blacklist-date-register-candidate , .Blacklist-position{
     width: 15%;
 }
 .Blacklist-details-candidate{
@@ -140,12 +127,13 @@
 .Blacklist-email-detail{
     color: grey;
 }
- .Blacklist-permission-content-candidate, .Blacklist-date-register-content-candidate, .Blacklist-position-content, .Blacklist-status-content{
+ .Blacklist-permission-content-candidate, .Blacklist-status-content, .Blacklist-date-register-content-candidate, .Blacklist-position-content{
     width: 15%;
     display: flex;
     align-items: center;
     font-weight: bold;
 }
+
 .Blacklist-details-content-candidate{
     width: 10%;
     display: flex;
@@ -182,4 +170,8 @@
     color: #A1A5B7;
     padding: 7px;
     cursor: pointer;
+}
+.Blacklist-position-column{
+    display: flex;
+    flex-direction: column;
 }

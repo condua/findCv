@@ -28,17 +28,17 @@ const InterviewDashboard = ({ dataInterviewDashboard }) => {
                     <div className='flex w-1/2 flex-col'>
                         <div className='flex gap-3 h-[40px] flex-row' style={{ paddingTop: '20%', paddingLeft: '20%' }}>
                             In Process
-                            <Card style={{ backgroundColor: '#0088FE', height: 20, width: 30, marginLeft: 6 }} />
+                            <Card style={{ backgroundColor: '#0088FE', height: 20, width: 20, marginLeft: 2 }} />
                             <label style={{}}>{dataInterviewDashboard.totalInterview[1]}</label>
                         </div>
                         <div className='flex gap-3 h-[40px]' style={{ paddingTop: '20%', paddingLeft: '20%' }}>
                             Completed
-                            <Card style={{ backgroundColor: '#00C49F', height: 20, width: 30 }} />
+                            <Card style={{ backgroundColor: '#00C49F', height: 20, width: 20 }} />
                             <label style={{}}>{dataInterviewDashboard.totalInterview[2]}</label>
                         </div>
                         <div className='flex gap-3 h-[40px]' style={{ paddingTop: '20%', paddingLeft: '20%' }}>
                             Yet to start
-                            <Card style={{ backgroundColor: '#cecece', height: 20, width: 30, marginLeft: 1 }} />
+                            <Card style={{ backgroundColor: '#cecece', height: 20, width: 20, marginLeft: 1 }} />
                             <label style={{}}>{dataInterviewDashboard.totalInterview[3]}</label>
                         </div>
                     </div>

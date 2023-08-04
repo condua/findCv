@@ -1,23 +1,65 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import DataCard from "../../components/DataCard"
+import React from "react";
+import { Link } from "react-router-dom";
+import { EnvironmentTwoTone } from "@ant-design/icons";
 
-import {
-    EnvironmentTwoTone,
-    EditOutlined,
-    EnterOutlined,
-    StopOutlined,
-} from "@ant-design/icons"
+const positions = [
+    {
+        title: "Intern ReactJS",
+        location: "Hồ Chí Minh",
+        salary: "3tr-5tr",
+        url: "/manage-candidate/InternReactJS",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+    {
+        title: "Fresher ReactJS",
+        location: "Hồ Chí Minh",
+        salary: "7tr-9tr",
+        url: "/manage-candidate/FresherReactJS",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+    {
+        title: "Junior ReactJS",
+        location: "Hồ Chí Minh",
+        salary: "12tr-15tr",
+        url: "/manage-candidate/JuniorReactJS",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+    {
+        title: "Intern Java",
+        location: "Hồ Chí Minh",
+        salary: "3tr-5tr",
+        url: "/manage-candidate/InternJava",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+    {
+        title: "Fresher Java",
+        location: "Hồ Chí Minh",
+        salary: "7tr-10tr",
+        url: "/manage-candidate/FresherJava",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+    {
+        title: "Junior Java",
+        location: "Hồ Chí Minh",
+        salary: "12tr-14tr",
+        url: "/manage-candidate/JuniorJava",
+        imageSrc:
+            "https://logowik.com/content/uploads/images/react7473.logowik.com.webp",
+    },
+];
 
 const Result = () => {
     return (
         <div>
-            {" "}
             <div className="flex w-full absolute right-[1px] mt-[-70px] bg-white h-16 rounded-xl items-center">
                 <div className="ml-10 font-serif text-xl text">Recruitment</div>
             </div>
             <div className="flex flex-col h-full w-full">
-                <DataCard />
                 <div className="flex justify-between my-8">
                     <div className="flex max-w-lg w-96 items-center justify-center">
                         <div className=" flex w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
@@ -48,122 +90,43 @@ const Result = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-y-8 gap-x-4 ">
-                    <Link to={`/manage-candidate/ReactJS`}>
-                        <div className="flex w-full h-36 bg-white rounded-xl shadow-xl hover:scale-105 transition-all ease-in-out duration-200">
-                            <div className="flex justify-center w-2/5">
-                                <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
-                                    <img
-                                        alt="cava"
-                                        className="w-full h-full object-cover"
-                                        src="https://logowik.com/content/uploads/images/react7473.logowik.com.webp"
-                                    ></img>
+                    {positions.map((position, index) => (
+                        <Link key={index} to={position.url}>
+                            <div className="flex w-full h-36 bg-white rounded-xl shadow-xl hover:scale-105 transition-all ease-in-out duration-200">
+                                <div className="flex justify-center w-2/5">
+                                    <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
+                                        <img
+                                            alt="cava"
+                                            className="w-full h-full object-cover"
+                                            src={position.imageSrc}
+                                        ></img>
+                                    </div>
+                                </div>
+                                <div className="flex w-full">
+                                    <div className="flex flex-col w-full p-3">
+                                        <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
+                                            {position.title}
+                                        </div>
+                                        <div className="flex my-3 text-sm text-lime-600 font-mono font-medium">
+                                            <EnvironmentTwoTone
+                                                twoToneColor="#52c41a"
+                                                className="mx-1"
+                                            />{" "}
+                                            {position.location}
+                                        </div>
+                                    </div>
+                                    <div className="flex w-5/12 my-5 font-mono font-bold text-lime-700">
+                                        {position.salary}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex w-full">
-                                <div className="flex flex-col w-full p-3">
-                                    <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
-                                        Nhân viên kinh doanh
-                                    </div>
-                                    <div className="flex text-sm my-1 ">
-                                        Position: Intern
-                                    </div>
-                                    <div className="flex  text-sm">
-                                        Language: ReactJS
-                                    </div>
-                                    <div className="flex my-3 text-sm text-lime-600 font-mono font-medium">
-                                        <EnvironmentTwoTone
-                                            twoToneColor="#52c41a"
-                                            className="mx-1"
-                                        />{" "}
-                                        Hồ Chí Minh
-                                    </div>
-                                </div>
-                                <div className="flex w-5/12 my-5 font-mono font-bold text-lime-700">
-                                    3tr-5tr
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={`/manage-candidate/VueJS`}>
-                        <div className="flex w-full h-36 bg-white rounded-xl shadow-xl hover:scale-105 transition-all ease-in-out duration-200">
-                            <div className="flex justify-center w-2/5">
-                                <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
-                                    <img
-                                        alt="cava"
-                                        className="w-full h-full object-cover"
-                                        src="https://logowik.com/content/uploads/images/react7473.logowik.com.webp"
-                                    ></img>
-                                </div>
-                            </div>
-                            <div className="flex w-full">
-                                <div className="flex flex-col w-full p-3">
-                                    <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
-                                        Nhân viên kinh doanh
-                                    </div>
-                                    <div className="flex text-sm my-1 ">
-                                        Position: Intern
-                                    </div>
-                                    <div className="flex  text-sm">
-                                        Language: VueJS
-                                    </div>
-                                    <div className="flex my-3 text-sm text-lime-600 font-mono font-medium">
-                                        <EnvironmentTwoTone
-                                            twoToneColor="#52c41a"
-                                            className="mx-1"
-                                        />{" "}
-                                        Hồ Chí Minh
-                                    </div>
-                                </div>
-                                <div className="flex w-5/12 my-5 font-mono font-bold text-lime-700">
-                                    3tr-5tr
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-
-                    <Link to={`/manage-candidate/Java`}>
-                        <div className="flex w-full h-36 bg-white rounded-xl shadow-xl hover:scale-105 transition-all ease-in-out duration-200">
-                            <div className="flex justify-center w-2/5">
-                                <div className="justify-center p-8 items-center bg-center bg-contain cursor-pointer">
-                                    <img
-                                        alt="cava"
-                                        className="w-full h-full object-cover"
-                                        src="https://logowik.com/content/uploads/images/react7473.logowik.com.webp"
-                                    ></img>
-                                </div>
-                            </div>
-                            <div className="flex w-full">
-                                <div className="flex flex-col w-full p-3">
-                                    <div className="flex text-lg font-sans cursor-pointer w-fit font-medium ">
-                                        Nhân viên kinh doanh
-                                    </div>
-                                    <div className="flex text-sm my-1 ">
-                                        Position: Intern
-                                    </div>
-                                    <div className="flex  text-sm">
-                                        Language: Java
-                                    </div>
-                                    <div className="flex my-3 text-sm text-lime-600 font-mono font-medium">
-                                        <EnvironmentTwoTone
-                                            twoToneColor="#52c41a"
-                                            className="mx-1"
-                                        />{" "}
-                                        Hồ Chí Minh
-                                    </div>
-                                </div>
-                                <div className="flex w-5/12 my-5 font-mono font-bold text-lime-700">
-                                    3tr-5tr
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Result
+export default Result;
+

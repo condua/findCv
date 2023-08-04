@@ -1,21 +1,43 @@
-.item {
+.selectoption {
+  height: 200px;
+  .link-row {
+    margin-bottom: 10px;
+  }
+
+  .item {
     display: flex;
     align-items: center;
-    padding: 10px;
+    justify-content: center;
+    padding: 8px;
     color: #333;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 160px;
   }
-  
-  .item:hover {
-    color: #28a745;
-  }
-  
+
   .item i {
-    margin-right: 5px;
+    margin-right: 8px;
   }
-  
-  .text-success {
-    color: #28a745 !important;
+
+  .item:hover {
+    background-color: #f0f0f0;
   }
-  
+
+  .active {
+    background-color: #f0f0f0;
+  }
+}
+
+/* CSS for the sticky container */
+.cv-select {
+  position: sticky;
+  top: 70px; /* Adjust the value according to the height of your header */
+  z-index: 1; /* To make sure the sticky container appears above other content */
+}
+
+/* Adjust the position when scrolled */
+.scrolled .cv-select {
+  top: 20px; /* Change the value as per your requirement */
+}

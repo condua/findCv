@@ -4,7 +4,7 @@ import "./Edit.scss"
 // import data from '../data.json';
 import TextArea from 'antd/es/input/TextArea';
 import { useSelector } from 'react-redux';
-
+import { Spin } from 'antd';
 const Edit = () => {
   const history = useNavigate();
   const { id } = useParams();
@@ -26,8 +26,48 @@ const Edit = () => {
 
   const [accountLink,setAccountLink] = useState(false)
   const [notifycation,setNotifycation] = useState(false)
+  const [userData, setUserData] = useState("");
 
   const [checked, setChecked] = useState(true)
+
+  const accessToken = useSelector(state => state.auth.accessToken)
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+  };
+  const fetchUserData = async () => {
+    setUserData("")
+    try {
+      const response = await fetch(`https://qltd01.cfapps.us10-001.hana.ondemand.com/user/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        // Handle error if the API call fails
+        console.error("Error fetching user data:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      // Handle the retrieved user data here
+      setUserData(data.data.cv_pdf);
+    } catch (error) {
+      // Handle errors if the API call fails
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  // Fetch user data when the component mounts
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const handleClickAccountLink = () =>{
     setAccountLink(true)
@@ -73,7 +113,7 @@ const Edit = () => {
                 </div>
                 <div className='info-item'>
                     <p>Ngày khởi tạo</p>
-                    <input type='text' placeholder={event.dateRegister} disabled/>
+                    <input type='text' placeholder={formatDate(event.dateRegister)} disabled/>
                 </div>
                 <div className='info-item'>
                     <p>Xác thực tài khoản</p>
@@ -81,12 +121,26 @@ const Edit = () => {
                 </div>
 
                 <div className='info-item'>
+                    <p>Kĩ năng</p>
+                    <input type='text' placeholder={event.skill} disabled/>
+                </div>
+                <div className='info-item'>
                     <p>Kinh nghiệm làm việc</p>
                     <input type='text' placeholder={event.experience} disabled/>
                 </div>
                 <div className='info-item'>
                     <p>Status</p>
                     <input type='text' placeholder={event.username} disabled/>
+                </div>
+                <div className='info-item'>
+                    <p>Thông tin Cv</p>
+                    {
+                      userData === "" ? <input type='text' placeholder="" disabled/>
+                      : userData
+                      ? <input style={{cursor:'pointer'}} type='text' placeholder='Nhấn vào đây để xem' onClick={() => window.open(userData, '_blank')} className='link-input' readOnly />               
+                      : <input type='text' placeholder="Không có" disabled/>
+                    }
+                    {/* <input style={{cursor:'pointer'}} type='text' placeholder='Click to view CV' onClick={() => window.open(userData, '_blank')} className='link-input' readOnly />                 */}
                 </div>
                 <div className='info-item'>
                     <p>Địa chỉ</p>
@@ -101,13 +155,13 @@ const Edit = () => {
 
                 <div className='save-item'>
 
-                    <div className='save-item-left'>
+                    {/* <div className='save-item-left'>
                         <button className='account-link' onClick={handleClickAccountLink}>Liên kết tài khoản</button>
                         <button className='notifycation' onClick={handleNotifycation}>Thông báo</button>
 
                     </div>
                     <button className='button-save'>Lưu thay đổi</button>
-                    <button className='button-close'>Hủy</button>
+                    <button className='button-close'>Hủy</button> */}
                     
                     {accountLink === true && (
                       <div className='account-link-form'>

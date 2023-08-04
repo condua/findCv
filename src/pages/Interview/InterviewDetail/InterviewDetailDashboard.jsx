@@ -1,57 +1,112 @@
 import { Avatar } from "antd"
+import { useState } from "react";
 // import { useNavigate } from "react-router-dom"
 
 
 const InterviewDetailDashboard = ({ dataDashboardDetail }) => {
 
+
     return (
-        <div className='bg-white w-full h-[250px] rounded-xl flex-col'>
-            <div style={{ fontWeight: 500, fontSize: 30, paddingLeft: '13%', paddingTop: '2%' }}>{dataDashboardDetail.roomName}</div>
-            <button
-                type="button" disabled
-                style={{
-                    color: '#2b7afa',                      // đổi theo Status
-                    backgroundColor: 'rgb(178 218 250)',   // đổi theo Status
-                    borderRadius: 5,
-                    fontWeight: 500,
-                    fontSize: 17,
-                    padding: '5px 10px',
-                    width: 140,
-                    position: 'relative',
-                    left: 850,
-                    top: -35,
-                }}
-            >
-                {dataDashboardDetail.status}
-            </button>
-            <div style={{ position: 'relative', top: -20, fontWeight: 400, fontSize: 25, paddingLeft: '13%' }}>{dataDashboardDetail.roomDescription}</div>
-            <div style={{ fontWeight: 500, fontSize: 18, paddingLeft: '13%' }}>
-                <span>Ngày bắt đầu</span>
-                <span style={{ paddingLeft: '13%' }}>Số người tham gia</span>
+        <div className='bg-white w-full rounded-xl flex-col'>
+            <div className="flex flex-row justify-between mx-40 mt-10 mb-0 w-3/4 ">
+                <div className="flex " style={{ fontWeight: 500, fontSize: 30 }}>{dataDashboardDetail.roomName}</div>
+                <div className="flex w-1/1.5">
+                    <button
+                        type="button" disabled
+                        style={{
+                            backgroundColor:
+                                dataDashboardDetail.status === 'In Process' ? '#0088FE'
+                                    : dataDashboardDetail.status === 'Completed' ? '#00C49F' : '#cecece',
+                            color:
+                                dataDashboardDetail.status === 'In Process' ? '#ffffff'
+                                    : dataDashboardDetail.status === 'Completed' ? '#ffffff' : 'black',
+                            borderRadius: 5,
+                            fontWeight: 500,
+                            fontSize: 19,
+                            padding: '5px 10px',
+                            width: 140,
+                        }}
+                    >
+                        {dataDashboardDetail.status}
+                    </button>
+                </div>
             </div>
 
-            <div style={{ fontWeight: 400, fontSize: 18, paddingLeft: '13%', paddingTop: '0.5%' }}>
-                <span>Sep 6, 2023</span>
-                <span style={{ paddingLeft: '15%' }}>9</span>
+            <div className="mx-40" style={{ fontSize: 20, fontWeight: 300 }}>{dataDashboardDetail.roomSkill}</div>
+
+            <div className='flex mx-40 mt-2 ' style={{ fontSize: 18 }}>
+                <div>
+                    <span style={{ fontWeight: 400, paddingRight: 5 }}>Ngày bắt đầu:</span>
+                    <span style={{ fontWeight: 300 }}>{dataDashboardDetail.startDate}</span>
+                </div>
+
+                <div style={{ paddingLeft: 223 }}>
+                    <span style={{ fontWeight: 400, paddingRight: 5 }}>Ngày kết thúc:</span>
+                    <span style={{ fontWeight: 300 }}>{dataDashboardDetail.endDate}</span>
+                </div>
             </div>
 
-            <div style={{ position: 'relative', left: '60%', top: -55, width: 100 }}>
-                <Avatar.Group
-                    maxCount={7}
-                    size="large"
-                    maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', fontWeight: 500 }}
-                >
-                    {dataDashboardDetail.listParticipant.map((participant, index) => (
-                        <Avatar key={index} src={participant.urlAvatar} />
-                    ))}
-                </Avatar.Group>
+            <div className="flex mt-4">
+                <div>
+                    <div className="mx-40" style={{ fontWeight: 400, fontSize: 18 }}>
+                        <span>Số người phỏng vấn:</span>
+                        <span style={{ fontWeight: 300, paddingLeft: 5 }}>{dataDashboardDetail.listInterviewer.length} người</span>
+                    </div>
+
+                    <div className="mx-40 mt-2" style={{}}>
+                        <Avatar.Group
+                            maxCount={7}
+                            size="large"
+                            maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', fontWeight: 500 }}
+                        >
+                            {dataDashboardDetail.listInterviewer.map((participant, index) => (
+                                <Avatar
+                                    className="hover:relative hover:z-10"
+                                    key={index}
+                                    src={participant.avatar}
+                                    style={{
+                                        transition: 'transform 0.2s', // Thêm hiệu ứng transition
+                                        margin: 0,
+
+                                    }}
+                                    onMouseOver={(e) => {
+                                        e.currentTarget.style.transform = 'scale(2.5)'; // Phóng to avatar khi hover vào
+                                    }}
+                                    onMouseOut={(e) => {
+                                        e.currentTarget.style.transform = 'scale(1)'; // Khôi phục kích thước ban đầu khi rê chuột ra khỏi avatar
+                                    }}
+                                />
+                            ))}
+                        </Avatar.Group>
+                    </div>
+                </div>
+
+                <div className="mx-10">
+                    <div style={{ fontWeight: 400, fontSize: 18 }}>
+                        <span>Số ứng viên phỏng vấn:</span>
+                        <span style={{ fontWeight: 300, paddingLeft: 5 }}>{dataDashboardDetail.listCandidate.length} người</span>
+                    </div>
+
+                    <div className=" mt-2 ">
+                        <Avatar.Group
+                            maxCount={7}
+                            size="large"
+                            maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', fontWeight: 500 }}
+                        >
+                            {dataDashboardDetail.listCandidate.map((participant, index) => (
+                                <Avatar key={index} src={participant.avatar} />
+                            ))}
+                        </Avatar.Group>
+                    </div>
+                </div>
             </div>
-            <div style={{ position: 'relative', bottom: 38, paddingLeft: '13%', fontSize: 18 }}>
+
+            <div className="mx-40 mt-2 mb-10" style={{ fontSize: 18 }}>
                 <span style={{ fontWeight: 500, paddingRight: 30 }}>
                     Meeting link:
                 </span>
-                <a href="https://meet.google.com/?pli=1" target="_blank" rel="noreferrer">
-                    https://meet.google.com/?pli=1
+                <a href={dataDashboardDetail.link} target="_blank" rel="noreferrer">
+                    {dataDashboardDetail.link}
                 </a>
             </div>
         </div >

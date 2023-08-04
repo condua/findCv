@@ -21,45 +21,49 @@ const token = localStorage.getItem("token")
 
 
 const items_admin = [
-    { key: "/interviewer", icon: <HomeOutlined />, label: "Home" },
-    { type: "divider" },
-    { key: "/event", icon: <FireOutlined />, label: "Event" },
-    { key: "/managecandidate", icon: <VideoCameraOutlined />, label: "Candidates Management" },
-
-    { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
-
-    { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
-    { key: "/room", icon: <FileSearchOutlined />, label: "Room" },
-
-    { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
     { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
+    { type: "divider" },
+
     { key: "/manage-user", icon: <FileSearchOutlined />, label: "Manage User" },
     { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },
     { key: "/result", icon: <FileSearchOutlined />, label: "Result" },
+    { type: "divider" },
+
+
+
+    { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruitment" },
+    { key: "/room", icon: <FileSearchOutlined />, label: "Room" },
+    { key: "/event", icon: <FireOutlined />, label: "Event" },
+    { type: "divider" },
+
+
+
+    { key: "/interviewer", icon: <HomeOutlined />, label: "Interviewer" },
+    { key: "/managecandidate", icon: <VideoCameraOutlined />, label: "Candidates Management" },
+    { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
     { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },
+    { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
 ]
 
 const items_interviwer = [
-    { key: "/interviewer", icon: <HomeOutlined />, label: "Home" },
+    { key: "/interviewer", icon: <HomeOutlined />, label: "Home Interviewer" },
     { type: "divider" },
     // { key: "/event", icon: <FireOutlined />, label: "Event" },
+
     { key: "/managecandidate", icon: <VideoCameraOutlined />, label: "Candidates Management" },
 
     { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
-
-    { key: "/event", icon: <FileSearchOutlined />, label: "Event" },
+    { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },
+    { key: "/interviewercalendar", icon: <FileSearchOutlined />, label: "InterviewerCalendar" },
 
 ]
 
 const items_recruiter = [
-    { key: "/recruitment", icon: <HomeOutlined />, label: "Home" },
+    { key: "/recruitment", icon: <FileSearchOutlined />, label: "Recruiment" },
     { type: "divider" },
-    
-    // { key: "/dashboard", icon: <FileSearchOutlined />, label: "Dashboard" },
+    { key: "/event", icon: <FireOutlined />, label: "Event" },
+    { key: "/interviewmain", icon: <VideoCameraOutlined />, label: "Interview" },
     { key: "/room", icon: <FileSearchOutlined />, label: "Room" },
-    { key: "/blacklist", icon: <FileSearchOutlined />, label: "Blacklist" },
-    { key: "/result", icon: <FileSearchOutlined />, label: "Result" },
-    { key: "/questions", icon: <FileSearchOutlined />, label: "Question" },
 ]
 
 const IRALayout = ({ collapsed, SetCollapsed, children }) => {

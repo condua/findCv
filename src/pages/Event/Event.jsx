@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {
@@ -6,12 +6,14 @@ import {
     StopOutlined,
     CalendarOutlined,
     UserOutlined,
+    LoadingOutlined
 } from "@ant-design/icons"
 import { getEventsRequest } from "../../redux/action/eventActions"
 import DataCard from "../../components/DataCard"
 import { useEffect } from "react"
 import format from "date-fns/format"
 import axios from "axios"
+import { Modal, Popconfirm, Result, message } from "antd"
 
 const Event = () => {
     const dispatch = useDispatch()
@@ -36,10 +38,17 @@ const Event = () => {
                 }
             )
 
+            message.success("Xoá event thành công")
             dispatch(getEventsRequest())
         } catch (error) {
             console.error("Error while deleting event:", error)
         }
+    }
+
+    const sortedEvents = events.slice().sort((a, b) => b.id - a.id);
+
+    if (!events) {
+        return <Result icon={<LoadingOutlined />} title="Please wait a sec..." />
     }
 
     return (
@@ -87,7 +96,7 @@ const Event = () => {
                     </Link>
                 </div>
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-y-8 gap-x-12">
-                    {events.map((event) =>
+                    {sortedEvents.map((event) =>
                         event.status ? (
                             <div
                                 key={event.id}
@@ -135,12 +144,30 @@ const Event = () => {
                                         >
                                             <EditOutlined className="text-xl" />
                                         </Link>
-                                        <StopOutlined
-                                            onClick={() =>
+                                        <Popconfirm
+                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl transition-all duration-300 hover:scale-125 hover:text-red-600"
+                                            title="Delete this event"
+                                            description="Are you sure to delete this event?"
+                                            onConfirm={() =>
                                                 handleDeleteEvent(event.id)
                                             }
-                                            className="flex flex-1 items-center justify-center mt-5 cursor-pointer text-xl transition-all duration-300 hover:scale-125 hover:text-red-600"
-                                        />
+                                            // onCancel={cancel}
+                                            okText="Yes"
+                                            okType="danger"
+                                            showCancel={false}
+                                            okButtonProps={{
+                                                style: {
+                                                    backgroundColor: "red",
+                                                    color: "white",
+                                                },
+                                            }}
+                                        >
+                                            <StopOutlined
+                                            // onClick={() =>
+                                            //     handleDeleteEvent(event.id)
+                                            // }
+                                            />{" "}
+                                        </Popconfirm>
                                     </div>
                                 </div>
                             </div>

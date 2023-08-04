@@ -8,6 +8,7 @@ import {FETCH_USERNAMES, fetchUsernamesSuccess, fetchUsernamesFailure } from '..
 import { GET_PROFILE_REQUEST,UPDATE_PROFILE_REQUEST, getProfileSuccess, getProfileFailure,updateProfileFailure,updateProfileSuccess } from '../action/profileActions';
 import { UPLOAD_AVATAR_REQUEST, uploadAvatarSuccess, uploadAvatarFailure } from '../action/uploadAvatarActions';
 import { GET_EVENTS_REQUEST, } from '../action/eventActions';
+import { APPLY_JOB_REQUEST, applyJobSuccess, applyJobFailure } from '../action/applyJobActions';
 
 import { Button, message } from 'antd';
 import { Navigate } from 'react-router-dom';
@@ -19,6 +20,9 @@ import {
   updateUserSuccess,
   updateUserFailure,
 } from '../action/userAction';
+
+import questionSaga from './questionSaga';
+import interviewSaga from './interviewSaga';
 
 
 
@@ -248,6 +252,38 @@ return axios.put('https://qltd01.cfapps.us10-001.hana.ondemand.com/profile', upd
   },
 });
 }
+function* applyJob(action) {
+  try {
+    console.log("RUNNING HERE TO APPLY")
+    const { accessToken, jobId } = action.payload;
+    // Thực hiện phương thức POST tới API
+    console.log("DATA TO APPLY",action.payload)
+    console.log("CALL", yield call(applyJobApi, accessToken, jobId));
+    const response = yield call(applyJobApi, accessToken, jobId);
+    console.log("PHAN HOI",response)
+    // Xử lý kết quả phản hồi
+    if (response.status === 200) {
+      yield put(applyJobSuccess());
+      // Điều hướng tới trang "/cvhandler" sau khi thực hiện thành công
+      console.log("POST SUCCESS");
+    } else {
+      yield put(applyJobFailure('Failed to apply job'));
+    }
+  } catch (error) {
+    console.error('Error applying job:', error);
+    yield put(applyJobFailure('Failed to apply job'));
+  }
+}
+
+function applyJobApi(accessToken, jobId) {
+  console.log("SAGAS: ", accessToken, jobId);
+  return axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/apply-job',  jobId , {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+}
 
 export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
@@ -259,8 +295,12 @@ export default function* rootSaga() {
   yield takeLatest(UPLOAD_AVATAR_REQUEST, uploadAvatar);
   yield takeLatest(UPDATE_PROFILE_REQUEST, updateProfile);
 
+  yield takeLatest(APPLY_JOB_REQUEST, applyJob);
+
   yield all([
     eventSaga(),
+    questionSaga(),
+    interviewSaga(),
     jobSaga(), 
   ]);
 

@@ -14,6 +14,9 @@ import {
   deleteJobSuccess,
   deleteJobFailure,
   DELETE_JOB_REQUEST,
+  GET_JOBDETAIL_REQUEST,
+  getJobDetailSuccess,
+  getJobDetailFailure,
   
 } from '../action/jobActions';
 
@@ -108,6 +111,25 @@ function deleteJobApi(jobId, accessToken) {
 }
 
 
+function* getJobDetail(action) {
+  try {
+    const jobId = action.payload;
+    const response = yield call(getJobDetailApi, jobId);
+    console.log(response)
+    yield put(getJobDetailSuccess(response.data.data)); 
+  } catch (error) {
+    yield put(getJobDetailFailure(error));
+  }
+}
+
+
+function getJobDetailApi(jobId) {
+  return axios.get(`https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting/${jobId}`);
+}
+
+
+
+
 
 
 export default function* jobSaga() {
@@ -115,4 +137,5 @@ export default function* jobSaga() {
   yield takeLatest(CREATE_JOB_REQUEST, createJob);
   yield takeLatest(UPDATE_JOB_REQUEST, updateJob);
   yield takeLatest(DELETE_JOB_REQUEST, deleteJob);
+  yield takeLatest(GET_JOBDETAIL_REQUEST, getJobDetail);
 }

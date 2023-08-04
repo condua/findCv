@@ -7,10 +7,46 @@ import {
 import { LOGIN_SUCCESS } from '../action/authActions';
 
   const initialState = {
-    usernames: [],
-    loading: false,
+    usernames: 
+      {
+        data: {
+          data: 
+            [{ id: null, 
+              name: null,
+              email:null,
+              permission:null,
+              dateRegister: null,
+              dateBlacklist: null,
+              accountStatus: null,
+              listInterview:[
+                {
+                  dateInterview:null,
+                  position:null,
+                  averageScore:null
+                }
+               
+              ],
+              avt:null,
+              username:null,
+              phone:null,
+              address:null,
+              status:null,
+              skill:null,
+              experience:null,
+              listJobPosting:[
+                {
+                  name:null,
+                  position:null,
+                }
+              ]
+            },
+          ],
+        },
+      },
+  
+    loading: true,
     error: null,
-    accessToken:null,
+    accessToken: null,
   };
   
 const getUserReducer = (state = initialState, action) => {

@@ -4,12 +4,108 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import user from '../user'
-import { Switch, Space } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactDOM from 'react-dom';
+import { Modal, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { format } from 'date-fns';
+
+
+const ToggleButton = ({ accountStatus, onClick }) => {
+    const [showConfirmation, setShowConfirmation] = useState(false);
+
+    const handleToggle = () => {
+        if (accountStatus === 'ACTIVE' || accountStatus === 'BANNED') {
+            setShowConfirmation(true);
+        } else {
+            onClick();
+        }
+    };
+
+    const handleCloseConfirmation = () => {
+        setShowConfirmation(false);
+    };
+
+    const handleConfirm = () => {
+        onClick(accountStatus); // Pass the current status to handleBanUser
+        setShowConfirmation(false);
+    };
+
+    let buttonClass = 'Manage-user-enable-button';
+
+    if (accountStatus === 'ACTIVE') {
+        buttonClass += ' active-button-color';
+    } else if (accountStatus === 'UNAUTHENTICATED') {
+        buttonClass += ' unauthen-button-color';
+    } else {
+        buttonClass += ' banned-button-color';
+    }
+
+    return (
+        <>
+            <button className={buttonClass} onClick={handleToggle}>
+                {accountStatus}
+            </button>
+
+            {showConfirmation && (
+                <Modal show={showConfirmation} onHide={handleCloseConfirmation}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmation</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to {accountStatus === 'ACTIVE' ? 'ban' : 'activate'} this user?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseConfirmation}>
+                            Cancel
+                        </Button>
+                        <Button variant="danger" onClick={handleConfirm}>
+                            {accountStatus === 'ACTIVE' ? 'Ban User' : 'Activate User'}
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
+        </>
+    );
+};
+
+
 
 
 
 const ManageUser = () => {
+    const userApi = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/user'
+    const [getUser, setGetUser] = useState({
+        status: "OK",
+        message: "Success !",
+        data: [
+
+        ]
+    });
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    const accessToken = useSelector(state => state.auth.accessToken)
+
+    const fetchUser = async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+            const response = await axios.get(userApi, { headers });
+            setGetUser(response.data);
+            console.log(response.data)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const userss = getUser.data;
+    console.log('12345', userss);
+    const altavatar = 'https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg';
+
+    const [users, setUsers] = useState(userss);
+
     useEffect(() => {
         setDefaultActiveTab();
     }, []);
@@ -38,10 +134,10 @@ const ManageUser = () => {
     const [initialSearchValue, setInitialSearchValue] = useState('');
     const ROWS_PER_PAGE = 10;
 
-
-    const recerUsers = user.filter(item => item.permission === "RECer");
-    const interviewerUsers = user.filter(item => item.permission === "Interviewer");
-    const candidateUsers = user.filter(item => item.permission === "Candidate");
+    //filter user
+    const recerUsers = userss.filter(item => item.permission === "RECRUITER");
+    const interviewerUsers = userss.filter(item => item.permission === "INTERVIEWER");
+    const candidateUsers = userss.filter(item => item.permission === "CANDIDATE");
 
     //RECer
     const handlePageChangeRECer = (pageNumber) => {
@@ -49,11 +145,13 @@ const ManageUser = () => {
     };
 
     const filteredRECerUsers = recerUsers.filter((item) => {
-        return (
-            item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-        );
+        const name = item.name ? item.name.toLowerCase() : '';
+        const email = item.email ? item.email.toLowerCase() : '';
+        const searchValue = initialSearchValue.toLowerCase();
+
+        return name.includes(searchValue) || email.includes(searchValue);
     });
+
 
     const totalRowsRECer = filteredRECerUsers.length;
     const totalPagesRECer = Math.ceil(totalRowsRECer / ROWS_PER_PAGE);
@@ -69,11 +167,13 @@ const ManageUser = () => {
     };
 
     const filteredInterviewerUsers = interviewerUsers.filter((item) => {
-        return (
-            item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-        );
+        const name = item.name ? item.name.toLowerCase() : '';
+        const email = item.email ? item.email.toLowerCase() : '';
+        const searchValue = initialSearchValue.toLowerCase();
+
+        return name.includes(searchValue) || email.includes(searchValue);
     });
+
 
     const totalRowsInterviewer = filteredInterviewerUsers.length;
     const totalPagesInterviewer = Math.ceil(totalRowsInterviewer / ROWS_PER_PAGE);
@@ -89,10 +189,11 @@ const ManageUser = () => {
     };
 
     const filteredCandidateUsers = candidateUsers.filter((item) => {
-        return (
-            item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-        );
+        const name = item.name ? item.name.toLowerCase() : '';
+        const email = item.email ? item.email.toLowerCase() : '';
+        const searchValue = initialSearchValue.toLowerCase();
+
+        return name.includes(searchValue) || email.includes(searchValue);
     });
 
     const totalRowsCandidate = filteredCandidateUsers.length;
@@ -116,6 +217,37 @@ const ManageUser = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+    };
+
+    const handleBanUser = async (id, currentStatus) => {
+        try {
+            let newStatus = '';
+            if (currentStatus === 'ACTIVE') {
+                newStatus = 'BANNED';
+            } else if (currentStatus === 'BANNED') {
+                newStatus = 'ACTIVE';
+            } else {
+                return; // Do nothing if status is UNAUTHENTICATED
+            }
+
+            const url = `https://qltd01.cfapps.us10-001.hana.ondemand.com/user/ban/${id}`;
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+
+            const body = {
+                accountStatus: newStatus,
+            };
+
+            const response = await axios.post(url, body, { headers });
+            // You can handle the response here, for example, showing a success message
+            console.log('User status updated successfully:', response.data);
+
+            // After updating the user status, you can fetch the updated user list
+            fetchUser();
+        } catch (error) {
+            console.error('Error updating user status:', error);
+        }
     };
 
 
@@ -150,7 +282,9 @@ const ManageUser = () => {
                         <FontAwesomeIcon icon={faBackward} />
                     </button>
 
-                    <div className="page-position">{currentPageRECer} / {totalPagesRECer}</div>
+                    <div className="page-position">
+                        {totalPagesRECer === 0 ? "0 / 0" : `${currentPageRECer} / ${totalPagesRECer}`}
+                    </div>
 
                     <button
                         className="Manage-user-button-next"
@@ -164,44 +298,46 @@ const ManageUser = () => {
                     <div className="Manage-user-name-user">Họ và tên/Email</div>
                     <div className="Manage-user-permission-user">Quyền hạn tài khoản</div>
                     <div className="Manage-user-date-register-user">Ngày đăng ký tài khoản</div>
-                    <div className="Manage-user-enable-user">Trạng thái</div>
+                    <div className="Manage-user-enable-user">Trạng thái tài khoản</div>
                     <div className="Manage-user-details-user">Chi tiết</div>
                 </div>
 
                 {currentRowsRECer.filter((item) => {
-                    return (
-                        item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-                        item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-                    );
+                    const name = item.name ? item.name.toLowerCase() : '';
+                    const email = item.email ? item.email.toLowerCase() : '';
+                    const searchValue = initialSearchValue.toLowerCase();
+
+                    return name.includes(searchValue) || email.includes(searchValue);
                 })
                     .map((item) => (
                         <div key={item.id}>
-                            {item.permission === "RECer" && ( // Kiểm tra điều kiện permission bằng "RECer"
-                                <div className="Manage-user-table-user">
-                                    <div className="Manage-user-name-content-user">
+                            <div className="Manage-user-table-user">
+                                <div className="Manage-user-name-content-user">
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="avt">
                                             <div className="Manage-user-circle">
-                                                <img src={item.avt} alt="avt" />
+                                                <img src={item.avt ? item.avt : altavatar} alt="avt" />
                                             </div>
                                         </div>
-
+                                    </Link>
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="Manage-user-name-email">
                                             <div className="Manage-user-name-detail">{item.name}</div>
                                             <div className="Manage-user-email-detail">{item.email}</div>
                                         </div>
-                                    </div>
-                                    <div className="Manage-user-permission-content-user">{item.permission}</div>
-                                    <div className="Manage-user-date-register-content-user">{item.date}</div>
-                                    <div className="Manage-user-enable-user-content">
-                                        <Space direction="vertical">
-                                            <Switch checkedChildren="Enable" unCheckedChildren="Disable" defaultChecked />
-                                        </Space>
-                                    </div>
-                                    <div className="Manage-user-details-content-user">
-                                        <button className="Manage-user-button-edit"><Link className="Manage-user-color-button-edit" to={`/detail-user/${item.id}`}>Edit</Link></button>
-                                    </div>
+                                    </Link>
                                 </div>
-                            )}
+                                <div className="Manage-user-permission-content-user">{item.permission}</div>
+                                <div className="Manage-user-date-register-content-user">
+                                    {format(new Date(item.dateRegister), "yyyy-MM-dd HH:mm:ss")}
+                                </div>
+                                <div className="Manage-user-enable-user-content">
+                                    <ToggleButton accountStatus={item.accountStatus} onClick={() => handleBanUser(item.id, item.accountStatus)} />
+                                </div>
+                                <div className="Manage-user-details-content-user">
+                                    <button className="Manage-user-button-edit"><Link className="Manage-user-color-button-edit" to={`/detail-user/${item.id}`}>Edit</Link></button>
+                                </div>
+                            </div>
                         </div>
                     ))}
 
@@ -218,7 +354,9 @@ const ManageUser = () => {
                         <FontAwesomeIcon icon={faBackward} />
                     </button>
 
-                    <div className="page-position">{currentPageInterviewer} / {totalPagesInterviewer}</div>
+                    <div className="page-position">
+                        {totalPagesInterviewer === 0 ? "0 / 0" : `${currentPageInterviewer} / ${totalPagesInterviewer}`}
+                    </div>
 
                     <button
                         className="Manage-user-button-next"
@@ -232,44 +370,48 @@ const ManageUser = () => {
                     <div className="Manage-user-name-user">Họ và tên/Email</div>
                     <div className="Manage-user-permission-user">Quyền hạn tài khoản</div>
                     <div className="Manage-user-date-register-user">Ngày đăng ký tài khoản</div>
-                    <div className="Manage-user-enable-user">Trạng thái</div>
+                    <div className="Manage-user-enable-user">Trạng thái tài khoản</div>
                     <div className="Manage-user-details-user">Chi tiết</div>
                 </div>
 
                 {currentRowsInterviewer.filter((item) => {
-                    return (
-                        item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-                        item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-                    );
+                    const name = item.name ? item.name.toLowerCase() : '';
+                    const email = item.email ? item.email.toLowerCase() : '';
+                    const searchValue = initialSearchValue.toLowerCase();
+
+                    return name.includes(searchValue) || email.includes(searchValue);
                 })
                     .map((item) => (
                         <div key={item.id}>
-                            {item.permission === "Interviewer" && ( // Kiểm tra điều kiện permission bằng "Interviewer"
-                                <div className="Manage-user-table-user">
-                                    <div className="Manage-user-name-content-user">
+
+                            <div className="Manage-user-table-user">
+                                <div className="Manage-user-name-content-user">
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="avt">
                                             <div className="Manage-user-circle">
-                                                <img src={item.avt} alt="avt" />
+                                                <img src={item.avt ? item.avt : altavatar} alt="avt" />
                                             </div>
                                         </div>
-
+                                    </Link>
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="Manage-user-name-email">
                                             <div className="Manage-user-name-detail">{item.name}</div>
                                             <div className="Manage-user-email-detail">{item.email}</div>
                                         </div>
-                                    </div>
-                                    <div className="Manage-user-permission-content-user">{item.permission}</div>
-                                    <div className="Manage-user-date-register-content-user">{item.date}</div>
-                                    <div className="Manage-user-enable-user-content">
-                                        <Space direction="vertical">
-                                            <Switch checkedChildren="Enable" unCheckedChildren="Disable" defaultChecked className="custom-switch" />
-                                        </Space>
-                                    </div>
-                                    <div className="Manage-user-details-content-user">
-                                        <button className="Manage-user-button-edit"><Link className="Manage-user-color-button-edit" to={`/detail-user/${item.id}`}>Edit</Link></button>
-                                    </div>
+                                    </Link>
                                 </div>
-                            )}
+                                <div className="Manage-user-permission-content-user">{item.permission}</div>
+                                <div className="Manage-user-date-register-content-user">
+                                    {format(new Date(item.dateRegister), "yyyy-MM-dd HH:mm:ss")}
+                                </div>
+                                <div className="Manage-user-enable-user-content">
+                                    <ToggleButton accountStatus={item.accountStatus} onClick={() => handleBanUser(item.id, item.accountStatus)} />
+                                </div>
+                                <div className="Manage-user-details-content-user">
+                                    <button className="Manage-user-button-edit"><Link className="Manage-user-color-button-edit" to={`/detail-user/${item.id}`}>Edit</Link></button>
+                                </div>
+                            </div>
+
                         </div>
                     ))}
 
@@ -285,7 +427,9 @@ const ManageUser = () => {
                         <FontAwesomeIcon icon={faBackward} />
                     </button>
 
-                    <div className="page-position">{currentPageCandidate} / {totalPagesCandidate}</div>
+                    <div className="page-position">
+                        {totalPagesCandidate === 0 ? "0 / 0" : `${currentPageCandidate} / ${totalPagesCandidate}`}
+                    </div>
 
                     <button
                         className="Manage-user-button-next"
@@ -301,57 +445,59 @@ const ManageUser = () => {
                     <div className="Manage-user-permission-candidate-user">Quyền hạn tài khoản</div>
                     <div className="Manage-user-date-register-candidate-user">Ngày đăng ký tài khoản</div>
                     <div className="Manage-user-position-user">Vị trí ứng tuyển</div>
-                    <div className="Manage-user-status-user">Trạng thái ứng tuyển</div>
                     <div className="Manage-user-enable-user">Trạng thái tài khoản</div>
                     <div className="Manage-user-details-candidate">Chi tiết</div>
                 </div>
 
                 {currentRowsCandidate.filter((item) => {
-                    return (
-                        item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-                        item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-                    );
+                    const name = item.name ? item.name.toLowerCase() : '';
+                    const email = item.email ? item.email.toLowerCase() : '';
+                    const searchValue = initialSearchValue.toLowerCase();
+
+                    return name.includes(searchValue) || email.includes(searchValue);
                 })
                     .map((item) => (
                         <div key={item.id}>
-                            {item.permission === "Candidate" && ( // Kiểm tra điều kiện permission bằng "Candidate"
-                                <div className="Manage-user-table-user">
-                                    <div className="Manage-user-name-content-candidate-user">
+
+                            <div className="Manage-user-table-user">
+                                <div className="Manage-user-name-content-candidate-user">
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="avt">
                                             <div className="Manage-user-circle">
-                                                <img src={item.avt} alt="avt" />
+                                                <img src={item.avt ? item.avt : altavatar} alt="avt" />
                                             </div>
                                         </div>
-
+                                    </Link>
+                                    <Link className="link-to-detail-user" to={`/detail-user/${item.id}`}>
                                         <div className="Manage-user-name-email">
                                             <div className="Manage-user-name-detail">{item.name}</div>
                                             <div className="Manage-user-email-detail">{item.email}</div>
                                         </div>
-                                    </div>
-                                    <div className="Manage-user-permission-content-candidate-user">{item.permission}</div>
-                                    <div className="Manage-user-date-register-content-candidate-user">{item.date}</div>
-                                    <div className="Manage-user-position-content-user">{item.position}</div>
-                                    <div className="Manage-user-status-content-user">
-                                        <div className={`Manage-user-frame-status ${item.status === "Accept" ? "Manage-user-accept" : ""} 
-                                ${item.status === "In process" ? "Manage-user-process" : ""} 
-                                ${item.status === "Blacklist" ? "Manage-user-blacklist" : ""} 
-                                `}>{item.status}</div>
-                                    </div>
-                                    <div className="Manage-user-enable-user-content">
-                                        <Space direction="vertical">
-                                            <Switch checkedChildren="Enable" unCheckedChildren="Disable" defaultChecked className="custom-switch" />
-                                        </Space>
-                                    </div>
-                                    <div className="Manage-user-details-content-candidate">
-                                        <Link  to={`/detail-user/${item.id}`}>
-                                            <button className="Manage-user-button-edit">
-                                                Edit
-                                            </button>
-                                        </Link>
-
+                                    </Link>
+                                </div>
+                                <div className="Manage-user-permission-content-candidate-user">{item.permission}</div>
+                                <div className="Manage-user-date-register-content-candidate-user">
+                                    {format(new Date(item.dateRegister), "yyyy-MM-dd HH:mm:ss")}
+                                </div>
+                                <div className="Manage-user-position-content-user">
+                                    <div className="Manage-user-position-column">
+                                        {item.listJobPosting.map((position, index) => (
+                                            <div key={index}>{position.position}</div>
+                                        ))}
                                     </div>
                                 </div>
-                            )}
+                                <div className="Manage-user-enable-user-content">
+                                    <ToggleButton accountStatus={item.accountStatus} onClick={() => handleBanUser(item.id, item.accountStatus)} />
+                                </div>
+                                <div className="Manage-user-details-content-candidate">
+                                    <Link to={`/detail-user/${item.id}`}>
+                                        <button className="Manage-user-button-edit">
+                                            Edit
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+
                         </div>
                     ))}
 

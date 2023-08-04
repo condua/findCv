@@ -10,8 +10,9 @@ import api from './api'
 import "./Login.scss"
 
 const Login = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [type, setType] = useState("password")
     const [show, setShow] = useState(false)
@@ -55,6 +56,22 @@ const Login = () => {
         }
     }, [response, navigate])
 
+    // const handleResponse = useCallback(() => {
+    //     console.log(location?.state?.previousUrl)
+    //     if (response && response.data) {
+    //       const { role } = response.data;
+    //       if (role === "CANDIDATE") {
+    //         navigate(-1);
+    //       } else if (role === "INTERVIEWER") {
+    //         navigate("/interviewer");
+    //       } else if (role === "RECRUITER") {
+    //         navigate("/recruitment");
+    //       } else if (role === "ADMIN") {
+    //         navigate("/admin");
+    //       }
+    //     }
+    //   }, [response, location, navigate]);
+    
     useEffect(() => {
         handleResponse()
     }, [handleResponse])

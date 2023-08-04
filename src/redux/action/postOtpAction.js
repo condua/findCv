@@ -7,12 +7,12 @@ export const postOtpRequest = (email) => ({
     payload: {email},
   });
 
-  export const postOtpSuccess = (otp) => ({
+  export const postOtpSuccess = (message) => ({
     type: POST_OTP_SUCCESS,
-    payload: {otp},
+    payload: {message},
   });
 
   export const postOtpFailure = (error) => ({
     type: POST_OTP_FAILURE,
-    payload: {otp},
+    payload: {error},
   });

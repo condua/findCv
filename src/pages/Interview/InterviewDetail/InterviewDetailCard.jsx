@@ -1,12 +1,13 @@
 import { Avatar, Button } from "antd"
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 const InterviewDetailCard = ({ dataInterviewDetail }) => {
 
     const navigate = useNavigate()
+    const params = useParams()
 
     const EVENTS_PER_PAGE = 9;
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,10 +18,12 @@ const InterviewDetailCard = ({ dataInterviewDetail }) => {
         currentPage * EVENTS_PER_PAGE
     );
 
-    const handleButtonStatus = (detailID, interviewID) => {
+    console.log("dataInterviewDetail",dataInterviewDetail)
+
+    const handleButtonStatus = (interviewDetailId, roomId) => {
 
         return (
-            navigate(`/interview/detail/${interviewID}/${detailID}`)
+            navigate(`/interview/detail/${roomId}/${interviewDetailId}`)
         )
     }
 
@@ -35,23 +38,29 @@ const InterviewDetailCard = ({ dataInterviewDetail }) => {
                             style={{ width: 70, height: 70, position: 'relative', left: '42%', top: '7%' }}
                         />
                         <div style={{ fontWeight: 500, fontSize: 21, paddingTop: '6%', paddingLeft: '1%', textAlign: 'center' }}>{item.name}</div>
-                        <div style={{ fontWeight: 300, fontSize: 18, paddingLeft: '1%', textAlign: 'center' }}>{item.position}</div>
-                        <div style={{ paddingTop: '4%', paddingLeft: '13%', fontSize: 17 }}>
-                            <label style={{ paddingRight: 120 }}>Kỹ năng</label>
-                            <label>Kinh nghiệm</label>
-                        </div>
-                        <div style={{ paddingTop: '0.5%', paddingLeft: '13%', fontSize: 16, fontWeight: 200 }}>
-                            <label style={{ paddingRight: 40 }}>{item.skill}</label>
+                        {/* <div style={{ fontWeight: 300, fontSize: 18, paddingLeft: '1%', textAlign: 'center' }}>{item.position}</div> */}
+
+                        <div className="flex w-full justify-center mx-10">
+                            <div className="flex flex-col w-full justify-self-center">
+                                <label style={{ fontSize: 17, fontWeight: 500 }}>Kỹ năng</label>
+                                <label style={{ fontSize: 16, fontWeight: 200 }}>{item.skills}</label>
+
+                            </div>
+                            {/* <div> */}
+                            <div className='flex flex-col w-full'>
+                                <label style={{ fontSize: 17, fontWeight: 500 }}>Kinh nghiệm</label>
+                                <label style={{ fontSize: 16, fontWeight: 200 }}>{item.experience}</label>
+                            </div>
                         </div>
 
-                        <div style={{textAlign: 'right' }}>
-                            <label style={{ position: 'relative', paddingRight: '27%', top: -21, marginTop: 20}}>{item.experience}</label>
+                        <div className='flex w-full my-4 mx-10'>
+                            <label style={{ fontSize: 17, fontWeight: 500 }}>Thời gian:</label>
+                            <label style={{ fontSize: 17, fontWeight: 400, paddingLeft: 2 }}>{item.date}({item.time})</label>
                         </div>
 
-                        <div style={{ textAlign: 'center' }}>
+                        <div className="flex justify-center mb-3" style={{ textAlign: 'center' }}>
                             <Button
-                                onClick={() => handleButtonStatus(item.detailID, item.interviewID)}
-                                className="mb-4"
+                                onClick={() => handleButtonStatus(item.itemId, params.id)}
                                 style={{
                                     height: 26,
                                     // marginLeft: '41%',
@@ -72,7 +81,7 @@ const InterviewDetailCard = ({ dataInterviewDetail }) => {
 
             <div>
                 {totalEventPage > 1 && (
-                    <div className="d-flex justify-content-center mt-3" style={{ marginBottom: 20, marginTop: 30,textAlign: 'center' }}>
+                    <div className="d-flex justify-content-center mt-3" style={{ marginBottom: 20, marginTop: 30, textAlign: 'center' }}>
                         <Button
                             variant="outline-success"
                             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}

@@ -66,6 +66,7 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized"
 import PrivateRoute from "./pages/Login/privateRoute"
 
 import Eventtest from "./pages/Interview/Table/Eventtest"
+import CvTest from "./pages/Interview/Table/CvTest"
 
 import RecruitDetail from "./pages/Recruitment/RecruitDetail"
 
@@ -76,6 +77,9 @@ import Cv from "./pages/Cv/index"
 
 import UserInfo from "./pages/UserInfo/UserInfo"
 import ResetPassword from "./pages/Register/ResetPassword"
+
+
+
 const App = (props) => {
     return (
         <>
@@ -129,22 +133,16 @@ const App = (props) => {
                 
                 <Route exact path='/' element={<PrivateRoute Roles={['INTERVIEWER', 'ADMIN']}/>}>
                     <Route path="/getuser" element={<IRALayout><GetUser/> </IRALayout>}/>
+                    <Route path="/cvtest" element={<IRALayout><CvTest/> </IRALayout>}/>
 
-                    {/* <Route path="" element={<IRALayout><Home/></IRALayout>} /> 
-                    <Route path="/home" element={<IRALayout><Home/></IRALayout>} />  */}
+                   
                     <Route path="/interviewer" element={<IRALayout><Home/></IRALayout>} /> 
 
                     <Route path="/managecandidate" element={<IRALayout><Table/></IRALayout>} /> 
                     <Route path="managecandidate/:id" element={<IRALayout><Edit/></IRALayout>} /> 
 
 
-                    <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
-                    <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
-                    <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
-                            
-                    <Route path="/interviewmain" element={<IRALayout><InterviewMain /></IRALayout>} />
-                    <Route path="/interview/detail/:id" element={<IRALayout><InterviewDetail /></IRALayout>} />
-                    <Route path="/interview/detail/:id/:mark_id" element={<IRALayout><InterviewMark /></IRALayout>} />
+                   
                     <Route path="/questions" element={<IRALayout><Questions /></IRALayout>} />
                     <Route path="/questions/addquestion" element={<IRALayout><AddQuestion /></IRALayout>} />
                     <Route path="/questions/editquestion/:question_id" element={<IRALayout><EditQuestion /></IRALayout>} />
@@ -164,9 +162,12 @@ const App = (props) => {
 
                     <Route path="/recruitment" element={<IRALayout><Recruitment /></IRALayout>} />
                     <Route path="/recruitment/add" element={<IRALayout><RecruitAdd /></IRALayout>} />
+                    <Route path="/recruitment/:id" element={<IRALayout><RecruitDetail /></IRALayout>} />
                     <Route path="/recruitment/edit/:id" element={<IRALayout><RecruitEdit /></IRALayout>} />  
                     <Route path="/event" element={<IRALayout><Event /></IRALayout>}/>
-                    <Route path='manage-candidate/:id' element={<IRALayout>< ManageCandidate /></IRALayout>} />
+                    <Route path="/event/:id" element={<IRALayout><EventDetail /> </IRALayout>}/>
+                    <Route path="/event/edit/:id" element={<IRALayout><EventEdit /></IRALayout>}/>
+                    <Route path="/event/add" element={<IRALayout><EventAdd /></IRALayout>}/>
                 </Route>
 
 
@@ -185,6 +186,9 @@ const App = (props) => {
 
                 <Route exact path='/' element={<PrivateRoute Roles={['INTERVIEWER','RECRUITER','ADMIN']}/>}>
                     <Route path="/userinfo" element={<IRALayout><UserInfo/></IRALayout> }/>
+                    <Route path="/interviewmain" element={<IRALayout><InterviewMain /></IRALayout>} />
+                    <Route path="/interview/detail/:id" element={<IRALayout><InterviewDetail /></IRALayout>} />
+                    <Route path="/interview/detail/:id/:mark_id" element={<IRALayout><InterviewMark /></IRALayout>} />
 
                 </Route>
                 <Route exact path='/' element={<PrivateRoute Roles={['CANDIDATE','INTERVIEWER','RECRUITER','ADMIN']}/>}>
