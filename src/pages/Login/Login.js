@@ -40,37 +40,37 @@ const Login = () => {
         setShow(!show)
     }
 
-    const handleResponse = useCallback(() => {
-        // Check if the response object exists and if its 'data' property exists
-        if (response && response.data) {
-            const { role } = response.data
-            if (role === "CANDIDATE") {
-                navigate("/")
-            } else if (role === "INTERVIEWER") {
-                navigate("/interviewer")
-            } else if (role === "RECRUITER") {
-                navigate("/recruitment")
-            } else if (role === "ADMIN") {
-                navigate("/admin")
-            }
-        }
-    }, [response, navigate])
-
     // const handleResponse = useCallback(() => {
-    //     console.log(location?.state?.previousUrl)
+    //     // Check if the response object exists and if its 'data' property exists
     //     if (response && response.data) {
-    //       const { role } = response.data;
-    //       if (role === "CANDIDATE") {
-    //         navigate(-1);
-    //       } else if (role === "INTERVIEWER") {
-    //         navigate("/interviewer");
-    //       } else if (role === "RECRUITER") {
-    //         navigate("/recruitment");
-    //       } else if (role === "ADMIN") {
-    //         navigate("/admin");
-    //       }
+    //         const { role } = response.data
+    //         if (role === "CANDIDATE") {
+    //             navigate("/")
+    //         } else if (role === "INTERVIEWER") {
+    //             navigate("/interviewer")
+    //         } else if (role === "RECRUITER") {
+    //             navigate("/recruitment")
+    //         } else if (role === "ADMIN") {
+    //             navigate("/admin")
+    //         }
     //     }
-    //   }, [response, location, navigate]);
+    // }, [response, navigate])
+
+    const handleResponse = useCallback(() => {
+        console.log(location?.state?.previousUrl)
+        if (response && response.data) {
+          const { role } = response.data;
+          if (role === "CANDIDATE") {
+            navigate(-1);
+          } else if (role === "INTERVIEWER") {
+            navigate("/interviewer");
+          } else if (role === "RECRUITER") {
+            navigate("/recruitment");
+          } else if (role === "ADMIN") {
+            navigate("/admin");
+          }
+        }
+      }, [response, location, navigate]);
     
     useEffect(() => {
         handleResponse()
