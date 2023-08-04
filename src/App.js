@@ -65,8 +65,7 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized"
 
 import PrivateRoute from "./pages/Login/privateRoute"
 
-import Eventtest from "./pages/Interview/Table/Eventtest"
-import CvTest from "./pages/Interview/Table/CvTest"
+
 
 import RecruitDetail from "./pages/Recruitment/RecruitDetail"
 
@@ -132,9 +131,6 @@ const App = (props) => {
                 </Route> 
                 
                 <Route exact path='/' element={<PrivateRoute Roles={['INTERVIEWER', 'ADMIN']}/>}>
-                    <Route path="/getuser" element={<IRALayout><GetUser/> </IRALayout>}/>
-                    <Route path="/cvtest" element={<IRALayout><CvTest/> </IRALayout>}/>
-
                    
                     <Route path="/interviewer" element={<IRALayout><Home/></IRALayout>} /> 
 
