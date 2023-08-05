@@ -23,6 +23,17 @@ const ResetPassword = () => {
       const response = await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/recover/send-otp', { email });
       const responseData = response.data;
       console.log(responseData.message); // Hiển thị "Success !" nếu thành công
+      if(String(responseData.status) !== "200 OK")
+      {
+        message.info({
+            content: 'Email không tồn tại trong hệ thống',
+            icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+            style: {
+              color: 'red',
+            },
+          });
+          return
+      }
       setStep(2); // Chuyển sang bước 2 sau khi gửi email thành công
       
     } catch (error) {
@@ -45,7 +56,17 @@ const ResetPassword = () => {
       const responseData = response.data;
       console.log(responseData.message); // Hiển thị "Success !" nếu thành công
       console.log(responseData.data.userId); // Hiển thị userId từ phản hồi
-
+      if(String(responseData.status) !== "200 OK")
+      {
+        message.info({
+            content: 'Mã OTP không đúng',
+            icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+            style: {
+              color: 'red',
+            },
+          });
+          return
+      }
       setUserId(responseData.data.userId)
       setOtp(responseData.data.otp)
       setStep(3); // Chuyển sang bước 3 sau khi gửi OTP thành công
@@ -68,6 +89,17 @@ const ResetPassword = () => {
       const response = await axios.put(`https://qltd01.cfapps.us10-001.hana.ondemand.com/recover/password?u=${userId}&o=${otp}`, { password, confirmPassword });
       const responseData = response.data;
       console.log(responseData.message); // Hiển thị "Success !" nếu thành công
+      if(String(responseData.status) !== "200 OK")
+      {
+        message.info({
+            content: 'Password không chính xác',
+            icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+            style: {
+              color: 'red',
+            },
+          });
+          return
+      }
       message.success({
         content: 'Mật khẩu đã được thay đổi thành công',
         onClose: () => {

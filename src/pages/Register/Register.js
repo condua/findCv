@@ -108,8 +108,21 @@ const Register = () => {
     }
     try {
         // Gọi API POST để xác thực OTP
-        await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/register', { username, email, password });
+        const response = await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/register', { username, email, password });
         // alert('Xác thực thành công!');
+        if(String(response.data.status) === "409 CONFLICT")
+        {
+          message.info({
+            content: `${response.data.message}`,
+            icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+            style: {
+              color: 'red',
+            },
+          });
+          return
+  
+        }
+        
         message.success({
           content: "Tài khoản đã đăng kí thành công",
           onClose: () => {
@@ -133,41 +146,7 @@ const Register = () => {
         });
         }
       }
-    // console.log(error)
 
-
-    // dispatch(registerRequest(username, email, password));
-    
-    // console.log(dispatch(registerRequest(username, email, password)))
-          
-    // if(messageRegister === "Email already exists!")
-    // {   
-    //     message.error({
-    //         content: 'Email đã tồn tại',
-
-    //       });
-
-    //     // navigate('/login')
-    //     return;
-    // }
-    // if(messageRegister === "Username already exists!")
-    // {
-    //     message.info({
-    //         content: 'Username đã tồn tại',
-    //         icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>, // Icon là dấu chấm than màu đỏ
-    //         style: {
-    //           color:'red',
-    //           // display: 'flex',
-    //           // justifyContent: 'center',
-    //           // alignItems: 'center',
-    //           // minHeight: 'calc(100vh - 33.33vh)',
-    //           // backgroundColor: 'rgba(255, 0, 0, 0.2)', // Màu nền màu đỏ, bạn có thể điều chỉnh giá trị rgba theo ý muốn
-    //         },
-    //       });
-        
-        
-    // };
-      
   };
 
     return (

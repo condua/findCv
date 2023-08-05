@@ -8,6 +8,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 import google from "../../assets/google.jpg"
 import api from './api'
 import "./Login.scss"
+import { message } from 'antd';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Login = () => {
     const [eye, setEye] = useState(<AiOutlineEye />)
     const statusCode = useSelector((state) => state.auth.error) ;
 
+    const message = useSelector((state) => state.auth.message) ;
     const handleToggle = () => {
         if (show === true) {
             setType("password")

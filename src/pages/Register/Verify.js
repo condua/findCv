@@ -21,8 +21,21 @@ const Verify = () => {
       // Gọi API POST để gửi email và nhận OTP
       const response = await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/send-otp', { email });
       setShowOtpInput(true);
+      if(response.data.status !== "200 OK")
+      {
+        message.info({
+          content: 'Email không tồn tại',
+          icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+          style: {
+            color: 'red',
+          },
+        });
+        return
+
+      }
     } catch (error) {
       console.error('Lỗi khi gửi email:', error);
+      
       message.info({
         content: 'Email không tồn tại',
         icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
@@ -38,8 +51,16 @@ const Verify = () => {
     e.preventDefault();
     try {
       // Gọi API POST để xác thực OTP
-      await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/verify', { email, otp });
+      const response = await axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/verify', { email, otp });
       // alert('Xác thực thành công!');
+      if(response.data.status !== "200 OK")
+      {
+        message.error({
+          content: 'Mã OTP không chính xác',
+          
+        });
+        return
+      }
       message.success({
         content: 'Tài khoản đã xác thực thành công',
         onClose: () => {
