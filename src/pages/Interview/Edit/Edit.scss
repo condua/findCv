@@ -1,6 +1,6 @@
 .edited-container {
     width: 100%;
-    height: 100vh;
+    height: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,14 +31,14 @@
     }
 
     .avatar-container {
-        width: 95%;
+        width: 100%;
         height: 13%;
         background-color: #FFFFFF;
-        margin-top: -2%;
+        margin-top: -5%;
         border-radius: 10px;
         display: flex;
         flex-direction: row;
-        margin-bottom: 20px;
+        margin-bottom: -10px;
 
         .avatar-edit {
             width: 90px;
@@ -78,13 +78,12 @@
 
         .form-edit {
             width: 100%;
-            height: 84%;
+            height: 92%;
             background-color: #FFFFFF;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-top: 1px solid #cbcfd3;
-
 
             .info-item {
                 width: 95%;
@@ -92,20 +91,23 @@
                 flex-direction: row;
                 background-color: #FFFFFF;
                 height: 15%;
+                align-items: center;
 
                 p {
-                    margin-right: 100px;
-                    width: 10%;
+                    margin-right: 70px;
+                    width: 15%;
                 }
 
                 input {
                     width: 80%;
-                    margin-top: 20px;
+                    // margin-top: 20px;
                     height: 60%;
                     border-radius: 6px;
                     background-color: #F5F8FA;
                     border: none;
                     box-sizing: border-box;
+                    color: black;
+
                 }
 
                 input[type="text"] {

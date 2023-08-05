@@ -1,12 +1,12 @@
 import React from "react"
 import DynamicFormItem from "./DynamicFormItem"
-import { Form, Input, Breadcrumb, Select, Image, Upload, Button } from "antd"
+import { Form, Input, Breadcrumb, Select, Image, Upload, Button, Result } from "antd"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "antd/es/form/Form"
 import { useState } from "react"
 import { useCallback } from "react"
 import { useSelector } from "react-redux"
-import { UploadOutlined } from "@ant-design/icons"
+import { UploadOutlined, LoadingOutlined } from "@ant-design/icons"
 import axios from "axios"
 
 const RecruitEdit = () => {
@@ -44,10 +44,16 @@ const RecruitEdit = () => {
     const [inputImageURL, setInputImageURL] = useState("")
     const [imageFile, setImageFile] = useState(null)
     const accessToken = useSelector((state) => state.auth.accessToken)
+    const [updateImage, setUpdateImage] = useState(false)
+    const [confirmLoading, setConfirmLoading] = useState(false)
+    const [showResult, setShowResult] = useState(false)
+
+
+
     const handleSave = useCallback(async () => {
         try {
+            setConfirmLoading(true)
             const data = await form.validateFields()
-
             data.detailJob = data.detailJob?.join(", ") || ""
             data.requirements = data.requirements?.join(", ") || ""
             data.interest = data.interest?.join(", ") || ""
@@ -55,17 +61,21 @@ const RecruitEdit = () => {
 
             console.log(data)
             const formData = new FormData()
-            formData.append("file", imageFile)
-            const imageResponse = await axios.post(
-                "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
-                formData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                }
-            )
-            data.image = imageResponse.data.data
+            if (updateImage) {
+                formData.append("file", imageFile)
+
+                const imageResponse = await axios.post(
+                    "https://qltd01.cfapps.us10-001.hana.ondemand.com/file/upload",
+                    formData,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                    }
+                )
+
+                data.image = imageResponse.data.data
+            }
 
             await axios.put(
                 `https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting/${job.id}`,
@@ -78,11 +88,17 @@ const RecruitEdit = () => {
                 }
             )
 
-            navigate("/recruitment", { replace: true })
+            setShowResult(true)
+
+            setTimeout(() => {
+                setShowResult(false)
+                navigate("/recruitment", { replace: true })
+            }, 1500)
         } catch (error) {
+            setConfirmLoading(false)
             console.error("Form submission failed:", error)
         }
-    }, [form, imageFile, accessToken, job.id, navigate])
+    }, [form, updateImage, job.id, accessToken, navigate, imageFile])
 
     return (
         <div className="">
@@ -116,6 +132,14 @@ const RecruitEdit = () => {
                     },
                 ]}
             />
+            {showResult ? (
+                <Result
+                    className=" pb-40"
+                    status="success"
+                    title="Job is Successfully Updated"
+                    subTitle="You can check out the updated job in the Recruitment page"
+                />
+            ) : (
             <Form form={form} layout="vertical">
                 <div className="bg-white px-24 py-16 flex flex-col rounded-3xl w-4/5 mx-auto">
                     <div className="text-zinc-900 text-3xl font-serif mb-11">
@@ -135,6 +159,7 @@ const RecruitEdit = () => {
                             maxCount={1}
                             type="image"
                             className=" mb-10 mt-3 w-1/5"
+                            onChange={() => setUpdateImage(true)}
                             beforeUpload={(file) => {
                                 if (
                                     file.type !== "image/png" &&
@@ -303,22 +328,38 @@ const RecruitEdit = () => {
                 </div>
                 <Form.Item className="">
                     <div className="flex my-10 w-full justify-center gap-10 ml-56">
-                        <button
-                            onClick={handleSave}
-                            className="hover:scale-110 w-28 shadow-xl relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
-                        >
-                            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                            <span className="relative">Update</span>
-                        </button>
-                        <button
-                            onClick={handleCancelClick}
-                            className="relative hover:scale-110 shadow-md rounded px-5 py-2.5 overflow-hidden group bg-white hover:bg-gradient-to-r  text-white hover:ring-2 hover:ring-offset-2 hover:ring-slate-400 transition-all ease-out duration-300"
-                        >
-                            <span className="relative text-black">Cancel</span>
-                        </button>
+                    <button
+                                onClick={handleSave}
+                                className={`hover:scale-110 w-28 shadow-xl relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300 ${
+                                    confirmLoading
+                                        ? "opacity-80 cursor-not-allowed"
+                                        : ""
+                                }`}
+                                disabled={confirmLoading}
+                            >
+                                {confirmLoading ? (
+                                    <>
+                                        <LoadingOutlined className="text-xl font-semibold" />
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                                        <span className="relative">Add</span>
+                                    </>
+                                )}
+                            </button>
+                            <button
+                                onClick={handleCancelClick}
+                                className="relative hover:scale-110 shadow-md rounded px-5 py-2.5 overflow-hidden group bg-white hover:bg-gradient-to-r  text-white hover:ring-2 hover:ring-offset-2 hover:ring-slate-400 transition-all ease-out duration-300"
+                            >
+                                <span className="relative text-black">
+                                    Cancel
+                                </span>
+                            </button>
                     </div>
                 </Form.Item>
             </Form>
+            )}
         </div>
     )
 }

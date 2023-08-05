@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Timeline } from 'antd';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Detail-user.scss'
-import background from '../../assets/background.webp';
-import users from '../user'
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function getRandomColor() {
     const colors = ['green', 'red', 'gray', 'blue', 'purple'];
@@ -18,83 +18,149 @@ function getRandomColor() {
 }
 
 function DetailUser() {
-    const history = [
-        {
-            datetime: '2015-09-01',
-            content: 'Create a services site',
-        },
-        {
-            datetime: '2015-09-02',
-            content: 'Solve initial network problems 1, problems 1, problems 1, problems 1',
-        },
-        {
-            datetime: '2015-09-03',
-            content: 'Solve initial network problems 1 ',
-        },
-        {
-            datetime: '2015-09-04',
-            content: 'Solve initial network problems 1',
-        },
-        {
-            datetime: '2015-09-05',
-            content: 'Solve initial network problems 1',
-        },
-        {
-            datetime: '2015-09-01',
-            content: 'Create a services site',
-        },
-        {
-            datetime: '2015-09-02',
-            content: 'Solve initial network problems 1',
-        },
-        {
-            datetime: '2015-09-03',
-            content: 'Solve initial network problems 1',
-        },
-        {
-            datetime: '2015-09-04',
-            content: 'Solve initial network problems 1',
-        },
-        {
-            datetime: '2015-09-05',
-            content: 'Solve initial network problems 1',
-        },
-        // Thêm các mục khác vào đây
-    ];
+    const [updatedUser, setUpdatedUser] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+    });
+
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
     const { id } = useParams();
-    console.log({ id });
+    const userApi = `https://qltd01.cfapps.us10-001.hana.ondemand.com/user/${id}`;
+    const [getUser, setGetUser] = useState({
+        status: "OK",
+        message: "Success!",
+        data: []
+    });
 
-    const user = users.find((item) => item.id === id);
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-    const [avt, setAvt] = useState(user.avt);
-    const [permission, setPermission] = useState(user.permission);
-    const [username, setUsername] = useState(user.username);
+    useEffect(() => {
+        fetchUser();
+    }, [id]);
+
+    const accessToken = useSelector(state => state.auth.accessToken);
+
+    const fetchUser = async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+            const response = await axios.get(userApi, { headers });
+            setGetUser(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (getUser.data) {
+            setUpdatedUser(getUser.data);
+        }
+    }, [getUser]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setUpdatedUser({
+            ...updatedUser,
+            [name]: value
+        });
+    };
+
+    const updateUser = async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+            const requestData = {
+                fullName: updatedUser.name,
+                email: updatedUser.email,
+                phone: updatedUser.phone,
+                address: updatedUser.address,
+            };
+            const response = await axios.put(userApi, requestData, { headers });
+            console.log('Response from PUT API:', response.data);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
+    };
+
+    const handleShowSuccessPopup = () => {
+        setShowSuccessPopup(true);
+        setTimeout(() => {
+            setShowSuccessPopup(false);
+        }, 2000);
+    };
+
+    const handleSaveChanges = async (event) => {
+        event.preventDefault();
+        await updateUser();
+        handleShowSuccessPopup();
+    };
+
+
+    if (!getUser.data) {
+        return <div>Loading...</div>;
+    }
+
+    const user = getUser.data;
+    console.log('user', user);
+
+    const name = user ? user.name : '';
+    const email = user ? user.email : '';
+    const avt = user ? user.avt : '';
+    const permission = user ? user.permission : '';
+    const username = user ? user.username : '';
+    const phone = user ? user.phone : '';
+    const address = user ? user.address : '';
 
     const getNextColor = getRandomColor();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const updatedData = [...users];
+    const history = [
+        {
+            datetime: '2023-07-01',
+            content: 'Create a services site',
+        },
+        {
+            datetime: '2023-07-02',
+            content: 'Solve initial network problems 1, problems 1, problems 1, problems 1',
+        },
+        {
+            datetime: '2023-07-03',
+            content: 'Solve initial network problems 1 ',
+        },
+        {
+            datetime: '2023-07-04',
+            content: 'Solve initial network problems 1',
+        },
+        {
+            datetime: '2023-07-05',
+            content: 'Solve initial network problems 1',
+        },
+        {
+            datetime: '2023-07-05',
+            content: 'Create a services site',
+        },
+        {
+            datetime: '2023-07-05',
+            content: 'Solve initial network problems 1',
+        },
+        {
+            datetime: '2023-07-06',
+            content: 'Solve initial network problems 1',
+        },
+        {
+            datetime: '2023-07-07',
+            content: 'Solve initial network problems 1',
+        },
+        {
+            datetime: '2023-07-08',
+            content: 'Solve initial network problems 1',
+        },
+    ];
 
-        // Update the candidate in the copied array
-        const updatedCandidate = {
-            ...user,
-            name: name,
-            email: email,
-            avt: avt
-        };
-
-        // Find the index of the candidate in the copied array
-        const candidateIndex = updatedData.findIndex(item => item.id === parseInt(id));
-
-        // Replace the old candidate with the updated candidate
-        updatedData[candidateIndex] = updatedCandidate;
-
-        // Update the data in localStorage
-        localStorage.setItem('data', JSON.stringify(updatedData));
-    }
+    const altavatar = 'https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg';
 
 
     return (
@@ -108,33 +174,48 @@ function DetailUser() {
                             <div className="Detail-user-username">Username: {username}</div>
                         </div>
                         <div className="Detail-user-avt">
-                            <img src={avt} alt="avt" />
+                            <img src={avt ? avt : altavatar} alt="avt" />
                         </div>
                     </div>
 
                     <div className="Detail-user-detail-infor">
                         <div className='Detail-user-info-container'>
                             <h2>Thông tin cơ bản</h2>
-                            <form onSubmit={handleSubmit} className='Detail-user-form-edit'>
+                            <form className='Detail-user-form-edit'>
                                 <div className='Detail-user-info-item' style={{ marginTop: '15px' }}>
                                     <p>Họ và tên</p>
-                                    <input type='text' value={name} />
-                                </div>
-                                <div className='Detail-user-info-item'>
-                                    <p>Tài khoản</p>
-                                    <input type='text' value={username} />
+                                    <input
+                                        type='text'
+                                        name='name'
+                                        value={updatedUser.name}
+                                        onChange={handleInputChange}
+                                    />
                                 </div>
                                 <div className='Detail-user-info-item'>
                                     <p>Email</p>
-                                    <input type='text' value={email} />
+                                    <input
+                                        type='text'
+                                        name='email'
+                                        value={updatedUser.email}
+                                        onChange={handleInputChange}
+                                    />
                                 </div>
                                 <div className='Detail-user-info-item'>
                                     <p>Số điện thoại</p>
-                                    <input type='text' value={name} />
+                                    <input
+                                        type='text'
+                                        name='phone'
+                                        value={updatedUser.phone}
+                                        onChange={handleInputChange}
+                                    />
                                 </div>
                                 <div className='Detail-user-info-item'>
                                     <p>Địa chỉ</p>
-                                    <textarea type='text' value={name} />
+                                    <textarea
+                                        name='address'
+                                        value={updatedUser.address}
+                                        onChange={handleInputChange}
+                                    />
                                 </div>
 
                                 <div className="Detail-user-button">
@@ -143,11 +224,9 @@ function DetailUser() {
                                             Hủy
                                         </button>
                                     </Link>
-                                    <Link to="/manage-user" className="Detail-user-link">
-                                        <button className='Detail-user-button-save'>
-                                            Lưu thay đổi
-                                        </button>
-                                    </Link>
+                                    <button className='Detail-user-button-save' onClick={handleSaveChanges}>
+                                        Lưu thay đổi
+                                    </button>
 
                                 </div>
                             </form>
@@ -156,6 +235,13 @@ function DetailUser() {
                         </div>
                     </div>
                 </div>
+
+                {showSuccessPopup && (
+                    <div className="success-popup">
+                        Lưu thông tin thành công
+                    </div>
+                )}
+
                 <div className="Detail-user-activity">
                     <div className="Detail-user-title-activity">Nhật ký hoạt động</div>
                     <div className="Detail-user-timeline">
@@ -164,7 +250,8 @@ function DetailUser() {
                                 color: getNextColor(),
                                 children: (
                                     <>
-                                        <p>{item.datetime}</p>                                        <p>{item.content}</p>
+                                        <p>{item.datetime}</p>
+                                        <p>{item.content}</p>
                                     </>
                                 ),
                             }))}

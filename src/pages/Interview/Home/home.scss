@@ -50,7 +50,7 @@
       flex-direction: column;
       overflow-y: scroll;
       -ms-overflow-style: none;
-      border-radius: 20px;
+      border-radius: 10px;
 
       #candidates-cv {
         font-family: Arial, Helvetica, sans-serif;
@@ -103,7 +103,9 @@
         margin-left: 5px;
         height: 30px;
         border-radius: 30px;
-        background-color: #00A3FF;
+        // background-color: #38f5ff;
+        // border: 1px solid #00A3FF;
+        color: black;
         border: none;
       }
 
@@ -122,7 +124,7 @@
       // border: 1px solid black;
       background-color: White;
       margin-left: 2%;
-      border-radius: 20px;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;

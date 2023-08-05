@@ -189,7 +189,7 @@
     color: grey;
     margin-top: 10px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .DetailBlacklist-name-admin, .DetailBlacklist-email, .DetailBlacklist-reason{
     display: flex;
@@ -200,6 +200,9 @@
     margin-bottom: 5px;
     font-weight: bold;
 }
+.DetailBlacklist-reason{
+    margin-top: 20px;
+}
 .DetailBlacklist-form-name-admin, .DetailBlacklist-form-email{
     width: 100%;
     height: 40px;
@@ -207,6 +210,7 @@
     border: none;
     box-sizing: border-box;
     border-radius: 6px;
+    padding: 5px;
 }
 .DetailBlacklist-form-reason{
     width: 100%;
@@ -223,7 +227,7 @@
 .DetailBlacklist-cancel{
     border: none;
     border-radius: 5px;
-    width: 80px;
+    width: 180px;
     height: 30px;
     margin-right: 20px;
     font-weight: bold;
@@ -232,14 +236,42 @@
     cursor: pointer;
     font-size: 16px;
 }
-.DetailBlacklist-add{
+.DetailBlacklist-save{
     border: none;
     border-radius: 5px;
-    width: 240px;
+    width: 180px;
+    height: 30px;
+    margin-right: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: blue;
+    cursor: pointer;
+    font-size: 16px;
+}
+.DetailBlacklist-remove{
+    border: none;
+    border-radius: 5px;
+    width: 180px;
     height: 30px;
     font-weight: bold;
     color: white;
     background-color: red;
+    cursor: pointer;
+    font-size: 16px;
+}
+.DetailBlacklist-add-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.DetailBlacklist-add{
+    border: none;
+    border-radius: 5px;
+    width: 180px;
+    height: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
     cursor: pointer;
     font-size: 16px;
 }

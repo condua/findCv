@@ -211,9 +211,9 @@ function CVBuilder() {
     <div style = {{width: "80%", marginLeft: "10%", marginRight: "10%"}}>
     <Container>
         <Row>
-        <Col xs={2} className="sidebar" >
+        {/* <Col xs={2} className="sidebar" >
             <CVSelect/>
-          </Col>
+          </Col> */}
         <Col xs = {10}>
 
     <div className="cv-builder" ref = {pagesPDF}  style = {{backgroundImage: "url('https://cv.fullstack.edu.vn/backgrounds/graph-dot-top-458966.svg')", backgroundPosition: "center", backgroundSize: "contain"}}>

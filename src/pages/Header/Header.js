@@ -103,11 +103,12 @@ function Header({userData}) {
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-useEffect(() => {
+
+  useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
-      const threshold = 50; // Khoảng cách scroll tối thiểu để coi là đã scroll
-    
+      const threshold = 50;
+  
       if (scrollTop > threshold) {
         setIsScrolled(true);
       } else {
@@ -121,6 +122,7 @@ useEffect(() => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
   return (
     <Navbar expand="lg" className={`bg-body-tertiary${isScrolled ? ' scrolled' : ''}`}>
       <Container fluid>
@@ -177,7 +179,7 @@ useEffect(() => {
                   <i className="bi bi-clipboard-fill ms-2"></i> <span style = {{fontWeight: "700", color: "#6f716f"}}>Việc làm đã ứng tuyển</span>
                 </NavLink>
               </NavDropdown.Item>
-</NavDropdown>
+            </NavDropdown>
             <NavLink
               to="/candidateevent"
               className={`item ${isProfileHovered ? 'text-success' : ''}`}
@@ -244,7 +246,7 @@ useEffect(() => {
                     >
                       <i className="bi bi-cloud-minus" style={{ color: '#00b14f', marginRight: '10px', marginTop: '5px' }}></i>
                       Việc làm đã nộp
-</NavLink>
+                    </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={handleLogout}>

@@ -22,7 +22,7 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...state,
-        // message: action.payload,
+        message: action.payload,
         data: null,
         accessToken: null,
         refreshToken: null,

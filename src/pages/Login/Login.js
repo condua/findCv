@@ -8,10 +8,12 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 import google from "../../assets/google.jpg"
 import api from './api'
 import "./Login.scss"
+import { message } from 'antd';
 
 const Login = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [type, setType] = useState("password")
     const [show, setShow] = useState(false)
@@ -27,6 +29,7 @@ const Login = () => {
     const [eye, setEye] = useState(<AiOutlineEye />)
     const statusCode = useSelector((state) => state.auth.error) ;
 
+    const message = useSelector((state) => state.auth.message) ;
     const handleToggle = () => {
         if (show === true) {
             setType("password")
@@ -39,22 +42,38 @@ const Login = () => {
         setShow(!show)
     }
 
-    const handleResponse = useCallback(() => {
-        // Check if the response object exists and if its 'data' property exists
-        if (response && response.data) {
-            const { role } = response.data
-            if (role === "CANDIDATE") {
-                navigate("/")
-            } else if (role === "INTERVIEWER") {
-                navigate("/interviewer")
-            } else if (role === "RECRUITER") {
-                navigate("/recruitment")
-            } else if (role === "ADMIN") {
-                navigate("/admin")
-            }
-        }
-    }, [response, navigate])
+    // const handleResponse = useCallback(() => {
+    //     // Check if the response object exists and if its 'data' property exists
+    //     if (response && response.data) {
+    //         const { role } = response.data
+    //         if (role === "CANDIDATE") {
+    //             navigate("/")
+    //         } else if (role === "INTERVIEWER") {
+    //             navigate("/interviewer")
+    //         } else if (role === "RECRUITER") {
+    //             navigate("/recruitment")
+    //         } else if (role === "ADMIN") {
+    //             navigate("/admin")
+    //         }
+    //     }
+    // }, [response, navigate])
 
+    const handleResponse = useCallback(() => {
+        console.log(location?.state?.previousUrl)
+        if (response && response.data) {
+          const { role } = response.data;
+          if (role === "CANDIDATE") {
+            navigate(-1);
+          } else if (role === "INTERVIEWER") {
+            navigate("/interviewer");
+          } else if (role === "RECRUITER") {
+            navigate("/recruitment");
+          } else if (role === "ADMIN") {
+            navigate("/admin");
+          }
+        }
+      }, [response, location, navigate]);
+    
     useEffect(() => {
         handleResponse()
     }, [handleResponse])

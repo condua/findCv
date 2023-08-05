@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 import {Timeline} from 'antd'
 import event from "../event.json"
 import useUser from '../../../hooks/useUser.js';
+import avatar from "../../../assets/No_image_available.png"
+
 
 const Home = () => {
     const [tableData, setTableData] = useState([]);
@@ -21,6 +23,7 @@ const Home = () => {
     const [events, setEvents] = useState([]);
     const currentUser = useUser()
     const [eventTable, setEventTable] = useState([]);
+    
     const apiUrl = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/event';
 
     const formatDate = (inputDate) => {
@@ -33,7 +36,16 @@ const Home = () => {
     
     
     const dispatch = useDispatch()
-    const getAllUser = useSelector(state => state.getuser.usernames.data.data)
+    const getAllUser = useSelector(state => {
+        const userData = state.getuser.usernames.data.data;
+        const candidateUsers = userData.filter(user => user.permission === "CANDIDATE");
+        return candidateUsers;
+      });
+    const loading = useSelector(state => state.getuser.loading)
+
+ 
+
+
     console.log(getAllUser)
     const fetchData = async () => {
         try {
@@ -78,23 +90,23 @@ const Home = () => {
  
 
     useEffect(() => {
-        fetchEvents();
+        // fetchEvents();
         dispatch(getEventsRequest())
     }, [dispatch]);
     const event_title = useSelector((state) => state.events)
 
     console.log(event_title)
 
-    const fetchEvents = async () => {
-        try {
-          const response = await axios.get('./event.json');
-          const data = response.data;
-          setEvents(data);
-          console.log(data)
-        } catch (error) {
-          console.error('Error fetching events:', error);
-        }
-      };
+    // const fetchEvents = async () => {
+    //     try {
+    //       const response = await axios.get('./event.json');
+    //       const data = response.data;
+    //       setEvents(data);
+    //       console.log(data)
+    //     } catch (error) {
+    //       console.error('Error fetching events:', error);
+    //     }
+    //   };
     
     // const fetchInterviews{
     //     try {
@@ -131,11 +143,11 @@ const Home = () => {
                 borderRadius:'30px',
                 fontWeight:'bolder'
                 };
-          case 'Approved':
+          case 'ACCEPT':
             return {
                 padding:'6px, 12px, 6px, 12px',
                 textAlign:'center',
-                color:'#50CD89',
+                color:'rgb(10 181 0)',
                 backgroundColor:'#E8FFF3',
                 border:'none',
                 padding:'8px 6px',
@@ -155,9 +167,12 @@ const Home = () => {
                 };
         }
       };
+
     return (
         <div className='home'>
-            
+            <div className="flex w-full absolute right-[1px] top-[-50px] bg-white h-16 rounded-xl items-center">
+                <div className="ml-10 font-serif text-xl text">Trang chủ Interviewer</div>
+            </div>
             <p style={{margin:'35px 0px -25px 35px', fontWeight:'bolder'}}>Các ứng viên gần đây</p>
                 <div className='container-cv' >
                     <div className='table-cv'>
@@ -166,31 +181,46 @@ const Home = () => {
                             <tr style={{ position: 'sticky', position: '-webkit-sticky', backgroundColor: '#FFFFFF',color:'black' }}>
                                 <th>Avatar</th>
                                 <th>Họ và tên</th>
-                                <th>Ngày phỏng vấn</th>
+                                <th>Ngày khởi tạo</th>
                                 <th>Vị trí ứng tuyển</th>
-                                {/* <th>Status</th> */}
-                                <th>Details</th>
+                                <th>Trạng thái</th>
+                                {/* <th>Chi tiết</th> */}
                             </tr>
                         </thead>
                         <tbody>
                             {getAllUser.map(item => (
                                 
                                 <tr key={item.id}>
-                                    <td> <img src={item.avt} className='ava'/></td>
-                                    <td>
+                                    {/* <td> <img src={item.avt} className='ava'/></td> */}
+                                        <td>
+                                            {item.avt ? (
+                                                <img src={item.avt} className='ava' alt="User Avatar" />
+                                            ) : (
+                                                <img src={avatar} className='ava' alt="Default Avatar" />
+                                            )}
+                                            </td>
+                                        <td>
                                         <p>{item.name}</p>
                                         <p>{item.email}</p>    
                                     </td>
-                                    <td>{item.dateRegister}</td>
-                                    {/* <td>{item.position}</td> */}
+                                    <td>{formatDate(item.dateRegister)}</td>
                                     <td>
+                                       <div>
+                                        {item.listJobPosting.map(position => (
+                                            <p>{position.position}</p>
+                                        )
+                                        )}
+                                       </div>
+                                    </td>
+                                    {/* <td>{item.position}</td> */}
+                                    <td style={{paddingRight:'20px'}}>
                                         <div style={getStatusColor(item.status)}>
                                             {item.status}
                                         </div>
                                     </td>
                                     
                                     
-                                    <td><button className='button-edit'><Link style={{textDecoration:'none',color:'white'}} to={`../managecandidate/${item.id}`}>View</Link></button></td>
+                                    {/* <td><button className='button-edit' style={{ border: '1px solid #00A3FF'}}><Link style={{textDecoration:'none', color:'black'}} to={`../managecandidate/${item.id}`}>View</Link></button></td> */}
                                 </tr>
                                 
                             ))}
@@ -200,73 +230,27 @@ const Home = () => {
                                 
                     <div className='event'>
                         {/* <BsCircle style={{color:'blue'}}/> */}
-                        <h2 style={{fontSize:'20px'}}>Các sự kiện sắp tới của công ty</h2>
+                        <h2 style={{fontSize:'20px'}}>Các sự kiện của công ty</h2>
                         <div className='event-list'>
-                                <Timeline style={{marginTop:'5px',marginLeft:'20px'}}
-                                    items={eventTable.map((event) => ({
-                                        color:getRandomColor(),
+                        <Timeline style={{ marginTop: '5px', marginLeft: '20px' }}
+                            items={eventTable.map((event) => {
+                                // Kiểm tra điều kiện event.status === true
+                                if (event.status === true) {
+                                    return {
+                                        color: getRandomColor(),
                                         children: (
                                             <>
-                                                <p>{event.title}</p>    
+                                                <p>{event.title}</p>
                                                 <p>{formatDate(event.time)}</p>
                                             </>
                                         ),
-                                    }))}
-                                />
-                        </div>
-                        
-                       
-                        {/* <div className='event-list'>
-                                {event.map(event=>(
-                                    <div className='event-item' key={event.name}>
-                                        <h4>{event.name}</h4>
-                                        <p>{event.date}</p>
-                                    </div>
-                                ))}
-                            
-                        </div> */}
-                      
-                    
-                        {/* <div className='event-list'>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            <div className='event-item'>
-                                <h4>JobFair tại trường đại học Bách Khoa</h4>
-                                <p>11 Jul 8:10 PM</p>
-                            </div>
-                            
-                        </div> */}
-
+                                    };
+                                }
+                                // Nếu event.status === false hoặc không có status, không tạo item cho Timeline
+                                return null;
+                            })}
+                        />
+                    </div>
                     </div>
                 </div>
                 <h4 style={{margin:'30px'}}>Các cuộc phỏng vấn gần đây</h4>

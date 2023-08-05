@@ -40,7 +40,7 @@ const TableInterviewer = () => {
         {currentTableData.map((item) => (
           <div className='block' key={item.id}>
             <div>
-              <img className='image' src={item.image} />
+              <img className='image' src={''} />
               <p style={{ fontSize: 20, fontWeight: 'bold' }} >{item.name}</p>
               <p style={{ fontSize: 20, fontWeight: 'bold' }}>{item.email}</p>
               <div className='Room'>

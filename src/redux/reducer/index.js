@@ -9,6 +9,9 @@ import getUserReducer from './getUserReducer.js'
 import jobReducer from './jobReducer.js';
 import userInfo from './userInfoReducer.js';
 import getProfileReducer from './getProfileReducer.js';
+import questionReducer from './questionReducer.js';
+import interviewReducer from './interviewReducer.js';
+import applyJobReducer from './applyJobReducer.js'; 
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -20,6 +23,10 @@ const rootReducer = combineReducers({
   jobs: jobReducer,
   userinfo: userInfo,
   getprofile: getProfileReducer,
+  question:questionReducer,
+  interview:interviewReducer,
+  applyJob: applyJobReducer,
+
 });
 
 export default rootReducer;

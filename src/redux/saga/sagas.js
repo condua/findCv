@@ -8,7 +8,8 @@ import {FETCH_USERNAMES, fetchUsernamesSuccess, fetchUsernamesFailure } from '..
 import { GET_PROFILE_REQUEST,UPDATE_PROFILE_REQUEST, getProfileSuccess, getProfileFailure,updateProfileFailure,updateProfileSuccess } from '../action/profileActions';
 import { UPLOAD_AVATAR_REQUEST, uploadAvatarSuccess, uploadAvatarFailure } from '../action/uploadAvatarActions';
 import { GET_EVENTS_REQUEST, } from '../action/eventActions';
-
+import { APPLY_JOB_REQUEST, applyJobSuccess, applyJobFailure } from '../action/applyJobActions';
+import {message as messageInfo} from 'antd'
 import { Button, message } from 'antd';
 import { Navigate } from 'react-router-dom';
 import { push } from 'react-router-redux'; 
@@ -19,6 +20,9 @@ import {
   updateUserSuccess,
   updateUserFailure,
 } from '../action/userAction';
+
+import questionSaga from './questionSaga';
+import interviewSaga from './interviewSaga';
 
 
 
@@ -31,26 +35,27 @@ function* login(action) {
     const response = yield call(loginApi, email, password);
     // console.log(response);
     const { data: responseData } = response;
-    // const { message: responeMessage } = response;
+    // const { message: responeMessagef } = response;
     // console.log(response);
     // console.log(responeMessage);
-    if(response.status !== 200)
-    {
-      yield put(loginFailure)
-    }
-    const role = responseData.data.role;
-    // console.log(role);
-    if (role === "CANDIDATE" || role ==="INTERVIEWER" || role ==="RECRUITER" || role ==="ADMIN") {
-      const { message, data , access_token, refresh_token } = responseData;
-      yield put(loginSuccess(message, data, access_token, refresh_token));
-    } else {
-      yield put(loginFailure('Invalid role'));
-    }
+    console.log(responseData.status)
+
+    
+    const { message, data , access_token, refresh_token } = responseData;
+    yield put(loginSuccess(message, data, access_token, refresh_token));
+    
     
   } catch (error) {
+    // message.info({
+    //   content: 'Email hoặc mật khẩu không đúng',
+    //   icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+    //   style: {
+    //     color: 'red',
+    //   },
+    // });
     console.error("Error in login saga:", error);
     // alert('Tài khoản hoặc mật khẩu không chính xác')
-    yield put(loginFailure(error.response.request.status)); 
+    yield put(loginFailure(error)); 
   }
 }
 function* registerUser(action) {
@@ -59,6 +64,18 @@ function* registerUser(action) {
     const {username, email, password} = action.payload
     const response = yield call(registerAPI, username, email, password);
     const { data: responseData } = response;
+    if(response.status !== "200 OK")
+      {
+        message.info({
+          content: 'Email đã tồn tại',
+          icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+          style: {
+            color: 'red',
+          },
+        });
+        return
+
+      }
 
     const { message, data , access_token, refresh_token } = responseData;
 
@@ -131,13 +148,44 @@ function* updateUserAsync(action) {
   try {
     const { userData, accessToken } = action.payload;
     // Make the API call to update the user information
-    const response = yield call(apiUpdateUser, userData, accessToken);
+    const api = "https://qltd01.cfapps.us10-001.hana.ondemand.com/profile"
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    const response = yield call(axios.put, api, userData,config);
+
+    // const response = yield call(apiUpdateUser, userData, accessToken);
     console.log(response)
     // Handle success
-    yield put(updateUserSuccess(response));
+    const responseData = response.data
+    console.log(responseData)
+    if(response.data.status !== "200 OK")
+      {
+        message.info({
+          content: 'Thông tin tài khoản thay đổi không thành công',
+          icon: <span style={{ color: 'red', marginRight: '8px' }}>⛔</span>,
+          style: {
+            color: 'red',
+          },
+        });
+        return
+
+      }
+    messageInfo.success({
+      content: 'Thông tin tài khoản đã được thay đổi thành công',
+
+    });
+    yield put(updateUserSuccess(response.data.data));
     
   } catch (error) {
     // Handle errors in the API call
+    console.log(error)
+    messageInfo.error({
+      content: 'Thông tin tài khoản thay đổi không thành công',
+
+    });
     yield put(updateUserFailure('UpdateProfile failed'));
   }
 }
@@ -154,16 +202,11 @@ const apiUpdateUser = async (userData, accessToken) => {
   try {
     const response = await axios.put(apiUrl, userData, {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    return response.data.data;
 
-    if (response.data.status === 'OK') {
-      return response.data.data;
-    } else {
-      throw new Error('UpdateProfile failed');
-    }
   } catch (error) {
     console.error(error);
     throw error;
@@ -248,6 +291,38 @@ return axios.put('https://qltd01.cfapps.us10-001.hana.ondemand.com/profile', upd
   },
 });
 }
+function* applyJob(action) {
+  try {
+    console.log("RUNNING HERE TO APPLY")
+    const { accessToken, jobId } = action.payload;
+    // Thực hiện phương thức POST tới API
+    console.log("DATA TO APPLY",action.payload)
+    console.log("CALL", yield call(applyJobApi, accessToken, jobId));
+    const response = yield call(applyJobApi, accessToken, jobId);
+    console.log("PHAN HOI",response)
+    // Xử lý kết quả phản hồi
+    if (response.status === 200) {
+      yield put(applyJobSuccess());
+      // Điều hướng tới trang "/cvhandler" sau khi thực hiện thành công
+      console.log("POST SUCCESS");
+    } else {
+      yield put(applyJobFailure('Failed to apply job'));
+    }
+  } catch (error) {
+    console.error('Error applying job:', error);
+    yield put(applyJobFailure('Failed to apply job'));
+  }
+}
+
+function applyJobApi(accessToken, jobId) {
+  console.log("SAGAS: ", accessToken, jobId);
+  return axios.post('https://qltd01.cfapps.us10-001.hana.ondemand.com/apply-job',  jobId , {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+}
 
 export default function* rootSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
@@ -259,8 +334,12 @@ export default function* rootSaga() {
   yield takeLatest(UPLOAD_AVATAR_REQUEST, uploadAvatar);
   yield takeLatest(UPDATE_PROFILE_REQUEST, updateProfile);
 
+  yield takeLatest(APPLY_JOB_REQUEST, applyJob);
+
   yield all([
     eventSaga(),
+    questionSaga(),
+    interviewSaga(),
     jobSaga(), 
   ]);
 

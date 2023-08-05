@@ -7,9 +7,12 @@ import {
     EditOutlined,
     VideoCameraOutlined,
     StopOutlined,
+    LoadingOutlined
 } from "@ant-design/icons"
-import { deleteJobRequest, getJobsRequest } from "../../redux/action/jobActions"
+import {  getJobsRequest } from "../../redux/action/jobActions"
 import { useDispatch, useSelector } from "react-redux"
+import { Popconfirm, Result, message } from "antd"
+import axios from "axios"
 
 const Recruitment = () => {
     const dispatch = useDispatch()
@@ -19,14 +22,36 @@ const Recruitment = () => {
     }, [dispatch])
 
     const jobs = useSelector((state) => state.jobs.jobs)
+    const accessToken = useSelector((state) => state.auth.accessToken)
+
     console.log(jobs)
 
-    const handleDeleteJob = (jobId) => {
-        console.log(jobId)
-        dispatch(deleteJobRequest(jobId))
-        dispatch(getJobsRequest())
+
+
+    const handleDeleteJob = async (jobId) => {
+        try {
+            await axios.delete(
+                `https://qltd01.cfapps.us10-001.hana.ondemand.com/job-posting/${jobId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+            dispatch(getJobsRequest())
+            message.success("Xoá job thành công")
+            
+        } catch (error) {
+            console.error("Error while deleting event:", error)
+        }
     }
 
+    const sortedJobs = jobs.slice().sort((a, b) => b.id - a.id);
+
+    if (!jobs) {
+        return <Result icon={<LoadingOutlined />} title="Please wait a sec..." />
+    }
+    
     return (
         <div>
             {" "}
@@ -72,7 +97,7 @@ const Recruitment = () => {
                     </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-y-8 gap-x-4 ">
-                    {jobs.map((job) =>
+                    {sortedJobs.map((job) =>
                         job.status ? (
                             <div className="flex w-full bg-white rounded-xl  hover:-translate-y-2 hover:shadow-2xl transition-all ease-in-out duration-200">
                                 <div className="flex justify-center w-2/5">
@@ -121,13 +146,31 @@ const Recruitment = () => {
                                     <div className="flex justify-center text-xl h-1/3">
                                         <VideoCameraOutlined />
                                     </div>
-                                    <div className="flex justify-center text-xl h-1/3 transition-all duration-300 hover:scale-125 hover:text-red-600 ">
-                                        <StopOutlined
-                                            onClick={() =>
+                                    <Popconfirm
+                                            className="flex justify-center cursor-pointer text-xl h-1/3 transition-all duration-300 hover:scale-125 hover:text-red-600 "
+                                            title="Delete this job"
+                                            description="Are you sure to delete this job?"
+                                            placement="bottomRight"
+                                            onConfirm={() =>
                                                 handleDeleteJob(job.id)
                                             }
-                                        />
-                                    </div>
+                                            // onCancel={cancel}
+                                            okText="Yes"
+                                            okType="danger"
+                                            showCancel={false}
+                                            okButtonProps={{
+                                                style: {
+                                                    backgroundColor: "red",
+                                                    color: "white",
+                                                },
+                                            }}
+                                        >
+                                            <StopOutlined
+                                            // onClick={() =>
+                                            //     handleDeleteEvent(event.id)
+                                            // }
+                                            />{" "}
+                                        </Popconfirm>
                                 </div>
                             </div>
                         ) : null

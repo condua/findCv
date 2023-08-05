@@ -49,6 +49,7 @@
     background-color: white;
     border-radius: 10px;
     padding: 10px;
+    overflow-y: auto;
 }
 .Detail-user-user{
     width: 100%;
@@ -136,7 +137,6 @@
         .Detail-user-info-item{
             width: 95%;
             display: flex;
-            align-items: center;
             background-color: #FFFFFF;
             height: 15%;
             p{
@@ -144,8 +144,7 @@
                 width: 10%;
             }
             input{
-                width: 80%;
-                margin-top: 20px;
+                width: 70%;
                 height: 60%;
                 border-radius: 6px;
                 background-color: #F5F8FA;
@@ -153,8 +152,7 @@
                 box-sizing: border-box;
             }
             textarea{
-                width: 80%;
-                margin-top: 20px;
+                width: 70%;
                 height: 100%;
                 border-radius: 6px;
                 background-color: #F5F8FA;
@@ -198,3 +196,17 @@
     text-decoration: none;
     color: white;
 }
+
+.success-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    font-size: 18px;
+  }
+  

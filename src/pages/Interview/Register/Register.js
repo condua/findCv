@@ -90,9 +90,43 @@ const Register = () => {
       }
       return options;
     };
-    const handleGender = () =>{
+    const [formData, setFormData] = useState({
+      username: '',
+      email: '',
+      password: '',
+      role: '',
+    });
 
-    }
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Replace 'YOUR_API_URL' with the actual API endpoint where you want to send the data
+      const apiUrl = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/auth/register';
+  
+      // Perform the POST request to the API
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response from the API if necessary
+          console.log(data);
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error('Error:', error);
+        });
+    };
     return (
         
         <div className='register'>
@@ -159,7 +193,7 @@ const Register = () => {
                       <button className='login-button'>
                         <h2><Link to='/login' style={{color:'white',textDecoration:'none'}}>Đăng Nhập</Link></h2>
                       </button>
-                      <button className='register-button'>
+                      <button className='register-button' onClick={handleSubmit}>
                         <h2>Đăng Kí</h2>
                       </button>
                     </div>

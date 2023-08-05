@@ -80,3 +80,23 @@ export const deleteJobFailure = (error) => ({
   type: DELETE_JOB_FAILURE,
   payload: error,
 });
+
+
+export const GET_JOBDETAIL_REQUEST = "GET_JOBDETAIL_REQUEST";
+export const GET_JOBDETAIL_SUCCESS = "GET_JOBDETAIL_SUCCESS";
+export const GET_JOBDETAIL_FAILURE = "GET_JOBDETAIL_FAILURE";
+
+export const getJobDetailRequest = (jobId) => ({
+  type: GET_JOBDETAIL_REQUEST,
+  payload: jobId,
+});
+
+export const getJobDetailSuccess = (job) => ({
+  type: GET_JOBDETAIL_SUCCESS,
+  payload: job,
+});
+
+export const getJobDetailFailure = (error) => ({
+  type: GET_JOBDETAIL_FAILURE,
+  payload: error,
+});

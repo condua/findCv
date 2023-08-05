@@ -1,45 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
-import CV from '../Cv/index'
+import { UserOutlined, SettingOutlined } from '@ant-design/icons';
 import './CVSelect.scss';
 
 function CVSelect() {
-  const [isProfileHovered, setProfileHovered] = useState(false);
-
-  const handleProfileMouseEnter = () => {
-    setProfileHovered(true);
-  };
-
-  const handleProfileMouseLeave = () => {
-    setProfileHovered(false);
-  };
-
   return (
-    <Col>
-      <Row>
-        <NavLink
-          to="/cvhandler"
-          className={`item ${isProfileHovered ? 'text-success' : ''}`}
-          onMouseEnter={handleProfileMouseEnter}
-          onMouseLeave={handleProfileMouseLeave}
-        >
-          <i className="bi bi-person"></i>
-          Thông tin ứng tuyển
-        </NavLink>
-      </Row>
-      <Row>
-        <NavLink
-          to="/cv"
-          className={`item ${isProfileHovered ? 'text-success' : ''}`}
-          onMouseEnter={handleProfileMouseEnter}
-          onMouseLeave={handleProfileMouseLeave}
-        >
-          <i className="bi bi-gear"></i>
-          Tạo CV
-        </NavLink>
-      </Row>
-    </Col>
+    <div className="cv-select">
+      <Col style={{ marginTop: "20px" }}>
+        <Row className="link-row">
+          <NavLink to="/cvhandler" className="item" activeClassName="active">
+            <i className="bi bi-person"></i>
+            Resume Digital
+          </NavLink>
+        </Row>
+        <Row className="link-row">
+          <NavLink to="/cv" className="item" activeClassName="active">
+            <i className="bi bi-gear"></i>
+            Build CV
+          </NavLink>
+        </Row>
+      </Col>
+    </div>
   );
 }
 

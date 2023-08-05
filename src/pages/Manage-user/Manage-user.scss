@@ -111,28 +111,29 @@
     width: 100%;
     display: flex;
     padding: 10px 0px;
+    align-items: center;
 }
 
 .Manage-user-name-user{
-    width: 30%;
+    width: 35%;
 }
 .Manage-user-permission-user{
-    width: 12.5%;
+    width: 15%;
 }
 .Manage-user-date-register-user{
-    width: 37.5%;
+    width: 30%;
 }
 .Manage-user-enable-user{
-    width: 10%;
+    width: 15%;
 }
 .Manage-user-details-user{
-    width: 10%;
+    width: 5%;
     text-align: center;
 }
 
 
 .Manage-user-name-content-user{
-    width: 30%;
+    width: 35%;
     display: flex;
 }
 .Manage-user-circle {
@@ -162,24 +163,24 @@
 }
 
  .Manage-user-permission-content-user{
-    width: 12.5%;
+    width: 15%;
     display: flex;
     align-items: center;
     font-weight: bold;
 }
 .Manage-user-date-register-content-user{
-    width: 37.5%;
+    width: 30%;
     display: flex;
     align-items: center;
     font-weight: bold;
 }
 .Manage-user-enable-user-content{
-    width: 10%;
+    width: 15%;
     display: flex;
     align-items: center;
 }
 .Manage-user-details-content-user{
-    width: 10%;
+    width: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,30 +188,34 @@
 }
 
 .Manage-user-name-candidate-user{
-    width: 30%;
+    width: 35%;
 }
-.Manage-user-permission-candidate-user, .Manage-user-date-register-candidate-user, .Manage-user-position-user, .Manage-user-status-user{
-    width: 12.5%;
+.Manage-user-permission-candidate-user, .Manage-user-date-register-candidate-user, .Manage-user-position-user{
+    width: 15%;
 }
 .Manage-user-details-candidate{
-    width: 10%;
+    width: 5%;
     text-align: center;
 }
 
 
 
 .Manage-user-name-content-candidate-user{
-    width: 30%;
+    width: 35%;
     display: flex;
 }
- .Manage-user-permission-content-candidate-user, .Manage-user-date-register-content-candidate-user, .Manage-user-position-content-user, .Manage-user-status-content-user{
-    width: 12.5%;
+ .Manage-user-permission-content-candidate-user, .Manage-user-date-register-content-candidate-user, .Manage-user-position-content-user{
+    width: 15%;
     display: flex;
     align-items: center;
     font-weight: bold;
 }
+.Manage-user-position-column{
+    display: flex;
+    flex-direction: column;
+}
 .Manage-user-details-content-candidate{
-    width: 10%;
+    width: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -243,16 +248,6 @@
     width: 50px;
     cursor: pointer;
 }
-.Manage-user-frame-status{
-    width: 100px;
-    height: 30px;
-    border: none;
-    border-radius: 10px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .Manage-user-accept{
     background-color: #E8FFF3;
     color: #50CD89;
@@ -265,3 +260,79 @@
     background-color: #FFF5F8;
     color: #F1416C;
 }
+.link-to-detail-user:hover{
+    color: inherit;
+    text-decoration: none;
+}
+.Manage-user-enable-button{
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 160px;
+}
+.active-button-color{
+    background-color: #50CD89;
+}
+.unauthen-button-color{
+    background-color: #F1BC00;
+}
+.banned-button-color{
+    background-color: #F1416C;
+}
+.Manage-user-cancel-button{
+    border-radius: 10px;
+    color: white;
+    background-color: grey;
+
+}
+
+.Manage-user-confirm-button{
+    border-radius: 10px;
+    color: white;
+    background-color: blue;
+}
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .confirmation-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+  }
+  
+  .confirmation-modal-message {
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .confirmation-modal-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .confirmation-modal-button:hover {
+    background-color: #0056b3;
+  }
+  

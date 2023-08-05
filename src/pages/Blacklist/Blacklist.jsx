@@ -1,18 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Blacklist.scss';
-import background from '../../assets/background.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import user from '../user'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 function BlackList() {
+    const userApi = 'https://qltd01.cfapps.us10-001.hana.ondemand.com/blacklist'
+    const [getUser, setGetUser] = useState({
+        status: "OK",
+        message: "Success !",
+        data: [
+
+        ]
+    });
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    const accessToken = useSelector(state => state.auth.accessToken)
+
+    const fetchUser = async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+            const response = await axios.get(userApi, { headers });
+            setGetUser(response.data);
+            console.log(response.data)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+
 
     const ROWS_PER_PAGE = 10;
     const [initialSearchValue, setInitialSearchValue] = useState('');
     const [currentPageCandidate, setCurrentPageCandidate] = useState(1);
-    const candidateUsers = user.filter(item => item.permission === "Candidate" && item.status === "Blacklist");
+    console.log('getuser', getUser);
+    const candidateUsers = getUser.data;
+
+    console.log('blacklist data', candidateUsers);
 
     //Candidate
     const handlePageChangeCandidate = (pageNumber) => {
@@ -20,10 +53,11 @@ function BlackList() {
     };
 
     const filteredCandidateUsers = candidateUsers.filter((item) => {
-        return (
-            item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-        );
+        const name = item.name ? item.name.toLowerCase() : '';
+        const email = item.email ? item.email.toLowerCase() : '';
+        const searchValue = initialSearchValue.toLowerCase();
+
+        return name.includes(searchValue) || email.includes(searchValue);
     });
 
     const totalRowsCandidate = filteredCandidateUsers.length;
@@ -45,17 +79,7 @@ function BlackList() {
         e.preventDefault();
     };
 
-    //Select
-    const [selectedOption1, setSelectedOption1] = useState('');
-    const [selectedOption2, setSelectedOption2] = useState('');
-
-    const handleSelect1 = (event) => {
-        setSelectedOption1(event.target.value);
-    };
-
-    const handleSelect2 = (event) => {
-        setSelectedOption2(event.target.value);
-    };
+    const altavatar = 'https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg';
 
 
     return (
@@ -71,21 +95,6 @@ function BlackList() {
                         onChange={handleSearchInputChange}
                     />
                 </form>
-
-                <select className="Blacklist-select-date" value={selectedOption1} onChange={handleSelect1}>
-                    <option value="">Ngày đăng ký ứng tuyển</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                </select>
-
-                <select className="Blacklist-select-position" value={selectedOption2} onChange={handleSelect2}>
-                    <option value="">Vị trí ứng tuyển</option>
-                    <option value="optionA">Option A</option>
-                    <option value="optionB">Option B</option>
-                    <option value="optionC">Option C</option>
-                </select>
-
             </div>
 
             <div className="Blacklist-candidate-list">
@@ -98,7 +107,9 @@ function BlackList() {
                         <FontAwesomeIcon icon={faBackward} />
                     </button>
 
-                    <div className="page-position">{currentPageCandidate} / {totalPagesCandidate}</div>
+                    <div className="page-position">
+                        {totalPagesCandidate === 0 ? "0 / 0" : `${currentPageCandidate} / ${totalPagesCandidate}`}
+                    </div>
 
                     <button
                         className="Blacklist-button-next"
@@ -119,45 +130,55 @@ function BlackList() {
                 </div>
 
                 {currentRowsCandidate.filter((item) => {
-                    return (
-                        item.name.toLowerCase().includes(initialSearchValue.toLowerCase()) ||
-                        item.email.toLowerCase().includes(initialSearchValue.toLowerCase())
-                    );
+                    const name = item.fullName ? item.fullName.toLowerCase() : '';
+                    const email = item.email ? item.email.toLowerCase() : '';
+                    const searchValue = initialSearchValue.toLowerCase();
+
+                    return name.includes(searchValue) || email.includes(searchValue);
                 })
                     .map((item) => (
-                        <div key={item.id}>
-                            {item.permission === "Candidate" && ( // Kiểm tra điều kiện permission bằng "Candidate"
-                                <div className="Blacklist-table-user">
-                                    <div className="Blacklist-name-content-candidate">
-                                        <div className="avt">
-                                            <div className="Blacklist-circle">
-                                                <img src={item.avt} alt="avt" />
-                                            </div>
+                        <div key={item.userId}>
+                            <div className="Blacklist-table-user">
+                                <div className="Blacklist-name-content-candidate">
+                                    <div className="avt">
+                                        <div className="Blacklist-circle">
+                                            <img src={item.avatar ? item.avatar : altavatar} alt="avt" />
                                         </div>
+                                    </div>
 
-                                        <div className="Blacklist-name-email">
-                                            <div className="Blacklist-name-detail">{item.name}</div>
-                                            <div className="Blacklist-email-detail">{item.email}</div>
-                                        </div>
-                                    </div>
-                                    <div className="Blacklist-permission-content-candidate">{item.permission}</div>
-                                    <div className="Blacklist-date-register-content-candidate">{item.date}</div>
-                                    <div className="Blacklist-position-content">{item.position}</div>
-                                    <div className="Blacklist-status-content">
-                                        <div className={`Blacklist-frame-status ${item.status === "Accept" ? "Blacklist-accept" : ""} 
-                                ${item.status === "In process" ? "Blacklist-process" : ""} 
-                                ${item.status === "Blacklist" ? "Blacklist-blacklist" : ""} 
-                                `}>{item.status}</div>
-                                    </div>
-                                    <div className="Blacklist-details-content-candidate" >
-                                        <Link to={`/detail-blacklist/${item.id}`}>
-                                            <button className="Blacklist-button-view">
-                                                View
-                                            </button>
-                                        </Link>
+                                    <div className="Blacklist-name-email">
+                                        <div className="Blacklist-name-detail">{item.fullName}</div>
+                                        <div className="Blacklist-email-detail">{item.email}</div>
                                     </div>
                                 </div>
-                            )}
+                                <div className="Blacklist-permission-content-candidate">
+                                    CANDIDATE
+                                </div>
+                                <div className="Blacklist-date-register-content-candidate">
+                                    {format(new Date(item.DateBlacklist), "yyyy-MM-dd HH:mm:ss")}
+                                </div>
+                                <div className="Blacklist-position-content">
+                                    <div className="Blacklist-position-column">
+                                        {item.ListJobPosting.map((position, index) => (
+                                            <div key={index}>{position.position}</div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="Blacklist-status-content">
+                                    <div className={`Blacklist-frame-status ${item.status === "ACCEPT" ? "Blacklist-accept" : ""} 
+                                ${item.status === "INPROCESS" ? "Blacklist-process" : ""} 
+                                ${item.status === "BLACKLIST" ? "Blacklist-blacklist" : ""} 
+                                `}>{item.status}</div>
+                                </div>
+                                <div className="Blacklist-details-content-candidate" >
+                                    <Link to={`/detail-blacklist/${item.blackListId}`}>
+                                        <button className="Blacklist-button-view">
+                                            View
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+
                         </div>
                     ))}
 
