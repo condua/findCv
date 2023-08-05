@@ -1,0 +1,363 @@
+.RoomDetail-home {
+  width: 100%;
+  height: 100vh;
+  background-color: #e9ecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .info-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+
+    .BackButton {
+      position: absolute;
+      background-color: #f1fafe;
+      border-radius: 10px;
+      color: #00a3ff;
+      border: none;
+      padding: 10px;
+      left: 780px;
+
+    }
+
+    h2 {
+      height: 8%;
+      margin-top: 10px;
+      margin-left: 20px;
+      text-align: left;
+    }
+
+    .form-edit {
+      width: 100%;
+      height: 84%;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-top: 1px solid #cbcfd3;
+
+
+      .info-item {
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        background-color: #FFFFFF;
+        height: 30%;
+
+        p {
+          margin-right: 100px;
+          width: 10%;
+        }
+
+        span {
+          width: 20%;
+        }
+
+        input {
+          width: 80%;
+          margin-top: 0px;
+          height: 60%;
+          border-radius: 6px;
+          background-color: gainsboro;
+          border: none;
+          box-sizing: border-box;
+          padding-left: 10px;
+        }
+
+
+        .ant-picker-clear {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
+        .ant-btn:hover {
+          background-color: transparent;
+        }
+
+        .DatePicker.RangePicker:hover {
+          background-color: transparent;
+
+
+        }
+
+
+
+
+      }
+
+      // .info-change-password{
+      //     .button-save{
+
+      //     }
+      // }
+
+      .save-item {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        background-color: #FFFFFF;
+        height: 8%;
+        justify-content: end;
+
+        border-top: 1px solid #cbcfd3;
+
+        .button-save {
+          position: relative;
+          top: 13px;
+          right: 20px;
+          padding-right: 10px;
+          padding-left: 10px;
+          background-color: #00A3FF;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .button-save:hover {
+          background-color: #4856d4;
+        }
+
+        .button-close {
+          position: relative;
+          top: 13px;
+          right: 200px;
+          padding-right: 10px;
+          padding-left: 10px;
+          background: none;
+          color: #B5B5C3;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .button-close:hover {
+          color: #00A3FF;
+        }
+
+        .save-item-left {
+          width: 82%;
+          display: flex;
+          flex-direction: row;
+          justify-content: left;
+          height: 100%;
+          margin-right: 50px;
+
+          .account-link {
+            position: relative;
+            top: 13px;
+            left: 20px;
+            padding-right: 10px;
+            padding-left: 10px;
+            background-color: #00A3FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+
+          .account-link:hover {
+            background-color: #7eddea;
+            color: black;
+          }
+
+          .notifycation {
+            position: relative;
+            top: 13px;
+            left: 5%;
+            padding-right: 10px;
+            padding-left: 10px;
+            background: none;
+            color: #B5B5C3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+
+          .notifycation:hover {
+            color: rgb(223, 60, 60);
+          }
+        }
+      }
+    }
+
+  }
+
+
+
+  .container-company {
+    width: 66.5%;
+    height: 100vh;
+    background-color: #e9ecef;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    align-items: center;
+    border-radius: 10px;
+
+    .AddButton {
+      background-color: #00a3ff;
+      color: white;
+      position: relative;
+      left: 0px;
+      border-radius: 10px;
+      border: none;
+      font-size: large;
+      padding: 20px;
+    }
+
+    .company-item {
+      width: 100%;
+      height: 30%;
+      margin: 20px 20px 20px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+
+      .company-item-top {
+        border-radius: 10px;
+        width: 100%;
+        height: 40%;
+        background-color: white;
+        margin: 0px 0px 10px 0px;
+        position: relative;
+
+        .logo {
+          position: absolute;
+          left: 0px;
+          width: 60px;
+          height: 60px;
+          background-color: #F5F8FA;
+          margin: 9px 0px 10px 10px;
+        }
+
+        h3 {
+          position: absolute;
+          left: 80px;
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-top: 10px;
+        }
+
+        p {
+          color: #B5B5C3;
+          position: absolute;
+          left: 80px;
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-top: 35px;
+        }
+
+        .status {
+          position: absolute;
+          width: 100px;
+          height: 40px;
+          text-align: center;
+          right: 20px;
+          top: 0px;
+          margin-left: 20px;
+          margin-top: 10px;
+          // padding: 6px, 12px, 6px, 12px;
+          background-color: #F1FAFF;
+          color: #00A3FF;
+          border: none;
+          gap: 10px;
+          border-radius: 6px;
+          font-weight: bolder;
+
+        }
+
+
+      }
+
+      .company-item-mid {
+        width: 100%;
+        height: 23%;
+        background-color: white;
+        margin: 10px 0px 10px 0px;
+        padding-left: 20px;
+        padding-right: 10px;
+
+        p {
+          font-size: 14px;
+          color: #7E8299;
+        }
+
+      }
+
+      .company-item-bot {
+        width: 96%;
+        height: 25%;
+        background-color: white;
+        margin: 10px 0px 10px 20px;
+        display: flex;
+        flex-direction: row;
+
+        .date {
+          width: 20%;
+          height: 100%;
+          border: 1px dashed #E4E6EF;
+          border-radius: 6px;
+          background-color: #FFFFFF;
+          text-align: left;
+          margin-right: 50px;
+
+          h4 {
+            margin-left: 10px;
+          }
+
+          p {
+            margin-left: 10px;
+            color: #B5B5C3;
+          }
+        }
+
+        .salary {
+          width: 20%;
+          height: 100%;
+          border: 1px dashed #E4E6EF;
+          border-radius: 6px;
+          background-color: #FFFFFF;
+          text-align: left;
+
+          h4 {
+            margin-left: 10px;
+          }
+
+          p {
+            margin-left: 10px;
+            color: #B5B5C3;
+          }
+        }
+      }
+    }
+  }
+
+  .container-company::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .timeline {
+    .ant-timeline-item-content {
+      font-size: 16px;
+    }
+  }
+
+  .timeline .ant-timeline-item-head {
+    transform: scale(2);
+  }
+}

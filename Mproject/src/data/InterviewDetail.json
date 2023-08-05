@@ -1,0 +1,112 @@
+[
+    {
+        "interviewID": 1,
+        "detailID": "C1",
+        "name": "Letitia",
+        "position": "Intern Frontend Developer",
+        "skill": "JavaScript, React",
+        "experience": "3 năm",
+        "status": "Đã chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/50.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C2",
+        "name": "John",
+        "position": "Software Engineer",
+        "skill": "Java, Python",
+        "experience": "5 năm",
+        "status": "Đã chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/male/25.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C3",
+        "name": "Emily",
+        "position": "UX Designer",
+        "skill": "UI/UX Design",
+        "experience": "7 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/18.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C4",
+        "name": "Michael",
+        "position": "Backend Developer",
+        "skill": "Node.js, MongoDB",
+        "experience": "4 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/male/33.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C5",
+        "name": "Sophia",
+        "position": "Data Analyst",
+        "skill": "SQL, Data Visualization",
+        "experience": "3 năm",
+        "status": "Đã chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/12.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C6",
+        "name": "Daniel",
+        "position": "Mobile App Developer",
+        "skill": "Flutter, iOS, Android",
+        "experience": "6 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/male/9.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C7",
+        "name": "Olivia",
+        "position": "Graphic Designer",
+        "skill": "Adobe Photoshop",
+        "experience": "4 năm",
+        "status": "Đã chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/40.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C8",
+        "name": "Ethan",
+        "position": "Full Stack Developer",
+        "skill": "JavaScript, React, Node.js",
+        "experience": "5 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/male/21.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C9",
+        "name": "Ava",
+        "position": "UI Designer",
+        "skill": "Sketch, Figma",
+        "experience": "3 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/27.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C10",
+        "name": "William",
+        "position": "DevOps Engineer",
+        "skill": "AWS, Docker, Kubernetes",
+        "experience": "4 năm",
+        "status": "Đã chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/male/17.jpg"
+    },
+    {
+        "interviewID": 1,
+        "detailID": "C11",
+        "name": "Mia",
+        "position": "Frontend Developer",
+        "skill": "HTML, CSS, JavaScript",
+        "experience": "2 năm",
+        "status": "Chưa chấm",
+        "avatar": "http://xsgames.co/randomusers/assets/avatars/female/35.jpg"
+    }
+]

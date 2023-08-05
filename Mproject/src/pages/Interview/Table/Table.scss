@@ -1,0 +1,316 @@
+.manage-candidate {
+  display: flex;
+  flex-direction: column;
+
+  .outer-wrapper {
+    width: 90%;
+    background-color: white;
+    border: 5px solid white;
+    margin: 55px 0px 0px 70px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+
+    .searchItem {
+
+      height: 30px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid #81807f;
+    }
+  }
+
+  .table-wrapper {
+    height: 600px;
+    // overflow-y: scroll;
+    margin: 20px;
+  }
+
+  .table-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width:"600px") {
+
+    .outer-wrapper {
+      width: 80%;
+      background-color: white;
+      border: 5px solid white;
+      margin: 55px 0px 0px 40px;
+      border-radius: 10px;
+
+      .table-wrapper {
+
+        height: 500px;
+        // overflow-y: scroll;
+        margin: 20px;
+      }
+    }
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+
+  .table-wrapper {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  #candidates {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    /* Don't collapse */
+    border-spacing: 0;
+    width: 100%;
+    // overflow-y: scroll;
+
+  }
+
+  #candidates td {
+    // border: 5px solid #ddd;
+    padding: 18px 18px 18px 18px;
+
+    .avatar-img {
+
+      margin: auto 0px auto 0px;
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      background-color: #00A3FF;
+    }
+
+  }
+
+  #candidates th {
+    // position: -webkit-sticky;
+    // position: sticky;
+    // top: 0px;
+    // border: 5px solid #ddd;
+    padding: 18px;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    /* background-color: #04AA6D; */
+    color: white;
+    // position: sticky;
+    // top:0;
+
+
+  }
+
+
+  #candidates tr:nth-child(even) {
+    background-color: #fff;
+  }
+
+  #candidates tr:hover {
+    background-color: #ddd;
+  }
+
+  // #candidates thead tr th:first-child, #candidates td:first-child {
+  //   /* Apply a left border on the first <td> or <th> in a row */
+  //   border-bottom: 5px solid #ddd;
+  // }
+  #candidates thead tr th {
+    position: sticky;
+    top: -5px;
+    background-color: #00A3FF;
+  }
+
+
+
+  @media only screen and (max-width: 900px) {
+    .container {
+      width: 55%;
+      left: 200px;
+      right: 150px;
+    }
+  }
+
+  .edit-button {
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #00A3FF;
+    border: none;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  .edit-button:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid #00A3FF;
+
+  }
+
+  .container-table {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    left: 0%;
+    background-color: rgba(68, 68, 83, 0.5);
+    display: flex;
+
+    .container-main {
+      position: fixed;
+      display: flex;
+      width: 85%;
+      height: 550px;
+      top: 80px;
+      left: 100px;
+      background-color: none;
+      border-radius: 20px;
+    }
+
+    .containerAvatar {
+      width: 30%;
+      background-color: white;
+      height: 100%;
+      border-radius: 20px 0px 0px 20px;
+      display: flex;
+      //justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      margin: 30px auto;
+      background-color: white;
+
+    }
+
+    .name {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      height: 220px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0px 0px 20px 10px rgb(156, 153, 153);
+
+      h2 {
+        margin-bottom: 20px;
+      }
+    }
+
+    .containerInformation {
+      width: 70%;
+      background-color: antiquewhite;
+      height: 100%;
+      border-radius: 0px 20px 20px 0px;
+      display: flex;
+      flex-direction: column;
+
+      .button {
+        width: 100%;
+        background-color: white;
+        border-radius: 0px 20px 0px 0px;
+        height: 15%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .button-info {
+          width: 150px;
+          height: 60%;
+          border-radius: 20px;
+          position: relative;
+          cursor: pointer;
+
+          margin-right: 100px;
+          background-color: #00A3FF;
+          color: white;
+          border: none;
+        }
+
+        .button-info:hover {
+          background-color: white;
+          border: 1px solid #00A3FF;
+          color: black;
+        }
+
+        .button-cv {
+          width: 150px;
+          height: 60%;
+          border-radius: 20px;
+          position: relative;
+          margin-right: 80px;
+          background-color: #00A3FF;
+          color: white;
+          cursor: pointer;
+          border: none;
+        }
+
+        .button-cv:hover {
+          background-color: white;
+          border: 1px solid #00A3FF;
+          color: black;
+        }
+
+        .close-button {
+          position: relative;
+          left: 40px;
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+          font-weight: bolder;
+          font-size: large;
+          border: 0.5px solid black;
+
+        }
+
+        .close-button:hover {
+          background-color: red;
+          color: white;
+          font-weight: bolder;
+          font-size: large;
+        }
+      }
+
+      .information {
+        background-color: white;
+        height: 85%;
+        border-radius: 0px 0px 20px 0px;
+
+        .itemInfo {
+          width: 80%;
+          height: 12%;
+          margin: 20px auto;
+          background-color: #F5F8FA;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: left;
+          border-radius: 30px;
+          opacity: 1;
+
+          h3 {
+            margin-left: 30px;
+          }
+
+
+        }
+      }
+
+      .inforCV {}
+    }
+  }
+
+  .pagination-table {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,236 @@
+.cv-builder {
+    
+    width: 100%;
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      .column {
+        width: 45%;
+        flex-shrink: 0;
+        order: 1;
+      }
+  
+      .column0 {
+        width: 100%;
+        flex-shrink: 0;
+        order: 0;
+      }
+  
+      .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        position: relative;
+        cursor: pointer;
+  
+        .label {
+          font-weight: bold;
+          margin-right: 10px;
+        }
+  
+        .value {
+          display: flex;
+          align-items: center;
+          min-height: 24px;
+          padding: 0 8px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 1.5;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          flex-grow: 1;
+          margin-right: 10px;
+  
+          &.input-borderless {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+  
+            &:focus {
+              outline: none;
+              border: none;
+            }
+          }
+  
+          &.input-active {
+            border-color: #007bff;
+          }
+        }
+  
+        .buttons {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+        }
+  
+        .add-button,
+        .remove-button {
+          display: none;
+          cursor: pointer;
+        }
+      }
+  
+      .expanded {
+        .buttons {
+          display: flex;
+        }
+  
+        .add-button,
+        .remove-button {
+          display: block;
+        }
+      }
+    }
+  
+    .overview {
+      margin-bottom: 20px;
+  
+      i.bi-yelp {
+        color: green;
+        font-size: 25px;
+      }
+  
+      .content {
+        min-height: 100px;
+        padding: 8px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.5;
+  
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+        }
+      }
+    }
+  
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+  
+      &:hover .upload-button {
+        display: flex;
+      }
+    }
+  
+    .value {
+      position: relative;
+    }
+  
+    .upload-button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  
+    .uploaded-image {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    img {
+      width: 200px;
+      height: 200px;
+      margin-left: 10%;
+      margin-top: 20px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  
+    .work-experience {
+      margin-bottom: 20px;
+  
+      i.bi-pie-chart {
+        color: green;
+        font-size: 25px;
+      }
+  
+      .experience-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+  
+        .experience-table {
+          display: flex;
+          flex-direction: column;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+  
+          .table-row {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+  
+            &:last-child {
+              border-bottom: none;
+            }
+  
+            .table-col {
+              width: 25%;
+              flex-grow: 0;
+  
+              .table-cell {
+                padding: 8px;
+              }
+            }
+          }
+        }
+  
+        .buttons {
+          margin-left: 10px;
+        }
+      }
+  
+      .add-button,
+      .remove-button {
+        display: none;
+        cursor: pointer;
+      }
+    }
+  
+    .work-experience i.bi-award {
+      color: green;
+      font-size: 25px;
+    }
+  
+    .work-experience .add-button {
+      display: block;
+    }
+  
+    .work-experience .remove-button {
+      display: block;
+      margin-left: 5px;
+    }
+  
+    .project .bi-plus,
+    .project .bi-trash {
+      color: #007bff;
+      font-size: 20px;
+    }
+  
+    .project .table-row:last-child .bi-plus,
+    .project .table-row:last-child .bi-trash {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('https://cv.fullstack.edu.vn/backgrounds/graph-dot-top-458966.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+  

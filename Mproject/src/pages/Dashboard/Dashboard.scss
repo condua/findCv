@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.Dashboard-container{
+    width: 100%;
+    // min-height: 100vh;
+    background-color: #E9ECEF;
+    padding: 10px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+
+    .navigate{
+        width: 100%;
+        height: 200px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .dashboard{
+        width: 100%;
+        height: 70%;
+        background-color: white;
+    }
+    // .manage-user{
+    //     width: 57%;
+    //     cursor: pointer;
+    //     background-color: white;
+    //     border-radius: 10px;
+    //     border-bottom: 4px solid #50CD89;
+    // }
+    .manage-user {
+        width: 57%;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 4px;
+        position: relative;
+      }
+      
+      .border-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #50CD89; /* Màu sắc của đường viền phía dưới */
+        border-radius: 0 0 4px 4px; /* Đặt border-radius chỉ cho phần tử con để không bị cong ở phía dưới */
+      }
+    .manage-candidate{
+        width: 19%;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 10px;
+    }
+    .blacklist{
+        width: 19%;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+ 
+}

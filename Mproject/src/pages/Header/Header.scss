@@ -1,0 +1,105 @@
+.btn {
+  margin-left: 1%;
+}
+
+.text {
+  text-decoration: none;
+  color: red;
+  display: inline-block;
+  font-size: 1.5em;
+  background: linear-gradient(to right, #FDFBFB, #EBEDEE 70%);
+  text-transform: uppercase;
+  background: linear-gradient(339deg, rgba(182,76,201,1) 0%, rgba(69,215,37,1) 23%, rgba(60,192,196,1) 40%, rgba(179,81,196,1) 57%, rgba(74,207,24,1) 72%, rgba(39,141,231,1) 91%, rgba(163,95,196,1) 98%);
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+.item {
+  font-size: large;
+  margin-top: 5px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  width: 80%;
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+
+.nav-link {
+  color: #333;
+  font-size: 16px;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #28a745;
+}
+
+.navbar-toggler {
+  border-color: #333;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-link {
+    margin: 10px 0;
+  }
+}
+.bg-body-tertiary.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  animation: slide-down 0.3s ease-in-out;
+  
+  // Thêm style mới để xóa dãn cách
+  margin-bottom: 0 !important;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.home {
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+.custom-title .nav-link {
+  font-size: 19px; /* Điều chỉnh kích thước mong muốn */
+  /* Các thuộc tính CSS khác nếu cần */
+  color: #6f716f;
+  margin-top: -2px;
+  font-weight: 700;
+}

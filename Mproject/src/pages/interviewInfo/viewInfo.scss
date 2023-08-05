@@ -1,0 +1,174 @@
+.InterviewInfo-edit-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E9ECEF;
+    overflow-y: scroll;
+
+    .top-main {
+        width: 100%;
+        height: 20%;
+        background: radial-gradient(36.28% 150.93% at 50% 50%, #3B8AFF 0%, #0048B3 100%);
+        border-radius: 0px 0px 20px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+
+        h1 {
+            font-size: 25px;
+            color: white;
+            background: none;
+            height: auto;
+            margin-top: 20px;
+            padding-left: 28px;
+            position: absolute;
+        }
+
+        p {
+            font-size: 10px;
+        }
+    }
+
+    .avatar-container {
+        width: 100%;
+        height: 40%;
+        background-color: white;
+        margin-top: -2%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        .Room {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            flex-direction: row;
+            position: relative;
+
+            .subRoom {
+                position: absolute;
+                left: 50px;
+                margin-left: 100px;
+                width: 40%;
+                height: 70px;
+                border-style: dashed;
+                margin: 10px;
+                font-size: 18px;
+                padding-top: 8px;
+                flex-direction: row;
+                text-align: center;
+                margin-top: 50px;
+            }
+
+            .hasInterview {
+                position: absolute;
+                margin-top: 50px;
+                left: 900px;
+                width: 40%;
+                height: 70px;
+                border-style: dashed;
+                font-size: 18px;
+                padding-top: 8px;
+                flex-direction: row;
+                text-align: center;
+            }
+        }
+
+        .Column {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+
+            .avatar-edit {
+                width: 90px;
+                height: 90px;
+                margin-left: 2%;
+                border-radius: 45px;
+                margin-top: 40px;
+                background-color: pink;
+                margin-right: 5%;
+            }
+
+            h2 {
+                margin-top: 40px;
+
+            }
+
+            p {
+                font-size: 20px;
+                color: #8A92A6;
+                margin-left: 5px;
+                margin-top: 44px;
+            }
+        }
+
+
+    }
+
+    .info-container {
+        width: 95%;
+        height: 60%;
+        border-radius: 10px;
+        background-color: #FFFFFF;
+        padding-bottom: 40px;
+
+        h2 {
+            height: 8%;
+            margin-top: 10px;
+            margin-left: 20px;
+            text-align: left;
+        }
+
+        .form-edit {
+            width: 100%;
+            height: 84%;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: 1px solid #cbcfd3;
+
+            .info-item {
+                width: 95%;
+                display: flex;
+                flex-direction: row;
+                background-color: #FFFFFF;
+                height: 15%;
+
+                p {
+                    margin-right: 100px;
+                    width: 10%;
+                }
+
+                .info {
+                    width: 80%;
+                    margin-top: 20px;
+                    height: 60%;
+                    border-radius: 6px;
+                    background-color: #F5F8FA;
+                    border: none;
+                    box-sizing: border-box;
+                    padding: 10px;
+
+                }
+
+            }
+        }
+    }
+
+    button {
+        margin-top: 0px;
+        background-color: #00a3ff;
+        border-radius: 10px;
+        border: none;
+        width: 100%;
+        height: 10%;
+        color: white;
+        font-size: x-large;
+    }
+}

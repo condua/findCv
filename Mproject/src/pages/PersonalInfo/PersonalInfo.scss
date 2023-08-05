@@ -1,0 +1,47 @@
+.personalinfo{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+.sidebar {
+    background-color: #e9eaec;
+  }
+  
+  .main-content {
+    background-color: #e9eaec;
+    margin-left: 20px;
+  }
+  
+  .section {
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    color: #00b14f;
+  }
+  
+  .avatar-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .change-avatar-btn {
+    margin-left: 10px;
+  }
+  
+  .save-btn {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  
+  .change-password-btn {
+    margin-top: 10px;
+  }
+}

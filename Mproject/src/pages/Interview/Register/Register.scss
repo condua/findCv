@@ -1,0 +1,146 @@
+.register{
+    width: 100%;
+    height: 100vh;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    #container-register{
+        width: 600px;
+        height: 90%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+       .form-register{
+            width: 90%;
+            height: 90%;
+            background-color: white;
+            .top-main{
+                width: 100%;
+                height: 0%;
+                border-radius: 40px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            .middle-main{
+                width: 100%;
+                height: 12%;
+                background-color: white;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                .straight-line{
+                    width: 40%;
+                    border-bottom: 1px solid black ;
+                }
+                p{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                }
+            }
+            .bottom-main{
+                width: 100%;
+                height: 76%;
+                background-color: white;
+                p{
+
+                }
+                input[type='text'], input[type='password']{
+                    width: 100%;
+                    height: 40px;
+                    padding-left: 10px;
+                    border-radius: 40px;
+                    margin-top: 5px;
+                    margin-bottom: 10px;
+                }
+                .gender{
+                    width: 100%;
+                    background-color: none;
+                    margin-bottom: 10px;
+                    margin-top: 10px;
+                    p{
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    span{
+                        margin-right: 60px;
+                    }
+                    input[type='radio']{
+
+                    }
+                }
+                .birthday{
+                    width: 100%;
+                    p{
+                        margin-bottom: 15px;
+                    }
+                    .container-select{
+                        width: 100%;
+                        height: 50px;
+                        display: flex;
+                        flex-direction: row;
+                        margin-bottom: 10px;
+                        select{
+                            -webkit-appearance: none; /* Safari, Chrome, Opera */
+                            -moz-appearance: none; /* Firefox */
+                            appearance: none;
+                            width: 20%;
+                            height: 100%;
+                            
+                            margin-right: 110px;
+                            border-radius: 10px;
+                            text-align: center;
+                            // padding-right: 30px;
+
+                            cursor: pointer;
+                        }
+                        
+                    }
+                    
+                }
+                .login-button{
+                    width: 200px;
+                    height: 50px;
+                    font-weight: 900;
+                    border-radius: 40px;
+                    border: none;
+                    background-color: rgb(3, 129, 129);
+                    margin: auto;
+                    color: white;
+                    cursor: pointer;
+                    
+                    
+                }
+                .login-button:hover{
+                    background-color: rgb(4, 205, 205);
+                }
+                .register-button{
+                    margin: auto;
+                    width: 200px;
+                    height: 50px;
+                    font-weight: 900;
+                    border-radius: 40px;
+                    border: none;
+                    background-color: rgb(2, 150, 101);
+                    color: white;
+                    cursor: pointer;
+
+                    
+                }
+                .register-button:hover{
+                    background-color: rgb(18, 215, 149);
+                }
+                
+                
+            }
+       }
+    }
+
+}

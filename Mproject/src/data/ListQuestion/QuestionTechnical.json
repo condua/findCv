@@ -1,0 +1,45 @@
+[
+    {
+        "key": "T1",
+        "position": "Backend, Frontend",
+        "skill": "React, JavaScript",
+        "questionContent": "HTML là gì?",
+        "answerContent": "HTML là một ngôn ngữ đánh dấu được thiết kế ra để tạo nên các trang web trên World Wide Web"
+    },
+    {
+        "key": "T2",
+        "position": "Junior Developer",
+        "skill": "Python, Django",
+        "questionContent": "CSS là viết tắt của gì?",
+        "answerContent": "CSS là viết tắt của Cascading Style Sheets, là ngôn ngữ định dạng để trình bày cho các trang web"
+      },
+      {
+        "key": "T3",
+        "position": "Software Engineer",
+        "skill": "Java, Spring Boot",
+        "questionContent": "JavaScript là ngôn ngữ lập trình nào?",
+        "answerContent": "JavaScript là một ngôn ngữ lập trình phổ biến và phía client-side được sử dụng rộng rãi trên web"
+      },
+      {
+        "key": "T4",
+        "position": "Frontend Developer",
+        "skill": "HTML, CSS, JavaScript",
+        "questionContent": "API là gì?",
+        "answerContent": "API (Application Programming Interface) là một tập hợp các quy tắc và giao thức cho phép các ứng dụng tương tác với nhau"
+      },
+      {
+        "key": "T5",
+        "position": "Backend Developer",
+        "skill": "Node.js, Express",
+        "questionContent": "SQL là viết tắt của gì?",
+        "answerContent": "SQL là viết tắt của Structured Query Language, là ngôn ngữ truy vấn được sử dụng để tương tác với cơ sở dữ liệu"
+      },
+      {
+        "key": "T6",
+        "position": "Full Stack Developer",
+        "skill": "React, Node.js, MongoDB",
+        "questionContent": "Git là gì và có tác dụng gì trong quản lý mã nguồn?",
+        "answerContent": "Git là một hệ thống quản lý mã nguồn phân tán được sử dụng để theo dõi các thay đổi trong mã nguồn và hỗ trợ quản lý phiên bản phần mềm"
+      }
+      
+]

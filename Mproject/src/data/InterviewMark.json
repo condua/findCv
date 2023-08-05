@@ -1,0 +1,52 @@
+{
+    "roomID": 1,
+    "email": "user1@gmail.com",
+    "interviewName": "AAA",
+    "interviewDate": "25/07/2023",
+    "averageScore": 7,
+    "status": "Đã chấm",
+    "question": [
+        {
+            "questionTechnical": [
+                {
+                    "key": "T1",
+                    "content": "HTML là gì?",
+                    "point": 7
+                },
+                {
+                    "key": "T2",
+                    "content": "CSS là viết tắt của gì?",
+                    "point": 7
+                }
+            ]
+        },
+        { 
+            "questionEnglish": [
+                {
+                    "key": "E1",
+                    "content": "Khả năng giao tiếp tiếng Anh có tốt không?",
+                    "point": 7
+                },
+                {
+                    "key": "E2",
+                    "content": "Bạn tự tin như thế nào về khả năng nói tiếng Anh?",
+                    "point": 7
+                }
+            ]
+        },
+        {
+            "questionSoftskill": [
+                {
+                    "key": "S1",
+                    "content": "Có kinh nghiệm làm việc nhóm không?",
+                    "point": 7
+                },
+                {
+                    "key": "S3",
+                    "content": "Bạn có khả năng làm việc dưới áp lực và trong các dự án có thời hạn gấp?",
+                    "point": 7
+                }
+            ]
+        }
+    ]
+}

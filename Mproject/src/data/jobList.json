@@ -1,0 +1,69 @@
+[
+    {
+      "id": 1,
+      "position": "Thực tập sinh ReactJS",
+      "company": "Công ty TNHH FPT SoftWare",
+      "logoUrl": "https://static.topcv.vn/company_logos/d4c67a384eb78e85932514b49bd1af54-6078f0c4ab999.jpg",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "17-05-2023 09:17 AM",
+      "salary": "3 - 5 triệu"
+    },
+    {
+      "id": 2,
+      "position": "Job 2",
+      "company": "Company 2",
+      "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfngsABC3AwwFnO34lb6Pk_VL_ZgmlSWpNkCL4M6n0Jj1F05_V6eIe1FsYXHckuxBevYY&usqp=CAU",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv2.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "18-05-2023 10:25 AM",
+      "salary": "3 - 5 triệu"
+    },
+    {
+      "id": 3,
+      "position": "Job 3",
+      "company": "Company 3",
+      "logoUrl": "https://kynguyenlamdep.com/wp-content/uploads/2022/06/avatar-cute-meo-con-than-chet.jpg",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv3.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "19-05-2023 11:55 AM",
+      "salary": "3 - 5 triệu"
+    },
+    {
+      "id": 4,
+      "position": "Job 4",
+      "company": "Company 4",
+      "logoUrl": "https://toigingiuvedep.vn/wp-content/uploads/2022/01/hinh-avatar-cute-nu.jpg",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv4.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "20-05-2023 02:10 PM",
+      "salary": "3 - 5 triệu"
+    },
+    {
+      "id": 5,
+      "position": "Job 5",
+      "company": "Company 5",
+      "logoUrl": "https://demoda.vn/wp-content/uploads/2023/01/hinh-avatar-cute-co-gai-bieu-cam-ngo-ngech.jpg",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv5.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "21-05-2023 03:45 PM",
+      "salary": "3 - 5 triệu"
+    },
+    {
+      "id": 6,
+      "position": "Job 6",
+      "company": "Company 6",
+      "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfngsABC3AwwFnO34lb6Pk_VL_ZgmlSWpNkCL4M6n0Jj1F05_V6eIe1FsYXHckuxBevYY&usqp=CAU",
+      "appliedAt": "12/07/2023",
+      "cvUrl": "https://example.com/cv6.pdf",
+      "status": "Đã ứng tuyển",
+      "appliedTime": "22-05-2023 04:20 PM",
+      "salary": "3 - 5 triệu"
+    }
+  ]
+  

@@ -1,0 +1,252 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ReasonBlacklist-container {
+    // min-height: 100vh;
+    background-color: #E9ECEF;
+    padding: 10px;
+    background-size: cover;
+}
+.ReasonBlacklist-tab-name{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+.ReasonBlacklist-content-tab-name{
+    font-size: 30px;
+    font-weight: 550;
+}
+.button-back{
+    color: white;
+    background-color: blue;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.ReasonBlacklist-content{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.ReasonBlacklist-candidate-info{
+    display: flex;
+    flex-direction: column;
+    width: 24%;
+    height: 820px;
+}
+.ReasonBlacklist-common-info{
+    width: 100%;
+    height: 360px;
+    margin-bottom: 20px;
+}
+.ReasonBlacklist-common-info-title{
+    width: 100%;
+    height: 30px; 
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+.ReasonBlacklist-common-info-content{
+    width: 100%;
+    height: 320px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.ReasonBlacklist-cv{
+    width: 100%;
+    height: 440px;
+}
+.ReasonBlacklist-cv-title{
+    width: 100%;
+    height: 30px; 
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+.ReasonBlacklist-cv-content{
+    width: 100%;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+.ReasonBlacklist-form{
+    background-color: white;
+    width: 75%;
+    height: 820px;
+    border-radius: 10px;
+    padding: 20px 50px;
+}
+.ReasonBlacklist-avt {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.ReasonBlacklist-avt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ReasonBlacklist-name{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.ReasonBlacklist-position{
+    margin-top: 10px;
+    color: grey;
+}
+.ReasonBlacklist-skill-experience{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+}
+.ReasonBlacklist-skill{
+    border: 1px dashed black;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    width: 45%;
+}
+.ReasonBlacklist-experience{
+    border: 1px dashed black;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+}
+.ReasonBlacklist-skill-title, .ReasonBlacklist-experience-title{
+    color: grey;
+}
+.ReasonBlacklist-skill-content, .ReasonBlacklist-experience-content{
+    font-weight: bold;
+    margin-top: 5px;
+}
+.ReasonBlacklist-status{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.ReasonBlacklist-accept{
+    background-color: #E8FFF3;
+    color: #50CD89;
+}
+.ReasonBlacklist-process{
+    background-color: #FFF8DD;
+    color: #F1BC00;
+}
+.ReasonBlacklist-blacklist{
+    background-color: #FFF5F8;
+    color: #F1416C;
+}
+.ReasonBlacklist-cv-content img {
+    width: 220px;
+    height: 300px;
+    object-fit: cover;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.ReasonBlacklist-caution{
+    color: grey;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.ReasonBlacklist-name-admin, .ReasonBlacklist-email, .ReasonBlacklist-reason{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.ReasonBlacklist-name-admin-title, .ReasonBlacklist-email-title, .ReasonBlacklist-reson-title{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.ReasonBlacklist-form-name-admin, .ReasonBlacklist-form-email{
+    width: 100%;
+    height: 40px;
+    background-color: #F5F8FA;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+.ReasonBlacklist-form-reason{
+    width: 100%;
+    height: 150px;
+    background-color: #F5F8FA;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 5px;
+}
+.ReasonBlacklist-button{
+    text-align: center;
+}
+.ReasonBlacklist-cancel{
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    margin-right: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: grey;
+    cursor: pointer;
+    font-size: 16px;
+}
+.ReasonBlacklist-add{
+    border: none;
+    border-radius: 5px;
+    width: 240px;
+    height: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    font-size: 16px;
+}
+.ReasonBlacklist-link{
+    text-decoration: none;
+    color: white;
+}
+.disable-link{
+    cursor: initial;
+}

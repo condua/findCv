@@ -1,0 +1,92 @@
+.login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: gray;
+    .form-login{
+        margin: auto;
+        width: 800px;
+        height: 600px;
+        background-color: white;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .text{
+            width: 50%;
+            height: 15%;
+            background-color: white;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .google{
+            width: 70%;
+            height: 10%;
+            background-color: white;
+            margin-top: 10px;
+            border-radius: 40px;
+            text-align: center;   
+            display: flex;
+            flex-direction: column;
+            justify-content: center;   
+            p{
+                font-size:18px;
+            }  
+        }
+        .mid{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 70%;
+            height: 5%;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+
+            .line-border{
+                width: 40%;
+                height: 50%;
+                border-bottom: 1px solid #919191;
+            }
+            h3{
+                margin: 0px 20px 0px 20px;
+            }
+        }
+        .input-text{
+            width: 70%;
+            height: 40%;
+            background-color: white;
+            position: relative;
+            p{
+                margin: 10px 0px 10px 0px;
+            }
+            input{
+                width: 100%;
+                height: 20%;
+                border: 1px solid grey;
+                border-radius: 20px;
+                padding-left: 10px;
+            }
+            span{
+                position: absolute;
+                right: 0px;
+                bottom:20px;
+                text-decoration: underline;
+                cursor: pointer;
+                color: blue;
+            }
+            
+        }
+        .login-button{
+            width: 70%;
+            height: 10%;
+            margin-top: 20px;
+            background-color: #C3C3C3;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+        }
+        .login-button:hover{
+            background-color: blue;
+        }
+    }
+}

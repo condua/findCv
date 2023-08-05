@@ -1,0 +1,46 @@
+{
+    "roomID": 1,
+    "roomName": "Mivy App",
+    "roomDescription": "Description Job",
+    "startDate": "01-08-2021",
+    "numberParticipant": 9,
+    "status": "In Process",
+    "listParticipant": [
+        {
+            "email": "user1@gmail.com",
+            "urlAvatar": "http://xsgames.co/randomusers/assets/avatars/male/20.jpg"
+        },
+        {
+            "email": "user2@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/female/34.jpg"
+        },
+        {
+            "email": "user3@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/female/7.jpg"
+        },
+        {
+            "email": "user4@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/male/75.jpg"
+        },
+        {
+            "email": "user5@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/female/5.jpg"
+        },
+        {
+            "email": "user6@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/male/24.jpg"
+        },
+        {
+            "email": "user7@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/female/6.jpg"
+        },
+        {
+            "email": "user8@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/female/15.jpg"
+        },
+        {
+            "email": "user9@gmail.com",
+            "urlAvatar": "https://xsgames.co/randomusers/assets/avatars/male/15.jpg"
+        }
+    ]
+}

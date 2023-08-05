@@ -1,0 +1,252 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.DetailBlacklist-container {
+    // min-height: 100vh;
+    background-color: #E9ECEF;
+    padding: 10px;
+    background-size: cover;
+}
+.DetailBlacklist-tab-name{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+.DetailBlacklist-content-tab-name{
+    font-size: 30px;
+    font-weight: 550;
+}
+.button-back{
+    color: white;
+    background-color: blue;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.DetailBlacklist-content{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.DetailBlacklist-candidate-info{
+    display: flex;
+    flex-direction: column;
+    width: 24%;
+    height: 820px;
+}
+.DetailBlacklist-common-info{
+    width: 100%;
+    height: 360px;
+    margin-bottom: 20px;
+}
+.DetailBlacklist-common-info-title{
+    width: 100%;
+    height: 30px; 
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+.DetailBlacklist-common-info-content{
+    width: 100%;
+    height: 320px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.DetailBlacklist-cv{
+    width: 100%;
+    height: 440px;
+}
+.DetailBlacklist-cv-title{
+    width: 100%;
+    height: 30px; 
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+.DetailBlacklist-cv-content{
+    width: 100%;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+.DetailBlacklist-form{
+    background-color: white;
+    width: 75%;
+    height: 820px;
+    border-radius: 10px;
+    padding: 20px 50px;
+}
+.DetailBlacklist-avt {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.DetailBlacklist-avt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.DetailBlacklist-name{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.DetailBlacklist-position{
+    margin-top: 10px;
+    color: grey;
+}
+.DetailBlacklist-skill-experience{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+}
+.DetailBlacklist-skill{
+    border: 1px dashed black;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    width: 45%;
+}
+.DetailBlacklist-experience{
+    border: 1px dashed black;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+}
+.DetailBlacklist-skill-title, .DetailBlacklist-experience-title{
+    color: grey;
+}
+.DetailBlacklist-skill-content, .DetailBlacklist-experience-content{
+    font-weight: bold;
+    margin-top: 5px;
+}
+.DetailBlacklist-status{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.DetailBlacklist-accept{
+    background-color: #E8FFF3;
+    color: #50CD89;
+}
+.DetailBlacklist-process{
+    background-color: #FFF8DD;
+    color: #F1BC00;
+}
+.DetailBlacklist-blacklist{
+    background-color: #FFF5F8;
+    color: #F1416C;
+}
+.DetailBlacklist-cv-content img {
+    width: 220px;
+    height: 300px;
+    object-fit: cover;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.DetailBlacklist-caution{
+    color: grey;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.DetailBlacklist-name-admin, .DetailBlacklist-email, .DetailBlacklist-reason{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.DetailBlacklist-name-admin-title, .DetailBlacklist-email-title, .DetailBlacklist-reason-title{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.DetailBlacklist-form-name-admin, .DetailBlacklist-form-email{
+    width: 100%;
+    height: 40px;
+    background-color: #F5F8FA;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+.DetailBlacklist-form-reason{
+    width: 100%;
+    height: 150px;
+    background-color: #F5F8FA;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 5px;
+}
+.DetailBlacklist-button{
+    text-align: center;
+}
+.DetailBlacklist-cancel{
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    margin-right: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: grey;
+    cursor: pointer;
+    font-size: 16px;
+}
+.DetailBlacklist-add{
+    border: none;
+    border-radius: 5px;
+    width: 240px;
+    height: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    font-size: 16px;
+}
+.DetailBlacklist-link{
+    text-decoration: none;
+    color: white;
+}
+.disable-link{
+    cursor: initial;
+}
